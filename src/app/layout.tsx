@@ -57,6 +57,7 @@ export default function RootLayout({
         <ThemeProvider>
           <SmoothScrollProvider>
             <InteractiveBackground />
+            <div className="grain-overlay" />
             {children}
           </SmoothScrollProvider>
         </ThemeProvider>

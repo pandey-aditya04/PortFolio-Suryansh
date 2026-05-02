@@ -4,6 +4,7 @@ import { motion, Variants } from "framer-motion";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useMousePosition } from "@/hooks/useMousePosition";
+import { HeroBackground } from "@/components/ui/HeroBackground";
 
 const fadeUpVariants: any = {
   hidden: { y: 30, opacity: 0 },
@@ -30,8 +31,7 @@ export function Hero() {
       id="hero"
       className="relative flex min-h-[90vh] items-center pt-20 overflow-hidden"
     >
-      {/* Subtle Background Glow */}
-      <div className="absolute top-1/4 left-1/4 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--gradient-start)] opacity-[0.05] blur-[100px]" />
+      <HeroBackground />
       
       <div className="section-container relative z-10 w-full">
         <div className="max-w-3xl">
