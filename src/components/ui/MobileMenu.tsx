@@ -7,7 +7,7 @@ interface MobileMenuProps {
   onClose: () => void;
 }
 
-const menuVariants = {
+const menuVariants: any = {
   closed: {
     opacity: 0,
     transition: {
@@ -26,7 +26,7 @@ const menuVariants = {
   },
 };
 
-const linkVariants = {
+const linkVariants: any = {
   closed: {
     y: 30,
     opacity: 0,
@@ -36,7 +36,7 @@ const linkVariants = {
     opacity: 1,
     transition: {
       duration: 0.4,
-      ease: [0.65, 0, 0.35, 1],
+      ease: [0.65, 0, 0.35, 1] as [number, number, number, number],
     },
   },
 };

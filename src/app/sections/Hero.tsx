@@ -1,11 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { ArrowUpRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useMousePosition } from "@/hooks/useMousePosition";
 
-const fadeUpVariants = {
+const fadeUpVariants: any = {
   hidden: { y: 30, opacity: 0 },
   visible: (delay: number) => ({
     y: 0,
@@ -13,7 +13,7 @@ const fadeUpVariants = {
     transition: {
       duration: 0.6,
       delay,
-      ease: [0.65, 0, 0.35, 1],
+      ease: [0.65, 0, 0.35, 1] as [number, number, number, number],
     },
   }),
 };

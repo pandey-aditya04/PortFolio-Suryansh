@@ -22,7 +22,7 @@ export function AnimatedText({
 }: AnimatedTextProps) {
   const items = animation === "word" ? text.split(" ") : text.split("");
 
-  const container = {
+  const container: any = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -33,7 +33,7 @@ export function AnimatedText({
     },
   };
 
-  const child = {
+  const child: any = {
     hidden: {
       y: 40,
       opacity: 0,
@@ -43,7 +43,7 @@ export function AnimatedText({
       opacity: 1,
       transition: {
         duration: 0.5,
-        ease: [0.65, 0, 0.35, 1],
+        ease: [0.65, 0, 0.35, 1] as [number, number, number, number],
       },
     },
   };
@@ -107,7 +107,7 @@ export function RevealText({
       transition={{
         duration: 0.6,
         delay,
-        ease: [0.65, 0, 0.35, 1],
+        ease: [0.65, 0, 0.35, 1] as [number, number, number, number],
       }}
       className={className}
     >

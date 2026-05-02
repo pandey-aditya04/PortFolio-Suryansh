@@ -14,7 +14,7 @@ interface SectionRevealProps {
   once?: boolean;
 }
 
-const variants: Record<AnimationVariant, { hidden: Record<string, number>; visible: Record<string, number> }> = {
+const variants: any = {
   "fade-up": {
     hidden: { y: 40, opacity: 0 },
     visible: { y: 0, opacity: 1 },
@@ -57,7 +57,7 @@ export function SectionReveal({
           transition: {
             duration,
             delay,
-            ease: [0.65, 0, 0.35, 1],
+            ease: [0.65, 0, 0.35, 1] as [number, number, number, number],
           },
         },
       }}

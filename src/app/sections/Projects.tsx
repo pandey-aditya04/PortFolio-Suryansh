@@ -87,7 +87,7 @@ export function Projects() {
                 transition={{
                   duration: 0.4,
                   delay: index * 0.05,
-                  ease: [0.65, 0, 0.35, 1],
+                  ease: [0.65, 0, 0.35, 1] as [number, number, number, number],
                 }}
                 className={cn(
                   project.span === "wide" && "md:col-span-2",

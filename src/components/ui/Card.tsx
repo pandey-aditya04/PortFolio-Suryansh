@@ -31,7 +31,7 @@ export function Card({
         className
       )}
       whileHover={{ y: -4, scale: 1.01 }}
-      transition={{ duration: 0.3, ease: [0.65, 0, 0.35, 1] }}
+      transition={{ duration: 0.3, ease: [0.65, 0, 0.35, 1] as [number, number, number, number] }}
       onClick={onClick}
     >
       {/* Spotlight effect */}

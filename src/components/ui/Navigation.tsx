@@ -39,7 +39,7 @@ export function Navigation() {
         id="main-navigation"
         initial={{ y: -100 }}
         animate={{ y: isVisible ? 0 : -100 }}
-        transition={{ duration: 0.3, ease: [0.65, 0, 0.35, 1] }}
+        transition={{ duration: 0.3, ease: [0.65, 0, 0.35, 1] as [number, number, number, number] }}
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
           isScrolled
