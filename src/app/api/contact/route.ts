@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
+// Contact API Route with Zod validation
+
 const contactSchema = z.object({
   name: z.string().min(2),
   email: z.string().email(),
