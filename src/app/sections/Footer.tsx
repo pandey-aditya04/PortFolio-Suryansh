@@ -5,7 +5,7 @@ import { ArrowUp, Heart, Mail } from "lucide-react";
 import { Github, Linkedin, Twitter } from "@/components/ui/Icons";
 import { navLinks, socialLinks } from "@/lib/constants";
 
-const socialIconMap: Record<string, React.ElementType> = { Github, Linkedin, Twitter, Mail };
+const socialIconMap: Record<string, any> = { Github, Linkedin, Twitter, Mail };
 
 export function Footer() {
   const scrollToTop = () => {
@@ -18,8 +18,8 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
           {/* Brand */}
           <div className="space-y-4">
-            <a href="#hero" className="text-2xl font-bold"><span className="gradient-text">AP</span>.dev</a>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">Creative developer crafting beautiful digital experiences with modern technologies.</p>
+            <a href="#hero" className="text-2xl font-bold"><span className="gradient-text">SS</span>.dev</a>
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">Lead Full-Stack Developer crafting high-performance digital experiences with modern technologies.</p>
           </div>
 
           {/* Quick links */}
@@ -38,12 +38,12 @@ export function Footer() {
             <h4 className="text-sm font-semibold uppercase tracking-widest mb-4 text-muted-foreground">Connect</h4>
             <div className="flex gap-3">
               {socialLinks.map((link) => {
-                const Icon = socialIconMap[link.icon] || Mail;
+                const IconComponent = (socialIconMap[link.icon] || Mail) as any;
                 return (
                   <motion.a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer"
                     className="flex h-10 w-10 items-center justify-center rounded-lg border border-border text-muted-foreground transition-colors hover:text-foreground hover:border-[var(--gradient-start)]/50"
                     whileHover={{ y: -3 }} aria-label={link.name}>
-                    <Icon className="h-4 w-4" />
+                    <IconComponent className="h-4 w-4" />
                   </motion.a>
                 );
               })}
@@ -54,7 +54,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:flex-row">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Aditya Pandey. Made with <Heart className="inline h-3 w-3 text-red-500 fill-red-500" /> and lots of coffee.
+            © {new Date().getFullYear()} Suryansh Srivastava. Made with <Heart className="inline h-3 w-3 text-red-500 fill-red-500" /> and lots of coffee.
           </p>
 
           <motion.button onClick={scrollToTop}

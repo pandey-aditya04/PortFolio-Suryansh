@@ -1,37 +1,20 @@
 import { NextResponse } from "next/server";
-import { z } from "zod";
 
-// Contact API Route with Zod validation
-
-const contactSchema = z.object({
-  name: z.string().min(2),
-  email: z.string().email(),
-  subject: z.string().min(3),
-  message: z.string().min(10),
-});
-
-export async function POST(request: Request) {
+export async function POST(req: Request) {
   try {
-    const body = await request.json();
-    const data = contactSchema.parse(body);
+    const body = await req.json();
+    const { name, email, subject, message } = body;
 
-    // TODO: Integrate with email service (Resend, SendGrid, etc.)
-    console.log("Contact form submission:", data);
+    // TODO: Connect to Resend or other email service here
+    // Example:
+    // const resend = new Resend(process.env.RESEND_API_KEY);
+    // await resend.emails.send({ ... });
 
-    return NextResponse.json(
-      { message: "Message sent successfully!" },
-      { status: 200 }
-    );
+    console.log("Contact form submission:", { name, email, subject, message });
+
+    return NextResponse.json({ message: "Success" }, { status: 200 });
   } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { message: "Validation failed", errors: error.issues },
-        { status: 400 }
-      );
-    }
-    return NextResponse.json(
-      { message: "Internal server error" },
-      { status: 500 }
-    );
+    console.error("Error in contact API:", error);
+    return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
   }
 }

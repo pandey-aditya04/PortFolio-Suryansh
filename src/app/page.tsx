@@ -1,12 +1,16 @@
 import { Navigation } from "@/components/ui/Navigation";
-import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { Hero } from "./sections/Hero";
-import { Projects } from "./sections/Projects";
+import { MarqueeStrip } from "./sections/MarqueeStrip";
+import { SkillsShowcase } from "./sections/SkillsShowcase";
+import { AIVideosReel } from "./sections/AIVideosReel";
+import { CarouselShowcase } from "./sections/CarouselShowcase";
+import { EditsShowcase } from "./sections/EditsShowcase";
+import { MenuShowcase } from "./sections/MenuShowcase";
+import { PostDesignsShowcase } from "./sections/PostDesignsShowcase";
+import { StatsSection } from "./sections/StatsSection";
 import { About } from "./sections/About";
-import { Services } from "./sections/Services";
-import { Process } from "./sections/Process";
-import { WhyChooseMe } from "./sections/WhyChooseMe";
-import { Testimonials } from "./sections/Testimonials";
+import { ServicesSection } from "./sections/ServicesSection";
+import { Projects } from "./sections/Projects";
 import { FAQ } from "./sections/FAQ";
 import { Contact } from "./sections/Contact";
 import { Footer } from "./sections/Footer";
@@ -14,16 +18,20 @@ import { Footer } from "./sections/Footer";
 export default function Home() {
   return (
     <>
-      <ScrollProgress />
       <Navigation />
       <main>
         <Hero />
+        <MarqueeStrip />
+        <SkillsShowcase />
+        <AIVideosReel />
+        <CarouselShowcase />
+        <EditsShowcase />
+        <MenuShowcase />
+        <PostDesignsShowcase />
+        <StatsSection />
         <About />
-        <Services />
-        <Process />
-        <WhyChooseMe />
+        <ServicesSection />
         <Projects />
-        <Testimonials />
         <FAQ />
         <Contact />
       </main>

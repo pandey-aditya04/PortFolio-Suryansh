@@ -1,157 +1,178 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { ArrowUpRight, Sparkles } from "lucide-react";
+import { ArrowUpRight, Sparkles, Video, Palette } from "lucide-react";
+import { Instagram } from "@/components/ui/Icons";
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
-import { useMousePosition } from "@/hooks/useMousePosition";
-import { HeroBackground } from "@/components/ui/HeroBackground";
+import dynamic from "next/dynamic";
 
-const fadeUpVariants: any = {
-  hidden: { y: 30, opacity: 0 },
-  visible: (delay: number) => ({
+const HeroBackground = dynamic(() => import("@/components/ui/HeroBackground").then(mod => mod.HeroBackground), {
+  ssr: false,
+});
+
+const letterVariants: Variants = {
+  initial: { y: 100, opacity: 0 },
+  animate: (i: number) => ({
     y: 0,
     opacity: 1,
     transition: {
-      duration: 0.6,
-      delay,
-      ease: [0.65, 0, 0.35, 1] as [number, number, number, number],
+      duration: 0.8,
+      delay: 0.02 * i,
+      ease: "easeOut",
     },
   }),
 };
 
-export function Hero() {
-  const mousePosition = useMousePosition();
-  
-  // Parallax effect for floating cards
-  const xOffset = (mousePosition.x - (typeof window !== 'undefined' ? window.innerWidth / 2 : 0)) * 0.05;
-  const yOffset = (mousePosition.y - (typeof window !== 'undefined' ? window.innerHeight / 2 : 0)) * 0.05;
-
+function SplitText({ text }: { text: string }) {
   return (
-    <section
-      id="hero"
-      className="relative flex min-h-[90vh] items-center pt-20 overflow-hidden"
-    >
+    <span className="inline-block overflow-hidden pb-2">
+      {text.split("").map((char, i) => (
+        <motion.span
+          key={i}
+          variants={letterVariants}
+          initial="initial"
+          animate="animate"
+          custom={i}
+          className="inline-block"
+        >
+          {char === " " ? "\u00A0" : char}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
+
+export function Hero() {
+  return (
+    <section id="hero" className="relative flex min-h-screen items-center pt-24 pb-20 overflow-hidden bg-[#09090f]">
       <HeroBackground />
       
       <div className="section-container relative z-10 w-full">
-        <div className="max-w-3xl">
-          {/* Status badge */}
-          <motion.div
-            custom={0.1}
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate="visible"
-            className="mb-8 inline-flex items-center gap-2 rounded-full border border-border
-                       bg-muted px-4 py-2 text-xs font-medium text-foreground backdrop-blur-sm"
-          >
-            <Sparkles className="h-3 w-3 text-muted-foreground" />
-            UI/UX & Graphic Designer
-          </motion.div>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div className="lg:col-span-7">
+            {/* Status badge */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20
+                         bg-primary/5 px-4 py-2 text-xs font-mono font-medium text-primary-light backdrop-blur-sm"
+            >
+              <Sparkles className="h-3.5 w-3.5" />
+              AVAILABLE FOR NEW PROJECTS
+            </motion.div>
 
-          {/* Headline */}
-          <motion.div
-            custom={0.2}
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate="visible"
-            className="flex items-center gap-4 flex-wrap"
-          >
-            <h1 className="heading-1">
-              <span className="font-normal">Aditya</span> <span className="font-bold">Pandey</span>
+            {/* Headline */}
+            <h1 className="heading-1 font-bold mb-6 text-white leading-[1.1]">
+              <SplitText text="Designing" /> <br />
+              <span className="gradient-text"><SplitText text="The Future" /></span>
             </h1>
-            <motion.a 
-              href="#projects"
-              className="flex h-12 w-12 items-center justify-center rounded-full border border-border bg-muted transition-colors hover:border-foreground"
-              whileHover={{ scale: 1.05, rotate: 45 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <ArrowUpRight className="h-5 w-5 text-foreground" />
-            </motion.a>
-          </motion.div>
 
-          {/* Subtitle */}
-          <motion.p
-            custom={0.3}
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate="visible"
-            className="mt-6 max-w-xl text-base md:text-lg text-muted-foreground leading-relaxed"
-          >
-            I&apos;m a versatile designer specializing in graphic, web, and product
-            design to help grow your business. Let&apos;s build something great!
-          </motion.p>
+            {/* Subtitle */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="mt-6 max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed"
+            >
+              I am <span className="text-white font-medium">Suryansh Srivastava</span>, a Lead Designer & AI Video Synthesist crafting high-performance visual experiences.
+            </motion.p>
 
-          {/* CTA Buttons */}
-          <motion.div
-            custom={0.4}
-            variants={fadeUpVariants}
-            initial="hidden"
-            animate="visible"
-            className="mt-10 flex flex-wrap items-center gap-4"
-          >
-            <Button
-              variant="outline"
-              size="lg"
-              className="rounded-full bg-transparent border border-border text-foreground hover:bg-muted"
-              onClick={() =>
-                document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })
-              }
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="mt-10 flex flex-wrap items-center gap-6"
             >
-              See All Projects
-            </Button>
-            <Button
-              variant="primary"
-              size="lg"
-              className="rounded-full bg-white text-black hover:bg-white/90"
-              onClick={() =>
-                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
-              }
+              <Button
+                variant="primary"
+                size="lg"
+                className="rounded-full px-8 h-14 bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/25"
+                onClick={() => document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" })}
+              >
+                Explore My Work
+              </Button>
+              <button 
+                className="group flex items-center gap-3 text-white font-medium hover:text-primary transition-colors"
+                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+              >
+                Let&apos;s Talk
+                <div className="h-10 w-10 rounded-full border border-border flex items-center justify-center transition-all group-hover:border-primary group-hover:bg-primary/10">
+                  <ArrowUpRight className="h-4 w-4" />
+                </div>
+              </button>
+            </motion.div>
+          </div>
+
+          <div className="lg:col-span-5 relative">
+            {/* Main Image Wrapper */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              className="relative aspect-[4/5] w-full max-w-[450px] mx-auto rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl shadow-primary/10"
             >
-              Contact Now
-            </Button>
-          </motion.div>
+              <Image
+                src="/images/suryansh/portrait.png"
+                alt="Suryansh Srivastava"
+                fill
+                className="object-cover"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#09090f] via-transparent to-transparent" />
+            </motion.div>
+
+            {/* Floating Cards */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+              className="absolute -right-6 top-1/4 h-20 w-48 bg-surface/80 backdrop-blur-xl border border-white/10 rounded-2xl flex items-center gap-4 px-4 shadow-2xl"
+            >
+              <div className="h-12 w-12 rounded-xl bg-accent-pink/20 flex items-center justify-center text-accent-pink">
+                <Video className="h-6 w-6" />
+              </div>
+              <div>
+                <div className="text-[10px] font-mono text-muted-foreground uppercase">Expertise</div>
+                <div className="text-sm font-bold text-white">AI Videos</div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 1, duration: 0.8 }}
+              className="absolute -left-6 bottom-1/4 h-20 w-48 bg-surface/80 backdrop-blur-xl border border-white/10 rounded-2xl flex items-center gap-4 px-4 shadow-2xl"
+            >
+              <div className="h-12 w-12 rounded-xl bg-accent-blue/20 flex items-center justify-center text-accent-blue">
+                <Instagram className="h-6 w-6" />
+              </div>
+              <div>
+                <div className="text-[10px] font-mono text-muted-foreground uppercase">Experience</div>
+                <div className="text-sm font-bold text-white">Carousels</div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.2, duration: 0.8 }}
+              className="absolute left-1/2 -translate-x-1/2 -bottom-10 h-20 w-56 bg-surface border border-primary/30 rounded-2xl flex items-center gap-4 px-4 shadow-[0_0_40px_rgba(124,58,237,0.2)]"
+            >
+              <div className="h-12 w-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary">
+                <Palette className="h-6 w-6" />
+              </div>
+              <div>
+                <div className="text-[10px] font-mono text-muted-foreground uppercase">Services</div>
+                <div className="text-sm font-bold text-white">Premium Design</div>
+              </div>
+            </motion.div>
+          </div>
+
         </div>
-      </div>
-
-      {/* Floating Testimonial Cards */}
-      <div className="absolute top-1/2 right-10 -translate-y-1/2 hidden lg:block w-[400px]">
-        {/* Top Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 50, rotate: -10 }}
-          animate={{ opacity: 1, y: 0, rotate: -5 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          style={{ x: xOffset, y: yOffset }}
-          className="absolute -top-32 right-10 z-20 w-72 rounded-2xl border border-border/50 bg-muted/80 p-5 backdrop-blur-md shadow-2xl"
-        >
-          <p className="text-sm font-medium text-foreground leading-relaxed">
-            &quot;Working with him was a game changer!&quot;
-          </p>
-          <p className="mt-2 text-right text-xs text-muted-foreground">- pranavnb</p>
-          
-          {/* Decorative Cursor */}
-          <div className="absolute -bottom-6 -left-6">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-foreground"><path d="m12 19-7-7 3-3 7 7-3 3z"/><path d="m18 13-1.5-7.5L9 4l9 9z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
-          </div>
-        </motion.div>
-
-        {/* Bottom Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 50, rotate: 10 }}
-          animate={{ opacity: 1, y: 0, rotate: 5 }}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          style={{ x: xOffset * 1.5, y: yOffset * 1.5 }}
-          className="absolute top-10 -right-10 z-10 w-72 rounded-2xl border border-border/50 bg-card p-5 shadow-2xl"
-        >
-          <p className="text-sm font-medium text-foreground leading-relaxed">
-            &quot;We increased our conversions by 200%&quot;
-          </p>
-          <p className="mt-2 text-right text-xs text-muted-foreground">- vijaynb</p>
-          
-          {/* Decorative Cursor */}
-          <div className="absolute -top-8 -left-2">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-foreground rotate-90"><path d="m12 19-7-7 3-3 7 7-3 3z"/><path d="m18 13-1.5-7.5L9 4l9 9z"/><path d="m2 2 7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

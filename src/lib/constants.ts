@@ -1,14 +1,14 @@
 import type { NavLink, SocialLink } from "@/types";
 
 export const siteConfig = {
-  name: "Aditya Pandey",
-  title: "%s | Aditya Pandey — Creative Developer",
-  defaultTitle: "Aditya Pandey — Creative Developer & Designer",
+  name: "Suryansh Srivastava",
+  title: "%s | Suryansh Srivastava — Lead Full-Stack Developer",
+  defaultTitle: "Suryansh Srivastava — Lead Developer & Designer",
   description:
-    "Creative developer and designer crafting beautiful digital experiences with modern technologies. Explore my portfolio of innovative web applications, designs, and more.",
-  url: "https://adityapandey.dev",
+    "Lead full-stack developer and designer crafting high-performance digital experiences. Explore my portfolio of innovative web applications, SaaS platforms, and creative designs.",
+  url: "https://suryanshsrivastavaa.vercel.app/",
   ogImage: "/og-image.png",
-  twitterHandle: "@adityapandey",
+  twitterHandle: "@suryanshs",
 };
 
 export const navLinks: NavLink[] = [
@@ -23,22 +23,22 @@ export const navLinks: NavLink[] = [
 export const socialLinks: SocialLink[] = [
   {
     name: "GitHub",
-    url: "https://github.com/adityapandey",
+    url: "https://github.com/pandey-aditya04/PortFolio-Suryansh",
     icon: "Github",
   },
   {
     name: "LinkedIn",
-    url: "https://linkedin.com/in/adityapandey",
+    url: "https://linkedin.com/in/suryanshsrivastavaa",
     icon: "Linkedin",
   },
   {
     name: "Twitter",
-    url: "https://twitter.com/adityapandey",
+    url: "https://twitter.com/suryanshs",
     icon: "Twitter",
   },
   {
     name: "Email",
-    url: "mailto:hello@adityapandey.dev",
+    url: "mailto:suryanshsrivastavaa@gmail.com",
     icon: "Mail",
   },
 ];

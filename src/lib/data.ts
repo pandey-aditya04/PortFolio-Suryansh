@@ -11,24 +11,26 @@ export const projects: Project[] = [
   {
     id: "1",
     title: "GoDine Platform",
+    role: "Lead Full-Stack Developer",
     description:
-      "A full-stack restaurant management SaaS with QR ordering, real-time dashboards, and subscription billing.",
+      "A comprehensive restaurant management SaaS featuring QR-code ordering, real-time kitchen dashboards, and subscription billing.",
     longDescription:
-      "Built a comprehensive restaurant management platform featuring QR-code ordering, real-time kitchen dashboards, and Razorpay-powered subscription billing. Serves multiple restaurants with customizable menus and analytics.",
-    image: "/images/projects/project-1.webp",
+      "Built a robust restaurant management platform that streamlines operations through digital menus and real-time order tracking. Implemented secure payment processing with Razorpay and a multi-tenant architecture to serve diverse dining establishments.",
+    image: "/images/suryansh/godine_mockup.png",
     tags: ["Next.js", "Supabase", "Flutter", "Node.js"],
     category: "SaaS",
     link: "https://godine.in",
-    github: "https://github.com/adityapandey/godine",
+    github: "https://github.com/suryanshsrivastavaa/godine",
     featured: true,
     span: "wide",
   },
   {
     id: "2",
     title: "AI Chatbot Builder",
+    role: "Lead Full-Stack Developer",
     description:
-      "Drag-and-drop chatbot builder with NLP integration and multi-platform deployment.",
-    image: "/images/projects/project-2.webp",
+      "A sophisticated drag-and-drop chatbot builder with NLP integration and multi-platform deployment capabilities.",
+    image: "/images/suryansh/chatbot_mockup.png",
     tags: ["React", "TypeScript", "MongoDB", "Express"],
     category: "Web App",
     link: "#",
@@ -89,7 +91,8 @@ export const skills: Skill[] = [
   { name: "PostgreSQL / Supabase", level: 85, category: "Backend" },
   { name: "MongoDB", level: 80, category: "Backend" },
   { name: "Flutter / Dart", level: 78, category: "Mobile" },
-  { name: "Figma / UI Design", level: 82, category: "Design" },
+  { name: "Figma / UI Design", level: 82, category: "Tools" },
+  { name: "Adobe Creative Suite", level: 85, category: "Tools" },
   { name: "Python", level: 75, category: "Backend" },
 ];
 
@@ -101,7 +104,7 @@ export const testimonials: Testimonial[] = [
     company: "TechVenture Labs",
     avatar: "/images/avatars/avatar-1.webp",
     content:
-      "Aditya transformed our entire digital presence. His attention to detail and ability to translate complex requirements into beautiful, functional interfaces is remarkable. The project was delivered ahead of schedule and exceeded our expectations.",
+      "Suryansh transformed our entire digital presence. His attention to detail and ability to translate complex requirements into beautiful, functional interfaces is remarkable. The project was delivered ahead of schedule and exceeded our expectations.",
     rating: 5,
   },
   {
@@ -111,7 +114,7 @@ export const testimonials: Testimonial[] = [
     company: "InnovateCo",
     avatar: "/images/avatars/avatar-2.webp",
     content:
-      "Working with Aditya was an absolute pleasure. He brought a unique creative vision to our SaaS dashboard that significantly improved user engagement. His code quality and documentation are top-notch.",
+      "Working with Suryansh was an absolute pleasure. He brought a unique creative vision to our SaaS dashboard that significantly improved user engagement. His code quality and documentation are top-notch.",
     rating: 5,
   },
   {
@@ -121,7 +124,7 @@ export const testimonials: Testimonial[] = [
     company: "DesignStudio Pro",
     avatar: "/images/avatars/avatar-3.webp",
     content:
-      "The portfolio website Aditya built for us was nothing short of stunning. Smooth animations, perfect responsiveness, and incredible performance. He's our go-to developer for premium web projects.",
+      "The portfolio website Suryansh built for us was nothing short of stunning. Smooth animations, perfect responsiveness, and incredible performance. He's our go-to developer for premium web projects.",
     rating: 5,
   },
   {
@@ -131,7 +134,7 @@ export const testimonials: Testimonial[] = [
     company: "CloudScale Systems",
     avatar: "/images/avatars/avatar-4.webp",
     content:
-      "Aditya's full-stack expertise was invaluable for our platform rebuild. From the React frontend to the Node.js backend, every piece was crafted with precision. Highly recommended for complex projects.",
+      "Suryansh's full-stack expertise was invaluable for our platform rebuild. From the React frontend to the Node.js backend, every piece was crafted with precision. Highly recommended for complex projects.",
     rating: 5,
   },
 ];
@@ -230,13 +233,15 @@ export const stats: Stat[] = [
 
 export const aboutText = {
   headline: "Crafting Digital Experiences That Matter",
-  bio: `I'm a creative developer and designer passionate about building beautiful, 
-  performant, and accessible web experiences. With expertise spanning the full stack — 
-  from pixel-perfect frontends to robust backends — I bring ideas to life with clean code 
-  and thoughtful design.
+  bio: `I'm Suryansh Srivastava, a Computer Science graduate and a creative developer 
+  passionate about building beautiful, performant, and accessible web experiences. 
+  With expertise spanning the full stack — from pixel-perfect frontends to robust backends — 
+  I bridge the gap between aesthetics and functionality.
 
-  When I'm not coding, you'll find me exploring new technologies, contributing to 
-  open-source projects, or experimenting with creative coding and generative art.`,
+  My recent journey to Varanasi deeply influenced my design philosophy, teaching me the value 
+  of simplicity and the profound impact of well-crafted experiences. When I'm not coding, 
+  you'll find me exploring the intersection of art and technology or planning my next 
+  adventure to discover more of the world's hidden gems.`,
   resumeUrl: "/resume.pdf",
 };
 

@@ -30,11 +30,11 @@ export function FAQ() {
                 <div className="flex items-center gap-4 mb-4">
                   <div className="h-12 w-12 rounded-lg bg-[#1a1a1a] flex items-center justify-center text-lg font-bold border border-border overflow-hidden relative">
                     <div className="absolute inset-0 bg-gradient-to-tr from-[var(--gradient-start)]/40 to-transparent" />
-                    AP
+                    SS
                   </div>
                   <div>
-                    <p className="text-base font-semibold text-foreground">Aditya Pandey</p>
-                    <p className="text-xs text-muted-foreground">Expert Designer</p>
+                    <p className="text-base font-semibold text-foreground">Suryansh Srivastava</p>
+                    <p className="text-xs text-muted-foreground">Expert Developer</p>
                   </div>
                 </div>
 

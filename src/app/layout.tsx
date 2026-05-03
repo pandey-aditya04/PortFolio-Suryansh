@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { InteractiveBackground } from "@/components/ui/InteractiveBackground";
 import { siteConfig } from "@/lib/constants";
+import { GlobalEffects } from "@/components/ui/GlobalEffects";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,24 +18,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: siteConfig.defaultTitle,
-    template: siteConfig.title,
-  },
-  description: siteConfig.description,
+  title: 'Suryansh Srivastava — UI/UX & Graphic Designer',
+  description: 'Portfolio of Suryansh Srivastava — graphic design, AI videos, carousels, menus and social media posts.',
+  metadataBase: new URL('https://suryanshsrivastavaa.vercel.app'),
   openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: siteConfig.url,
-    title: siteConfig.defaultTitle,
-    description: siteConfig.description,
-    siteName: siteConfig.name,
+    title: 'Suryansh Srivastava — Designer',
+    description: 'UI/UX & Graphic Designer — AI Videos, Carousels, Edits, Menus',
+    url: 'https://suryanshsrivastavaa.vercel.app',
+    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+    type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
-    title: siteConfig.defaultTitle,
-    description: siteConfig.description,
-    creator: siteConfig.twitterHandle,
+    card: 'summary_large_image',
+    title: 'Suryansh Srivastava — Designer',
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,
@@ -58,6 +55,7 @@ export default function RootLayout({
           <SmoothScrollProvider>
             <InteractiveBackground />
             <div className="grain-overlay" />
+            <GlobalEffects />
             {children}
           </SmoothScrollProvider>
         </ThemeProvider>
