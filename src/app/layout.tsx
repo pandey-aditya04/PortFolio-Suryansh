@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, DM_Serif_Display, DM_Sans } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { InteractiveBackground } from "@/components/ui/InteractiveBackground";
 import { siteConfig } from "@/lib/constants";
-import { GlobalEffects } from "@/components/ui/GlobalEffects";
+import { CustomCursor } from "@/components/ui/CustomCursor";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,6 +15,17 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const dmSerifDisplay = DM_Serif_Display({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-serif",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
 });
 
 export const metadata: Metadata = {
@@ -47,15 +58,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable}`}
+      className={`${geistSans.variable} ${geistMono.variable} ${dmSerifDisplay.variable} ${dmSans.variable}`}
       suppressHydrationWarning
     >
       <body>
         <ThemeProvider>
           <SmoothScrollProvider>
-            <InteractiveBackground />
             <div className="grain-overlay" />
-            <GlobalEffects />
+            <div className="glow-blob top-[-10%] left-[-10%]" />
+            <div className="glow-blob bottom-[-10%] right-[-10%]" />
+            <CustomCursor />
             {children}
           </SmoothScrollProvider>
         </ThemeProvider>

@@ -1,106 +1,79 @@
 "use client";
 
-import { SectionReveal } from "@/components/ui/SectionReveal";
-import { Check, ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { motion } from "framer-motion";
+import { Layout, Palette, Video, Share2 } from "lucide-react";
 
-const services = [
-  {
-    title: "The Visionary",
-    price: "Custom",
-    description: "Perfect for brands looking for a unique, high-fidelity identity and motion assets.",
-    features: [
-      "AI Video Production",
-      "Full Branding Suite",
-      "UI/UX Design",
-      "Unlimited Revisions",
-      "Source Files Included"
-    ],
-    highlight: true,
-    color: "var(--primary)"
-  },
-  {
-    title: "The Creator",
-    price: "Custom",
-    description: "Ideal for social media creators and influencers needing consistent, high-quality content.",
-    features: [
-      "10+ Instagram Carousels",
-      "Post Design System",
-      "Thumbnails & Reels",
-      "7-Day Turnaround",
-      "Brand Style Guide"
-    ],
-    highlight: false,
-    color: "var(--accent-blue)"
-  }
-];
+export const ServicesSection = () => {
+  const services = [
+    {
+      title: "Website Design",
+      icon: Layout,
+      description: "Custom, responsive websites with high-end animations and seamless user experiences.",
+      color: "rgba(255,255,255,0.05)",
+    },
+    {
+      title: "Logo Design",
+      icon: Palette,
+      description: "Unique brand identities that stand out in the digital landscape.",
+      color: "rgba(255,255,255,0.05)",
+    },
+    {
+      title: "Motion Graphics",
+      icon: Video,
+      description: "Dynamic visual storytelling through advanced motion design and AI synthesis.",
+      color: "rgba(255,255,255,0.05)",
+    },
+    {
+      title: "Social Media",
+      icon: Share2,
+      description: "Engaging content systems for Instagram, Twitter, and LinkedIn.",
+      color: "rgba(255,255,255,0.05)",
+    },
+  ];
 
-export function ServicesSection() {
   return (
-    <section id="services" className="section-padding bg-[#09090f]">
-      <div className="section-container">
-        <SectionReveal>
-          <div className="mb-20 text-center max-w-2xl mx-auto">
-            <h2 className="heading-2 mb-4">Work With <span className="gradient-text">Me</span></h2>
-            <p className="text-muted-foreground">
-              Choose the package that fits your goals. Every project is handled with precision and a passion for premium design.
-            </p>
-          </div>
-        </SectionReveal>
+    <section id="services" className="py-32 bg-[#0c0c0c]">
+      <div className="max-w-[1400px] mx-auto px-6">
+        <div className="flex flex-col gap-4 mb-20">
+          <span className="text-[10px] uppercase tracking-widest text-white/40">⊙ Services</span>
+          <h2 className="text-5xl font-serif text-white">What I Do</h2>
+        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {services.map((service, idx) => (
-            <SectionReveal key={idx} delay={idx * 0.1}>
-              <div 
-                className={`relative p-8 md:p-12 rounded-[2.5rem] border transition-all duration-500 hover:scale-[1.02] ${
-                  service.highlight 
-                    ? "bg-surface border-primary/30 shadow-[0_0_50px_rgba(124,58,237,0.1)]" 
-                    : "bg-surface/50 border-border"
-                }`}
-              >
-                {service.highlight && (
-                  <div className="absolute -top-4 left-12 px-4 py-1 bg-primary rounded-full text-[10px] font-bold uppercase tracking-widest text-white">
-                    Most Popular
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {services.map((service, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              whileHover={{ 
+                borderColor: "rgba(255,255,255,0.15)",
+                boxShadow: "0 0 40px rgba(255,255,255,0.04)"
+              }}
+              className="p-10 rounded-[2rem] border border-white/5 bg-[#111] flex flex-col gap-12 group cursor-pointer transition-all duration-500"
+            >
+              <div className="flex flex-col gap-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-white">
+                    <service.icon className="w-6 h-6" />
                   </div>
-                )}
-
-                <div className="mb-8">
-                  <h3 className="text-2xl font-bold mb-2">{service.title}</h3>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-bold">{service.price}</span>
-                  </div>
+                  <h3 className="text-2xl font-serif text-white">{service.title}</h3>
                 </div>
-
-                <p className="text-sm text-muted-foreground mb-10 leading-relaxed">
+                <p className="text-white/40 leading-relaxed max-w-sm">
                   {service.description}
                 </p>
-
-                <div className="space-y-4 mb-12">
-                  {service.features.map((feature, fIdx) => (
-                    <div key={fIdx} className="flex items-center gap-3">
-                      <div 
-                        className="h-5 w-5 rounded-full flex items-center justify-center"
-                        style={{ backgroundColor: `${service.color}20` }}
-                      >
-                        <Check className="h-3 w-3" style={{ color: service.color }} />
-                      </div>
-                      <span className="text-sm text-gray-300">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <Button 
-                  className="w-full h-14 rounded-2xl group"
-                  variant={service.highlight ? "primary" : "secondary"}
-                >
-                  Get Started 
-                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
               </div>
-            </SectionReveal>
+
+              {/* Overlapping Images Grid */}
+              <div className="relative h-48 mt-auto overflow-hidden rounded-xl">
+                 <div className="absolute top-0 left-0 w-3/4 h-full bg-[#222] rounded-xl border border-white/10 group-hover:scale-[1.03] transition-transform duration-500 group-hover:-translate-y-2" />
+                 <div className="absolute top-10 right-0 w-1/2 h-full bg-[#333] rounded-xl border border-white/10 group-hover:scale-[1.03] transition-transform duration-500 group-hover:translate-x-2" />
+                 <div className="absolute -bottom-10 left-10 w-2/3 h-full bg-[#1a1a1a] rounded-xl border border-white/10 group-hover:scale-[1.03] transition-transform duration-500" />
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
   );
-}
+};

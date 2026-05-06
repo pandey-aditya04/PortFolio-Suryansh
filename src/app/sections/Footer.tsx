@@ -23,16 +23,16 @@ export function Footer() {
   };
 
   return (
-    <footer className="border-t border-border bg-muted/30">
-      <div className="section-container py-16">
+    <footer className="border-t border-white/5 bg-[#0c0c0c]">
+      <div className="max-w-[1400px] mx-auto px-6 py-16">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
           {/* Brand */}
           <div className="space-y-4">
-            <a href="#hero" className="text-2xl font-bold">
-              <span className="gradient-text">SS</span>.dev
+            <a href="#hero" className="text-2xl font-serif text-white">
+              Johan Beker
             </a>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-xs">
-              Lead Designer & AI Video Synthesist crafting high-performance visual experiences.
+            <p className="text-sm text-white/40 leading-relaxed max-w-xs">
+              UI/UX & Graphic Designer building digital experiences with premium aesthetics.
             </p>
           </div>
 
@@ -73,13 +73,13 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:flex-row">
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Suryansh Srivastava. Made with <Heart className="inline h-3 w-3 text-red-500 fill-red-500" /> and lots of coffee.
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 md:flex-row">
+          <p className="text-sm text-white/40">
+            © {new Date().getFullYear()} Johan Beker. All rights reserved.
           </p>
 
           <motion.button onClick={scrollToTop}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition-colors hover:text-foreground hover:border-[var(--gradient-start)]/50"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/40 transition-colors hover:text-white hover:border-white/20"
             whileHover={{ y: -3, scale: 1.1 }} whileTap={{ scale: 0.9 }} aria-label="Scroll to top">
             <ArrowUp className="h-4 w-4" />
           </motion.button>

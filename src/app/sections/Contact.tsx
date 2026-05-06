@@ -39,24 +39,24 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="section-padding bg-background relative overflow-hidden">
+    <section id="contact" className="py-32 bg-[#0c0c0c] relative overflow-hidden">
       {/* Decorative background blur */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl max-h-4xl bg-primary/10 blur-[120px] rounded-full -z-10 pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl max-h-4xl bg-white/5 blur-[120px] rounded-full -z-10 pointer-events-none" />
       
-      <div className="section-container">
+      <div className="max-w-[1400px] mx-auto px-6">
         <div className="grid grid-cols-1 gap-20 lg:grid-cols-2 items-start">
           
           {/* Left Column: Info */}
           <SectionReveal variant="slide-right">
-            <div className="mb-8">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="h-px w-8 bg-primary" />
-                <span className="text-xs font-mono uppercase tracking-widest text-primary">
+            <div className="mb-8 flex flex-col gap-4">
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] text-white">⊙</span>
+                <span className="text-xs font-medium uppercase tracking-widest text-white/40">
                   Let&apos;s Connect
                 </span>
               </div>
-              <h2 className="heading-2 mb-6">
-                Let&apos;s build something <span className="gradient-text">exceptional</span>
+              <h2 className="text-5xl md:text-6xl font-serif text-white leading-tight">
+                Let&apos;s build something <span className="text-white/40 italic">exceptional</span>
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-md">
                 Have a project in mind or just want to say hi? I&apos;m currently available for new opportunities and collaborations.
@@ -175,7 +175,7 @@ export function Contact() {
                     <button 
                       disabled={isSubmitting}
                       type="submit" 
-                      className="w-full h-14 bg-primary text-white font-bold rounded-2xl hover:bg-primary-light transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-lg shadow-primary/20"
+                      className="w-full h-14 bg-white text-black font-bold rounded-2xl hover:bg-white/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-lg"
                     >
                       {isSubmitting ? (
                         <>

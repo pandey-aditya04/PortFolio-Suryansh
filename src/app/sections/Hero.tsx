@@ -1,179 +1,143 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
-import { ArrowUpRight, Sparkles, Video, Palette } from "lucide-react";
-import { Instagram } from "@/components/ui/Icons";
-import Image from "next/image";
-import { Button } from "@/components/ui/Button";
-import dynamic from "next/dynamic";
+import { motion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
+import { FloatingShapes } from "@/components/ui/FloatingShapes";
 
-const HeroBackground = dynamic(() => import("@/components/ui/HeroBackground").then(mod => mod.HeroBackground), {
-  ssr: false,
-});
-
-const letterVariants: Variants = {
-  initial: { y: 100, opacity: 0 },
-  animate: (i: number) => ({
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.8,
-      delay: 0.02 * i,
-      ease: "easeOut",
-    },
-  }),
-};
-
-function SplitText({ text }: { text: string }) {
+export const Hero = () => {
   return (
-    <span className="inline-block overflow-hidden pb-2">
-      {text.split("").map((char, i) => (
-        <motion.span
-          key={i}
-          variants={letterVariants}
-          initial="initial"
-          animate="animate"
-          custom={i}
-          className="inline-block"
-        >
-          {char === " " ? "\u00A0" : char}
-        </motion.span>
-      ))}
-    </span>
-  );
-}
+    <section className="relative min-h-screen pt-32 pb-20 flex items-center overflow-hidden">
+      <FloatingShapes />
+      {/* Background Glow */}
+      <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] bg-[#646464]/10 rounded-full blur-[120px] -z-10" />
 
-export function Hero() {
-  return (
-    <section id="hero" className="relative flex min-h-screen items-center pt-24 pb-20 overflow-hidden bg-[#09090f]">
-      <HeroBackground />
-      
-      <div className="section-container relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          <div className="lg:col-span-7">
-            {/* Status badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/20
-                         bg-primary/5 px-4 py-2 text-xs font-mono font-medium text-primary-light backdrop-blur-sm"
-            >
-              <Sparkles className="h-3.5 w-3.5" />
-              AVAILABLE FOR NEW PROJECTS
-            </motion.div>
+      <div className="max-w-[1400px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center w-full">
+        {/* Left Column */}
+        <div className="flex flex-col gap-8">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 w-fit"
+          >
+            <span className="text-[10px] text-white">⊙</span>
+            <span className="text-xs font-medium uppercase tracking-widest text-white/80">UI/UX & Graphic Designer</span>
+          </motion.div>
 
-            {/* Headline */}
-            <h1 className="heading-1 font-bold mb-6 text-white leading-[1.1]">
-              <SplitText text="Designing" /> <br />
-              <span className="gradient-text"><SplitText text="The Future" /></span>
+          <div className="flex flex-col gap-2">
+            <h1 className="text-7xl md:text-9xl font-serif leading-none tracking-tight">
+              <motion.span
+                initial={{ y: 100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="block text-white"
+              >
+                Johan
+              </motion.span>
+              <motion.span
+                initial={{ y: 100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="block text-[#666666]"
+              >
+                Beker
+              </motion.span>
             </h1>
-
-            {/* Subtitle */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="mt-6 max-w-xl text-lg md:text-xl text-muted-foreground leading-relaxed"
-            >
-              I am <span className="text-white font-medium">Suryansh Srivastava</span>, a Lead Designer & AI Video Synthesist crafting high-performance visual experiences.
-            </motion.p>
-
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="mt-10 flex flex-wrap items-center gap-6"
-            >
-              <Button
-                variant="primary"
-                size="lg"
-                className="rounded-full px-8 h-14 bg-primary text-white hover:bg-primary/90 shadow-lg shadow-primary/25"
-                onClick={() => document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" })}
-              >
-                Explore My Work
-              </Button>
-              <button 
-                className="group flex items-center gap-3 text-white font-medium hover:text-primary transition-colors"
-                onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-              >
-                Let&apos;s Talk
-                <div className="h-10 w-10 rounded-full border border-border flex items-center justify-center transition-all group-hover:border-primary group-hover:bg-primary/10">
-                  <ArrowUpRight className="h-4 w-4" />
-                </div>
-              </button>
-            </motion.div>
           </div>
 
-          <div className="lg:col-span-5 relative">
-            {/* Main Image Wrapper */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="relative aspect-[4/5] w-full max-w-[450px] mx-auto rounded-[3rem] overflow-hidden border border-white/10 shadow-2xl shadow-primary/10"
-            >
-              <Image
-                src="/images/suryansh/portrait.png"
-                alt="Suryansh Srivastava"
-                fill
-                className="object-cover"
-                priority
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#09090f] via-transparent to-transparent" />
-            </motion.div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="text-lg md:text-xl text-white/60 max-w-lg leading-relaxed"
+          >
+            I craft digital experiences that blend innovative design with flawless functionality. Let's build something extraordinary together.
+          </motion.p>
 
-            {/* Floating Cards */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-              className="absolute -right-6 top-1/4 h-20 w-48 bg-surface/80 backdrop-blur-xl border border-white/10 rounded-2xl flex items-center gap-4 px-4 shadow-2xl"
-            >
-              <div className="h-12 w-12 rounded-xl bg-accent-pink/20 flex items-center justify-center text-accent-pink">
-                <Video className="h-6 w-6" />
-              </div>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="flex flex-wrap gap-4"
+          >
+            <button className="px-8 py-4 bg-white text-[#0c0c0c] rounded-full font-semibold hover:bg-white/90 transition-all">
+              Contact Now
+            </button>
+            <button className="px-8 py-4 border border-white/10 text-white rounded-full font-semibold hover:bg-white/5 transition-all">
+              See All Projects
+            </button>
+          </motion.div>
+        </div>
+
+        {/* Right Column — Antigravity Cluster */}
+        <div className="relative h-[500px] flex items-center justify-center">
+          {/* Card 1 */}
+          <motion.div
+            animate={{
+              y: [0, -18, 0],
+              rotate: [-8, -8, -8]
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute top-10 left-0 w-72 p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md z-20"
+          >
+            <p className="text-white/80 text-sm leading-relaxed mb-4">
+              "The attention to detail and creative vision Johan brought to our project was truly exceptional."
+            </p>
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-white/10" />
               <div>
-                <div className="text-[10px] font-mono text-muted-foreground uppercase">Expertise</div>
-                <div className="text-sm font-bold text-white">AI Videos</div>
+                <p className="text-xs font-bold text-white">Sarah Jenkins</p>
+                <p className="text-[10px] text-white/40">CEO, TechFlow</p>
               </div>
-            </motion.div>
+            </div>
+          </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1, duration: 0.8 }}
-              className="absolute -left-6 bottom-1/4 h-20 w-48 bg-surface/80 backdrop-blur-xl border border-white/10 rounded-2xl flex items-center gap-4 px-4 shadow-2xl"
-            >
-              <div className="h-12 w-12 rounded-xl bg-accent-blue/20 flex items-center justify-center text-accent-blue">
-                <Instagram className="h-6 w-6" />
-              </div>
+          {/* Card 2 */}
+          <motion.div
+            animate={{
+              y: [-10, 10, -10],
+              rotate: [5, 5, 5]
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute bottom-10 right-0 w-72 p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md z-10"
+          >
+            <p className="text-white/80 text-sm leading-relaxed mb-4">
+              "Working with Johan was a game-changer for our brand identity. A master of his craft."
+            </p>
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-white/10" />
               <div>
-                <div className="text-[10px] font-mono text-muted-foreground uppercase">Experience</div>
-                <div className="text-sm font-bold text-white">Carousels</div>
+                <p className="text-xs font-bold text-white">Michael Chen</p>
+                <p className="text-[10px] text-white/40">Founder, Arise</p>
               </div>
-            </motion.div>
+            </div>
+          </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.8 }}
-              className="absolute left-1/2 -translate-x-1/2 -bottom-10 h-20 w-56 bg-surface border border-primary/30 rounded-2xl flex items-center gap-4 px-4 shadow-[0_0_40px_rgba(124,58,237,0.2)]"
-            >
-              <div className="h-12 w-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary">
-                <Palette className="h-6 w-6" />
-              </div>
-              <div>
-                <div className="text-[10px] font-mono text-muted-foreground uppercase">Services</div>
-                <div className="text-sm font-bold text-white">Premium Design</div>
-              </div>
-            </motion.div>
-          </div>
-
+          {/* Cursor Arrow Icon */}
+          <motion.div
+            animate={{
+              x: [-20, 20, -20],
+              y: [20, -20, 20]
+            }}
+            transition={{
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white"
+          >
+            <ArrowUpRight className="w-5 h-5" />
+          </motion.div>
         </div>
       </div>
     </section>
   );
-}
+};

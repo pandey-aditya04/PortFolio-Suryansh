@@ -1,118 +1,103 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { Star } from "lucide-react";
-import { testimonials } from "@/lib/data";
-import { SectionReveal } from "@/components/ui/SectionReveal";
-import { cn } from "@/lib/utils";
 
-const statsData = [
-  { value: "100+", label: "Happy clients", highlighted: false },
-  { value: "$250m", label: "revenue added", highlighted: true },
-  { value: "4.8", label: "Average Rating", highlighted: false },
+const testimonials = [
+  {
+    name: "Alex Rivera",
+    role: "CEO at Fintech",
+    content: "Johan's ability to translate complex ideas into elegant designs is unparalleled. He truly understands the balance between form and function.",
+    rating: 5,
+    avatarColor: "#ff5733"
+  },
+  {
+    name: "Sarah Chen",
+    role: "Product Manager",
+    content: "The motion graphics and AI video synthesis Johan provided for our launch were breathtaking. He's not just a designer; he's a visual storyteller.",
+    rating: 5,
+    avatarColor: "#33ff57"
+  },
+  {
+    name: "Marcus Thorne",
+    role: "Founder, Zenith",
+    content: "Working with Johan was the best decision we made for our rebranding. Professional, creative, and incredibly fast.",
+    rating: 4.8,
+    avatarColor: "#3357ff"
+  }
 ];
 
-export function Testimonials() {
+export const Testimonials = () => {
   return (
-    <section id="testimonials" className="section-padding">
-      <div className="section-container">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-          {/* Left Column: Header & Stats */}
-          <div className="lg:col-span-5 flex flex-col justify-center">
-            <SectionReveal variant="slide-right">
-              <div className="mb-4 inline-flex items-center justify-center rounded-full border border-border bg-muted px-3 py-1">
-                <span className="text-xs font-medium text-muted-foreground uppercase tracking-widest">
-                  Happy Clients
-                </span>
-              </div>
-              <h2 className="heading-2 mb-4">
-                Clients <span className="text-muted-foreground">Love me</span>
-              </h2>
-              <p className="text-muted-foreground mb-10">
-                Trusted by 100+ happy clients, adding $250m+ in revenue.
-              </p>
+    <section id="testimonials" className="py-32 bg-[#0c0c0c]">
+      <div className="max-w-[1400px] mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+          
+          {/* Left Column — Info & Stats */}
+          <div className="flex flex-col gap-10 lg:sticky lg:top-32">
+            <div className="flex flex-col gap-4">
+              <span className="text-[10px] uppercase tracking-widest text-white/40">⊙ Happy Clients</span>
+              <h2 className="text-6xl font-serif text-white">Clients <br /><span className="text-white/40">Love me</span></h2>
+            </div>
 
-              {/* Stats Grid */}
-              <div className="grid grid-cols-3 gap-4 mb-10">
-                {statsData.map((stat, i) => (
-                  <div
-                    key={i}
-                    className={cn(
-                      "rounded-xl border border-border bg-muted p-4 text-center flex flex-col justify-center items-center h-24",
-                      stat.highlighted && "highlight-border bg-[#141414]"
-                    )}
-                  >
-                    <span className="text-xl font-bold text-foreground">
-                      {stat.value}
-                    </span>
-                    <span className="text-xs text-muted-foreground mt-1">
-                      {stat.label}
-                    </span>
-                  </div>
-                ))}
-              </div>
+            <div className="grid grid-cols-3 gap-4">
+              {[
+                { value: "100+", label: "Clients" },
+                { value: "$250m", label: "Revenue" },
+                { value: "4.8", label: "Rating" },
+              ].map((stat, i) => (
+                <div key={i} className="p-4 rounded-2xl border border-white/10 bg-white/5 flex flex-col gap-1 items-center text-center">
+                  <span className="text-xl font-bold text-white">{stat.value}</span>
+                  <span className="text-[10px] uppercase tracking-wider text-white/40">{stat.label}</span>
+                </div>
+              ))}
+            </div>
 
-              {/* CTA Buttons */}
-              <div className="flex flex-wrap gap-4">
-                <button className="rounded-full bg-transparent border border-border px-6 py-3 text-sm font-medium text-foreground hover:bg-muted transition-colors">
-                  See All Projects
-                </button>
-                <button className="rounded-full bg-white px-6 py-3 text-sm font-medium text-black hover:bg-white/90 transition-colors">
-                  Contact Now
-                </button>
-              </div>
-            </SectionReveal>
+            <div className="flex gap-4">
+              <button className="px-8 py-4 bg-white text-[#0c0c0c] rounded-full font-semibold">Contact Now</button>
+              <button className="px-8 py-4 border border-white/10 text-white rounded-full font-semibold">See All</button>
+            </div>
           </div>
 
-          {/* Right Column: Testimonials List */}
-          <div className="lg:col-span-7 flex flex-col gap-4">
+          {/* Right Column — Sticky Stacked Cards */}
+          <div className="flex flex-col gap-8">
             {testimonials.map((t, i) => (
-              <SectionReveal key={t.id} variant="slide-left" delay={i * 0.1}>
-                <TestimonialCard testimonial={t} />
-              </SectionReveal>
+              <div 
+                key={i} 
+                className="sticky top-[100px] bg-[#111] p-10 rounded-[2.5rem] border border-white/10 shadow-2xl flex flex-col gap-8 transition-transform duration-500 hover:-translate-y-2"
+                style={{ 
+                  marginTop: i === 0 ? 0 : `${i * 20}px`,
+                  top: `${100 + i * 20}px`
+                }}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                    <div 
+                      className="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold"
+                      style={{ backgroundColor: t.avatarColor }}
+                    >
+                      {t.name.charAt(0)}
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-lg font-bold text-white">{t.name}</span>
+                      <span className="text-xs text-white/40 uppercase tracking-widest">{t.role}</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <span className="text-sm font-bold text-white mr-2">{t.rating}</span>
+                    <Star className="w-4 h-4 fill-white text-white" />
+                  </div>
+                </div>
+
+                <p className="text-xl text-white/80 leading-relaxed italic">
+                   "{t.content}"
+                </p>
+              </div>
             ))}
           </div>
+
         </div>
       </div>
     </section>
   );
-}
-
-function TestimonialCard({ testimonial }: { testimonial: (typeof testimonials)[0] }) {
-  return (
-    <div className="rounded-2xl border border-border bg-muted p-6 transition-colors hover:bg-[#141414]">
-      {/* Author Header */}
-      <div className="flex items-center gap-4 mb-4">
-        <div className="h-12 w-12 rounded-lg bg-[#1a1a1a] flex items-center justify-center text-lg font-bold border border-border overflow-hidden relative">
-           {/* Placeholder for actual image */}
-           <div className="absolute inset-0 bg-gradient-to-tr from-[var(--gradient-start)]/40 to-transparent" />
-           {testimonial.name.charAt(0)}
-        </div>
-        <div>
-          <p className="text-base font-semibold text-foreground">{testimonial.name}</p>
-          <p className="text-xs text-muted-foreground uppercase tracking-wider">{testimonial.company}</p>
-        </div>
-      </div>
-
-      {/* Rating */}
-      <div className="mb-4 flex gap-1">
-        <span className="text-sm font-medium mr-2">{testimonial.rating.toFixed(1)}</span>
-        {Array.from({ length: 5 }).map((_, i) => (
-          <Star
-            key={i}
-            className={cn(
-              "h-4 w-4",
-              i < testimonial.rating
-                ? "fill-[#f59e0b] text-[#f59e0b]"
-                : "text-border"
-            )}
-          />
-        ))}
-      </div>
-
-      {/* Content */}
-      <p className="text-sm text-muted-foreground leading-relaxed">
-        {testimonial.content}
-      </p>
-    </div>
-  );
-}
+};
