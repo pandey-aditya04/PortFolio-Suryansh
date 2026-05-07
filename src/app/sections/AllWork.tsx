@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Play, ExternalLink } from 'lucide-react';
+import { X, Play, ExternalLink, ArrowUpRight } from 'lucide-react';
 
 interface WorkItem {
   id: string;
