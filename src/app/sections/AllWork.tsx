@@ -90,7 +90,6 @@ const AllWork = () => {
       subcategories: [
         {
           name: "Advertisements",
-          gridCols: "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6",
           items: [
             { id: "ai-adv-1", title: "Realistic Product Advertisement", tag: "Product Ad", type: "youtube", videoId: "u2MwVays7fo", isVertical: true },
             { id: "ai-land-1", title: "Mountain Vista Cinematic", tag: "Cinematic", type: "youtube", videoId: "VHdLncCBl9M" },
@@ -110,7 +109,6 @@ const AllWork = () => {
       subcategories: [
         {
           name: "Motion Graphics",
-          gridCols: "grid-cols-2 md:grid-cols-4",
           items: [
             { id: "car-1", title: "Future Aesthetics", tag: "Concept", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777790890/skills/Carousel/A1.jpg" },
             { id: "car-2", title: "Neon Pulse", tag: "Motion", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777790895/skills/Carousel/A2.jpg" },
@@ -128,7 +126,6 @@ const AllWork = () => {
       subcategories: [
         {
           name: "Professional Works",
-          gridCols: "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6",
           items: [
             { id: "edit-1", title: "Electra CS Master Edit", tag: "Production", type: "youtube", videoId: "OHEWAcivxCA" },
             { id: "edit-2", title: "Cinematic Commercial Story", tag: "Commercial", type: "youtube", videoId: "zQArTonc-FQ" },
@@ -146,7 +143,6 @@ const AllWork = () => {
       subcategories: [
         {
           name: "Social Media",
-          gridCols: "grid-cols-2 md:grid-cols-4",
           items: [
             { id: "post-1", title: "Modern Minimalist 01", tag: "Graphic", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777790980/skills/Post%20designs/1.jpg" },
             { id: "post-2", title: "Branding Concept 02", tag: "Branding", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777790982/skills/Post%20designs/2.jpg" },
@@ -166,7 +162,7 @@ const AllWork = () => {
   ];
 
   return (
-    <section className="projects-section py-32 bg-black relative overflow-hidden font-sans">
+    <section className="projects-section pt-40 pb-32 bg-black relative overflow-hidden font-sans">
       <div className="absolute top-1/4 -left-20 w-96 h-96 bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
 
@@ -200,51 +196,75 @@ const AllWork = () => {
               </div>
             )}
 
-            {category.subcategories.map((sub, sIdx) => (
-              <div key={sub.name} className={sIdx === 0 ? "mt-0" : "mt-24"}>
-                {category.name === "Carousel" || category.name === "Post Designs" ? (
-                  <div className="flex flex-col gap-12 -mx-12 overflow-hidden py-4">
-                    {/* Row 1 - Left */}
-                    <div className="carousel-track scroll-left">
-                      {[...sub.items, ...sub.items].map((item: any, idx) => (
-                        <div 
-                          key={`row1-${idx}`} 
-                          className="w-[280px] h-[380px] md:w-[350px] md:h-[450px] rounded-[2rem] overflow-hidden border border-white/5 relative group cursor-pointer shrink-0"
-                          onClick={() => setSelectedVideo(item)}
-                        >
-                          <img src={item.src} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
-                        </div>
-                      ))}
-                    </div>
+            {category.subcategories.map((sub, sIdx) => {
+              const landscapeItems = sub.items.filter(item => !item.isVertical);
+              const portraitItems = sub.items.filter(item => item.isVertical);
 
-                    {/* Row 2 - Right */}
-                    <div className="carousel-track scroll-right">
-                      {[...sub.items.reverse(), ...sub.items].map((item: any, idx) => (
-                        <div 
-                          key={`row2-${idx}`} 
-                          className="w-[280px] h-[380px] md:w-[350px] md:h-[450px] rounded-[2rem] overflow-hidden border border-white/5 relative group cursor-pointer shrink-0"
-                          onClick={() => setSelectedVideo(item)}
-                        >
-                          <img src={item.src} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
-                        </div>
-                      ))}
+              return (
+                <div key={sub.name} className={sIdx === 0 ? "mt-0" : "mt-24"}>
+                  {category.name === "Carousel" || category.name === "Post Designs" ? (
+                    <div className="flex flex-col gap-12 -mx-12 overflow-hidden py-4">
+                      <div className="carousel-track scroll-left">
+                        {[...sub.items, ...sub.items].map((item: any, idx) => (
+                          <div 
+                            key={`row1-${idx}`} 
+                            className="w-[280px] h-[380px] md:w-[350px] md:h-[450px] rounded-[2rem] overflow-hidden border border-white/5 relative group cursor-pointer shrink-0"
+                            onClick={() => setSelectedVideo(item)}
+                          >
+                            <img src={item.src} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
+                          </div>
+                        ))}
+                      </div>
+                      <div className="carousel-track scroll-right">
+                        {[...sub.items.reverse(), ...sub.items].map((item: any, idx) => (
+                          <div 
+                            key={`row2-${idx}`} 
+                            className="w-[280px] h-[380px] md:w-[350px] md:h-[450px] rounded-[2rem] overflow-hidden border border-white/5 relative group cursor-pointer shrink-0"
+                            onClick={() => setSelectedVideo(item)}
+                          >
+                            <img src={item.src} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                <div className={sub.gridCols}>
-                  {sub.items.map((item: any, idx: number) => (
-                    <WorkCard 
-                      key={item.id}
-                      item={item} 
-                      category={category} 
-                      onClick={() => setSelectedVideo(item)} 
-                      index={idx}
-                    />
-                  ))}
+                  ) : (
+                    <div className="flex flex-col gap-16">
+                      {/* Landscape Grid */}
+                      {landscapeItems.length > 0 && (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+                          {landscapeItems.map((item, idx) => (
+                            <div key={item.id} className="min-h-0">
+                              <WorkCard 
+                                item={item} 
+                                category={category} 
+                                onClick={() => setSelectedVideo(item)} 
+                                index={idx}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Portrait Grid */}
+                      {portraitItems.length > 0 && (
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-start">
+                          {portraitItems.map((item, idx) => (
+                            <div key={item.id} className="min-h-0">
+                              <WorkCard 
+                                item={item} 
+                                category={category} 
+                                onClick={() => setSelectedVideo(item)} 
+                                index={idx}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
-                )}
-              </div>
-            ))}
+              );
+            })}
           </div>
         ))}
       </div>
