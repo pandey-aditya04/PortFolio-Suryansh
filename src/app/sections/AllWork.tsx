@@ -117,9 +117,11 @@ const AllWork = () => {
         {
           name: "Advertisements",
           items: [
-            { id: "ai-adv-1", title: "Realistic Product Advertisement", tag: "Product Ad", type: "youtube", videoId: "u2MwVays7fo", isVertical: true },
+            // Row 1: 2 Landscape
             { id: "ai-land-1", title: "Mountain Vista Cinematic", tag: "Cinematic", type: "youtube", videoId: "VHdLncCBl9M" },
             { id: "ai-land-2", title: "Nature Synthesis Exploration", tag: "Visual Art", type: "youtube", videoId: "d3HpHGpXFuE" },
+            // Row 2: 3 Portrait
+            { id: "ai-adv-1", title: "Realistic Product Advertisement", tag: "Product Ad", type: "youtube", videoId: "u2MwVays7fo", isVertical: true },
             { id: "ai-adv-2", title: "Abstract Motion Design", tag: "Motion Art", type: "youtube", videoId: "DU68DVJCTq4", isVertical: true },
             { id: "ai-story-1", title: "Cyberpunk Narrative Short", tag: "Narrative", type: "youtube", videoId: "WJS5_laqbno", isVertical: true }
           ]
@@ -256,24 +258,26 @@ const AllWork = () => {
                       </div>
                     </div>
                   ) : (
-                    <div className="grid grid-cols-6 gap-6 max-w-[1400px] mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-6 gap-6 max-w-[1400px] mx-auto">
                       {sub.items.map((item: any, idx) => (
                         <div 
                           key={item.id} 
                           className={cn(
-                            "relative overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a] transition-transform duration-500 hover:scale-[1.02] group cursor-pointer",
+                            "relative overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a0a] group cursor-pointer transition-all duration-500",
                             item.isVertical ? "col-span-3 md:col-span-2 aspect-[9/16]" : "col-span-6 md:col-span-3 aspect-video"
                           )}
                           onClick={() => setSelectedVideo(item as any)}
                         >
-                          <MediaContent item={item} isHovered={false} />
+                          <div className="absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105">
+                            <MediaContent item={item} isHovered={false} />
+                          </div>
                           
                           {/* Aesthetic Overlay */}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
                           
                           {/* Interaction Icon */}
-                          <div className="absolute bottom-4 left-4 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-                            <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center shadow-2xl">
+                          <div className="absolute bottom-6 left-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center shadow-2xl">
                               <ArrowUpRight className="w-4 h-4" />
                             </div>
                           </div>
