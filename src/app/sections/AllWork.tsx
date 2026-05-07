@@ -26,26 +26,25 @@ const AllWork = () => {
       subcategories: [
         {
           name: "Advertisements",
-          gridCols: "grid-cols-1 md:grid-cols-3",
+          gridCols: "grid-cols-1 md:grid-cols-2",
           items: [
-            { id: "ai-adv-1", title: "Motion Graphics", tag: "AI Synthesis", type: "youtube", videoId: "d3HpHGpXFuE" },
-            { id: "ai-adv-2", title: "Realistic Product Ad", tag: "AI Generated", type: "cloudinary", src: "https://res.cloudinary.com/daeio5gbf/video/upload/v1777787883/skills/AI%20VIDEOS/Landscape/1.mp4" },
-            { id: "ai-adv-3", title: "Visual Evolution", tag: "AI Art", type: "cloudinary", src: "https://res.cloudinary.com/daeio5gbf/video/upload/v1777787883/skills/AI%20VIDEOS/Landscape/3.mp4" }
+            { id: "ai-adv-1", title: "AI Product Advertisement", tag: "Shorts", type: "youtube", videoId: "u2MwVays7fo" },
+            { id: "ai-adv-2", title: "Motion Art Series", tag: "Shorts", type: "youtube", videoId: "DU68DVJCTq4" }
           ]
         },
         {
           name: "AI Storytelling",
-          gridCols: "grid-cols-1 md:grid-cols-3",
+          gridCols: "grid-cols-1 md:grid-cols-1",
           items: [
-             { id: "ai-story-1", title: "Narrative Concept", tag: "Narrative", type: "cloudinary", src: "https://res.cloudinary.com/daeio5gbf/video/upload/v1777787883/skills/AI%20VIDEOS/Landscape/2.mp4" },
-             { id: "ai-story-2", title: "Character Study", tag: "AI Motion", type: "cloudinary", src: "https://res.cloudinary.com/daeio5gbf/video/upload/v1777787883/skills/AI%20VIDEOS/Landscape/5.mp4" }
+             { id: "ai-story-1", title: "Narrative Concept Short", tag: "Shorts", type: "youtube", videoId: "WJS5_laqbno" }
           ]
         },
         {
           name: "Landscape",
-          gridCols: "grid-cols-1 md:grid-cols-3",
+          gridCols: "grid-cols-1 md:grid-cols-2",
           items: [
-            { id: "ai-land-1", title: "Cinematic Landscape", tag: "Cinematic", type: "cloudinary", src: "https://res.cloudinary.com/daeio5gbf/video/upload/v1777787883/skills/AI%20VIDEOS/Landscape/4.mp4" }
+            { id: "ai-land-1", title: "Mountain Vista AI", tag: "Runway Gen-3", type: "youtube", videoId: "VHdLncCBl9M" },
+            { id: "ai-land-2", title: "Nature Synthesis", tag: "Luma Dream Machine", type: "youtube", videoId: "d3HpHGpXFuE" }
           ]
         }
       ]
@@ -76,11 +75,18 @@ const AllWork = () => {
       subcategories: [
         {
           name: "Professional Works",
-          gridCols: "grid-cols-1 md:grid-cols-3",
+          gridCols: "grid-cols-1 md:grid-cols-2",
           items: [
             { id: "edit-1", title: "Electra CS Master Edit", tag: "Premiere Pro", type: "youtube", videoId: "OHEWAcivxCA" },
-            { id: "edit-2", title: "FRND Ad Campaign", tag: "Performance", type: "youtube", videoId: "ICPDfLbCpSo" },
-            { id: "edit-3", title: "Narrative Short", tag: "After Effects", type: "youtube", videoId: "-MhFhPmehbg" }
+            { id: "edit-2", title: "Cinematic Commercial", tag: "After Effects", type: "youtube", videoId: "zQArTonc-FQ" }
+          ]
+        },
+        {
+          name: "Advertisement Videos",
+          gridCols: "grid-cols-1 md:grid-cols-2",
+          items: [
+            { id: "adv-v-1", title: "Social Media Ad", tag: "Shorts", type: "youtube", videoId: "-MhFhPmehbg" },
+            { id: "adv-v-2", title: "FRND Ad Campaign", tag: "Performance", type: "youtube", videoId: "ICPDfLbCpSo" }
           ]
         }
       ]
