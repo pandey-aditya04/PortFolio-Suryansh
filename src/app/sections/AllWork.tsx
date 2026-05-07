@@ -4,8 +4,17 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Play, ExternalLink } from 'lucide-react';
 
+interface WorkItem {
+  id: string;
+  title: string;
+  tag: string;
+  type: 'youtube' | 'cloudinary' | 'image';
+  videoId?: string;
+  src?: string;
+}
+
 const AllWork = () => {
-  const [selectedVideo, setSelectedVideo] = useState<any>(null);
+  const [selectedVideo, setSelectedVideo] = useState<WorkItem | null>(null);
 
   const categories = [
     {
@@ -148,7 +157,7 @@ const AllWork = () => {
                 </div>
 
                 <div className={`grid ${sub.gridCols} gap-4`}>
-                  {sub.items.map((item) => (
+                  {sub.items.map((item: any) => (
                     <motion.div
                       key={item.id}
                       whileHover={{ y: -5 }}
