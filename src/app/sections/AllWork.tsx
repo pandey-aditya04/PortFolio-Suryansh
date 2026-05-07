@@ -32,18 +32,15 @@ const MediaContent = ({ item, isHovered }: { item: any, isHovered: boolean }) =>
   const shouldPlay = isInView && isHovered;
 
   return (
-    <div ref={containerRef} className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden bg-[#0a0a0a]">
-      {/* 1. Media Layer (Mounted when in view, visible on hover) */}
+    <div ref={containerRef} className="absolute inset-0 w-full h-full overflow-hidden bg-[#0a0a0a]">
+      {/* 1. Media Layer (Stays active in background when in view) */}
       {isInView && (
-        <div className={cn(
-          "absolute inset-0 w-full h-full transition-opacity duration-700 z-10",
-          isHovered ? "opacity-100" : "opacity-0"
-        )}>
+        <div className="absolute inset-0 w-full h-full z-0">
           {item.type === 'youtube' ? (
             <div className={`absolute w-[100%] h-[155%] -top-[27.5%] left-0 transform-gpu ${item.isVertical ? 'scale-[1.35]' : 'scale-[1.3]'}`}>
               <iframe
                 src={`https://www.youtube.com/embed/${item.videoId}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=${item.videoId}&enablejsapi=1&playsinline=1`}
-                className="w-full h-full border-none"
+                className="w-full h-full border-none pointer-events-none"
                 allow="autoplay; encrypted-media"
                 title={item.title}
               />
@@ -66,17 +63,20 @@ const MediaContent = ({ item, isHovered }: { item: any, isHovered: boolean }) =>
         </div>
       )}
 
-      {/* 2. Placeholder Layer (Blurred, visible when not hovered) */}
+      {/* 2. Placeholder Overlay (Blurred, visible when not hovered) */}
       <div className={cn(
-        "absolute inset-0 w-full h-full transition-all duration-700 bg-cover bg-center z-0",
-        isHovered ? "opacity-0 scale-105 blur-0" : "opacity-60 scale-100 blur-[10px]"
+        "absolute inset-0 w-full h-full transition-all duration-700 bg-cover bg-center z-10",
+        isHovered ? "opacity-0 scale-105 blur-0" : "opacity-100 scale-100 blur-[12px]"
       )}
       style={{ 
         backgroundImage: item.type === 'youtube' 
           ? `url(https://img.youtube.com/vi/${item.videoId}/maxresdefault.jpg)` 
           : `url(${item.src})` 
       }}
-      />
+      >
+        {/* Subtle Gradient to prevent harsh edges */}
+        <div className="absolute inset-0 bg-black/20" />
+      </div>
     </div>
   );
 };
