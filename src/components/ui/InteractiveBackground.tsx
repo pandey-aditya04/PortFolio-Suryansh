@@ -8,8 +8,10 @@ import ShootingStreaks from "./ShootingStreaks";
 
 export function InteractiveBackground() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const handleMouseMove = (e: MouseEvent) => {
       setMousePos({ x: e.clientX, y: e.clientY });
     };
@@ -59,13 +61,15 @@ export function InteractiveBackground() {
       </motion.div>
 
       {/* 4. Optimized Mouse Glow */}
-      <div 
-        className="absolute w-[30vw] h-[30vw] rounded-full mix-blend-screen blur-[100px] transition-transform duration-700 ease-out will-change-transform"
-        style={{
-          background: "radial-gradient(circle, rgba(255,255,255,0.02) 0%, transparent 60%)",
-          transform: `translate3d(${mousePos.x - (typeof window !== 'undefined' ? window.innerWidth * 0.15 : 0)}px, ${mousePos.y - (typeof window !== 'undefined' ? window.innerHeight * 0.15 : 0)}px, 0)`
-        }}
-      />
+      {mounted && (
+        <div 
+          className="absolute w-[30vw] h-[30vw] rounded-full mix-blend-screen blur-[100px] transition-transform duration-700 ease-out will-change-transform"
+          style={{
+            background: "radial-gradient(circle, rgba(255,255,255,0.02) 0%, transparent 60%)",
+            transform: `translate3d(${mousePos.x - window.innerWidth * 0.15}px, ${mousePos.y - window.innerHeight * 0.15}px, 0)`
+          }}
+        />
+      )}
     </div>
   );
 }
