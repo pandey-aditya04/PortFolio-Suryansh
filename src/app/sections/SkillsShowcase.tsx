@@ -19,7 +19,7 @@ export function SkillsShowcase() {
       <div className="section-container">
         
         <SectionReveal>
-          <div className="mb-16">
+          <div className="mb-10">
             <div className="flex items-center gap-2 mb-4">
               <div className="h-px w-8 bg-primary" />
               <span className="text-xs font-mono uppercase tracking-widest text-primary">
@@ -39,18 +39,24 @@ export function SkillsShowcase() {
           {featured && (
             <SectionReveal className="md:col-span-2">
               <div 
-                className="group relative h-[400px] md:h-[500px] overflow-hidden rounded-3xl border border-border bg-surface transition-all duration-500 hover:border-primary/40 hover:shadow-[0_0_40px_rgba(124,58,237,0.15)] cursor-pointer"
+                className="group relative h-[300px] md:h-[400px] overflow-hidden rounded-3xl border border-border bg-surface transition-all duration-500 hover:border-primary/40 hover:shadow-[0_0_40px_rgba(124,58,237,0.15)] cursor-pointer"
                 onMouseEnter={() => setHoveredId(featured.id)}
                 onMouseLeave={() => setHoveredId(null)}
                 onClick={() => setSelectedCategory(featured)}
               >
                 {/* Background Image / Video Preview */}
                 <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
-                  <img 
-                    src={featured.thumbnail} 
-                    alt={featured.label}
-                    className="h-full w-full object-cover"
-                  />
+                  {featured.thumbnail ? (
+                    <img 
+                      src={featured.thumbnail} 
+                      alt={featured.label}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <div className="h-full w-full bg-neutral-900 flex items-center justify-center">
+                      <span className="text-white/20 text-6xl font-serif">{featured.label[0]}</span>
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#09090f] via-[#09090f]/20 to-transparent" />
                 </div>
 
@@ -93,18 +99,24 @@ export function SkillsShowcase() {
           {others.map((category, idx) => (
             <SectionReveal key={category.id} delay={idx * 0.1}>
               <div 
-                className="group relative h-[300px] md:h-[350px] overflow-hidden rounded-3xl border border-border bg-surface transition-all duration-500 hover:border-primary/40 hover:shadow-[0_0_40px_rgba(124,58,237,0.15)] cursor-pointer"
+                className="group relative h-[250px] md:h-[300px] overflow-hidden rounded-3xl border border-border bg-surface transition-all duration-500 hover:border-primary/40 hover:shadow-[0_0_40px_rgba(124,58,237,0.15)] cursor-pointer"
                 onMouseEnter={() => setHoveredId(category.id)}
                 onMouseLeave={() => setHoveredId(null)}
                 onClick={() => setSelectedCategory(category)}
               >
                 {/* Background */}
                 <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
-                  <img 
-                    src={category.thumbnail} 
-                    alt={category.label}
-                    className="h-full w-full object-cover"
-                  />
+                  {category.thumbnail ? (
+                    <img 
+                      src={category.thumbnail} 
+                      alt={category.label}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <div className="h-full w-full bg-neutral-900 flex items-center justify-center">
+                      <span className="text-white/20 text-4xl font-serif">{category.label[0]}</span>
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#09090f] via-[#09090f]/40 to-transparent" />
                 </div>
 

@@ -70,8 +70,8 @@ export function Contact() {
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-white uppercase tracking-wider mb-1">Email Me</h4>
-                  <a href="mailto:suryanshsrivastavaa@gmail.com" className="text-lg text-muted-foreground hover:text-primary transition-colors">
-                    suryanshsrivastavaa@gmail.com
+                  <a href="mailto:maxx88461@gmail.com" className="text-lg text-muted-foreground hover:text-primary transition-colors">
+                    maxx88461@gmail.com
                   </a>
                 </div>
               </div>
@@ -96,21 +96,21 @@ export function Contact() {
 
           {/* Right Column: Form */}
           <SectionReveal variant="slide-left">
-            <div className="relative p-8 md:p-12 rounded-[2.5rem] bg-surface border border-white/5 shadow-2xl overflow-hidden">
+            <div className="relative p-10 md:p-14 rounded-[3rem] bg-white/[0.02] border border-white/10 shadow-2xl backdrop-blur-xl">
               <AnimatePresence mode="wait">
                 {isSuccess ? (
                   <motion.div 
                     key="success"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    className="flex flex-col items-center justify-center py-12 text-center"
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    className="flex flex-col items-center justify-center py-20 text-center"
                   >
-                    <div className="h-20 w-20 rounded-full bg-primary/20 flex items-center justify-center text-primary mb-6">
-                      <CheckCircle2 className="h-10 w-10" />
+                    <div className="h-24 w-24 rounded-full bg-white/10 flex items-center justify-center text-white mb-8">
+                      <CheckCircle2 className="h-12 w-12" />
                     </div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
-                    <p className="text-muted-foreground">Thank you for reaching out. I&apos;ll get back to you shortly.</p>
+                    <h3 className="text-3xl font-serif text-white mb-4">Message Sent!</h3>
+                    <p className="text-white/40 text-lg">Thank you for reaching out. I&apos;ll get back to you shortly.</p>
                   </motion.div>
                 ) : (
                   <motion.form 
@@ -119,11 +119,11 @@ export function Contact() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="space-y-6"
+                    className="space-y-10"
                   >
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="space-y-2">
-                        <label className="text-xs font-mono uppercase tracking-widest text-gray-400">Name</label>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div className="space-y-4">
+                        <label className="text-xs font-medium uppercase tracking-[0.2em] text-white/40 ml-1">Name</label>
                         <input 
                           required
                           type="text" 
@@ -133,8 +133,8 @@ export function Contact() {
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         />
                       </div>
-                      <div className="space-y-2">
-                        <label className="text-xs font-mono uppercase tracking-widest text-gray-400">Email</label>
+                      <div className="space-y-4">
+                        <label className="text-xs font-medium uppercase tracking-[0.2em] text-white/40 ml-1">Email</label>
                         <input 
                           required
                           type="email" 
@@ -146,25 +146,30 @@ export function Contact() {
                       </div>
                     </div>
                     
-                    <div className="space-y-2">
-                      <label className="text-xs font-mono uppercase tracking-widest text-gray-400">Subject</label>
-                      <select 
-                        className="form-input appearance-none"
-                        value={formData.subject}
-                        onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      >
-                        <option>New Project Inquiry</option>
-                        <option>Collaboration</option>
-                        <option>Just Saying Hi</option>
-                        <option>Other</option>
-                      </select>
+                    <div className="space-y-4">
+                      <label className="text-xs font-medium uppercase tracking-[0.2em] text-white/40 ml-1">Subject</label>
+                      <div className="relative">
+                        <select 
+                          className="form-input appearance-none"
+                          value={formData.subject}
+                          onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                        >
+                          <option>New Project Inquiry</option>
+                          <option>Collaboration</option>
+                          <option>Just Saying Hi</option>
+                          <option>Other</option>
+                        </select>
+                        <div className="absolute right-6 top-1/2 -translate-y-1/2 pointer-events-none text-white/20">
+                           <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/></svg>
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="space-y-2">
-                      <label className="text-xs font-mono uppercase tracking-widest text-gray-400">Message</label>
+                    <div className="space-y-4">
+                      <label className="text-xs font-medium uppercase tracking-[0.2em] text-white/40 ml-1">Message</label>
                       <textarea 
                         required
-                        rows={4}
+                        rows={5}
                         placeholder="Tell me about your project..."
                         className="form-input resize-none"
                         value={formData.message}
@@ -172,23 +177,25 @@ export function Contact() {
                       />
                     </div>
 
-                    <button 
+                    <motion.button 
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                       disabled={isSubmitting}
                       type="submit" 
-                      className="w-full h-14 bg-white text-black font-bold rounded-2xl hover:bg-white/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-3 shadow-lg"
+                      className="w-full h-16 bg-white text-black font-bold rounded-2xl hover:bg-white/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-4 text-lg shadow-[0_20px_40px_rgba(255,255,255,0.1)]"
                     >
                       {isSubmitting ? (
                         <>
-                          <Loader2 className="h-5 w-5 animate-spin" />
+                          <Loader2 className="h-6 w-6 animate-spin" />
                           Sending...
                         </>
                       ) : (
                         <>
                           Send Message
-                          <Send className="h-4 w-4" />
+                          <Send className="h-5 w-5" />
                         </>
                       )}
-                    </button>
+                    </motion.button>
                   </motion.form>
                 )}
               </AnimatePresence>

@@ -1,98 +1,96 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MessageSquare, Zap, Rocket } from "lucide-react";
-import { Figma } from "@/components/ui/Icons";
-import { SectionReveal } from "@/components/ui/SectionReveal";
+import { MessageSquare, Zap, Play, CheckCircle } from "lucide-react";
 
-const steps = [
-  {
-    id: 1,
-    title: "Let's Get In Touch",
-    description: "Start by reaching out through our contact page. Fill out the form or book a call to discuss your project, goals, and ideas.",
-    icon: MessageSquare,
-  },
-  {
-    id: 2,
-    title: "Grab Your Designs",
-    description: "Tell me your unique vision, and I'll create stunning, functional designs that perfectly align with your goals.",
-    icon: Figma,
-  },
-  {
-    id: 3,
-    title: "Kickstart Development",
-    description: "I expertly transform your designs into a powerful, scalable solution, fully ready to launch.",
-    icon: Zap,
-  },
-  {
-    id: 4,
-    title: "And Hand Over",
-    description: "Receive a fully tested, polished, and high-quality product tailored to your needs with ongoing support.",
-    icon: Rocket,
-  },
-];
+export const Process = () => {
+  const steps = [
+    {
+      id: 1,
+      title: "Initial Brief & Vision",
+      description: "We start with a detailed consultation to understand your brand's unique voice, goals, and visual aspirations.",
+      icon: MessageSquare,
+    },
+    {
+      id: 2,
+      title: "AI Concept Synthesis",
+      description: "Using advanced AI tools like Runway and Higgsfield, I generate striking visual concepts and motion storyboards.",
+      icon: Zap,
+    },
+    {
+      id: 3,
+      title: "Pro Post-Production",
+      description: "I expertly refine and edit assets in Premiere Pro and After Effects, adding sound design and cinematic polish.",
+      icon: Play,
+    },
+    {
+      id: 4,
+      title: "Final Delivery",
+      description: "Receive high-converting, premium visual content tailored for your social platforms and ad campaigns.",
+      icon: CheckCircle,
+    },
+  ];
 
-export function Process() {
   return (
-    <section id="process" className="section-padding overflow-hidden">
-      <div className="section-container">
-        <SectionReveal>
-          <div className="mb-12 text-center">
-             <div className="mb-4 inline-flex items-center justify-center rounded-full border border-border bg-muted px-3 py-1">
-                <span className="text-xs font-medium text-muted-foreground uppercase tracking-widest">
-                  How it works
+    <section id="process" className="py-32 bg-[#0c0c0c]">
+      <div className="max-w-[1400px] mx-auto px-6">
+        {/* Header */}
+        <div className="flex flex-col items-center gap-6 mb-20 text-center">
+          <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 flex items-center gap-2">
+            <span className="text-[10px] text-white">⊙</span>
+            <span className="text-xs font-medium uppercase tracking-widest text-white/80">How it works</span>
+          </div>
+          <h2 className="text-5xl md:text-7xl font-serif text-white">
+            Process <span className="text-white/40 italic">Is Everything</span>
+          </h2>
+          <p className="text-white/40 text-lg max-w-md">
+            Simple, streamlined process is what gets you premium results.
+          </p>
+        </div>
+
+        {/* Steps Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {steps.map((step, i) => (
+            <motion.div
+              key={step.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="p-8 rounded-[2rem] border border-white/10 bg-[#111] relative group overflow-hidden"
+            >
+              {/* Step Number Badge */}
+              <div className="absolute top-6 right-6 w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[10px] font-bold text-white/40 group-hover:text-white group-hover:border-white/30 transition-all">
+                {step.id}
+              </div>
+
+              {/* Icon */}
+              <div className="mb-8 w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-white/60 group-hover:text-white group-hover:scale-110 transition-all">
+                <step.icon className="w-6 h-6" />
+              </div>
+
+              {/* Content */}
+              <div className="flex flex-col gap-4">
+                <h3 className="text-xl font-serif text-white group-hover:translate-x-1 transition-transform">
+                  {step.title}
+                </h3>
+                <p className="text-white/40 text-sm leading-relaxed">
+                  {step.description}
+                </p>
+              </div>
+
+              {/* Bottom Step Label */}
+              <div className="mt-8 pt-8 border-t border-white/5">
+                <span className="text-[10px] uppercase tracking-widest text-white/20 font-bold bg-white/5 px-4 py-1.5 rounded-full">
+                  Step {step.id}
                 </span>
               </div>
-            <h2 className="heading-2">
-              Process <span className="text-muted-foreground">Is Everything</span>
-            </h2>
-            <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
-              Simple, streamlined process is what get&apos;s you results.
-            </p>
-          </div>
-        </SectionReveal>
 
-        {/* Horizontal Scrolling Container */}
-        <div className="flex gap-6 overflow-x-auto pb-8 snap-x no-scrollbar">
-          {steps.map((step, i) => {
-            const Icon = step.icon;
-            return (
-              <motion.div
-                key={step.id}
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="flex-shrink-0 w-[300px] md:w-[350px] snap-center rounded-3xl border border-border bg-muted p-8 flex flex-col relative group"
-              >
-                {/* Step Number Badge */}
-                <div className="absolute top-6 right-6 h-8 w-8 rounded-full bg-black/50 border border-border flex items-center justify-center text-xs font-bold text-white z-10">
-                  {step.id}
-                </div>
-
-                <div className="mb-8">
-                  <div className="h-12 w-12 rounded-2xl bg-[#141414] border border-border flex items-center justify-center mb-6">
-                    <Icon className="h-6 w-6 text-foreground" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-4">
-                    {step.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
-
-                <div className="mt-auto">
-                   <div className="h-px w-full bg-border mb-6" />
-                   <span className="text-xs font-medium text-muted-foreground bg-[#141414] border border-border px-3 py-1.5 rounded-full">
-                     Step {step.id}
-                   </span>
-                </div>
-              </motion.div>
-            );
-          })}
+              {/* Hover Glow */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
   );
-}
+};

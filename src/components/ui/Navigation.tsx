@@ -36,9 +36,9 @@ export const Navigation = () => {
       {/* Logo */}
       <div className="flex items-center gap-2 pr-4 border-r border-white/10">
         <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-[#0c0c0c] font-bold">
-          J
+          S
         </div>
-        <span className="text-white font-medium tracking-tight">Johan Beker</span>
+        <span className="text-white font-medium tracking-tight">Suryansh S.</span>
       </div>
 
       {/* Nav Links */}
@@ -63,7 +63,7 @@ export const Navigation = () => {
         className="flex items-center gap-2 bg-white text-[#0c0c0c] px-5 py-2 rounded-full text-sm font-semibold hover:bg-white/90 transition-colors"
       >
         <span>✦</span>
-        <span>Get for Free</span>
+        <span>Let&apos;s Talk</span>
       </motion.button>
     </motion.header>
   );

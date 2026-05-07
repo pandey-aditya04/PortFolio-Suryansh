@@ -29,10 +29,10 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <a href="#hero" className="text-2xl font-serif text-white">
-              Johan Beker
+              Suryansh Srivastava
             </a>
             <p className="text-sm text-white/40 leading-relaxed max-w-xs">
-              UI/UX & Graphic Designer building digital experiences with premium aesthetics.
+              AI Visual Creator & Motion Artist crafting premium digital experiences through visual storytelling.
             </p>
           </div>
 
@@ -75,7 +75,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 md:flex-row">
           <p className="text-sm text-white/40">
-            © {new Date().getFullYear()} Johan Beker. All rights reserved.
+            © {new Date().getFullYear()} Suryansh Srivastava. All rights reserved.
           </p>
 
           <motion.button onClick={scrollToTop}

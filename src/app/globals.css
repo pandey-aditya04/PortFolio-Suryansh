@@ -8,9 +8,9 @@
   /* Dark theme palette as per spec */
   --background: #0c0c0c;
   --foreground: #ffffff;
-  --muted: #888888;
-  --muted-foreground: #666666;
-  --border: rgba(255, 255, 255, 0.08);
+  --muted: #111;
+  --muted-foreground: #444444;
+  --border: rgba(255, 255, 255, 0.05);
   --accent: #ffffff;
   
   /* Typography */
@@ -132,23 +132,25 @@ body {
 
 .form-input {
   width: 100%;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
-  background: var(--muted);
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: #0f0f0f;
+  backdrop-filter: blur(10px);
   color: var(--foreground);
-  padding: 1rem 1.25rem;
-  font-size: 0.875rem;
-  transition: all 0.3s ease;
+  padding: 1.25rem 1.5rem;
+  font-size: 0.95rem;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   outline: none;
 }
 
 .form-input::placeholder {
-  color: var(--muted-foreground);
+  color: rgba(255, 255, 255, 0.2);
 }
 
 .form-input:focus {
-  border-color: var(--gradient-start);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--gradient-start) 20%, transparent);
+  background: #141414;
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.03);
 }
 
 /* ============================================
@@ -213,8 +215,9 @@ body {
   content: '';
   position: absolute; 
   inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.03;
+  /* Optimized noise using a lightweight tiling image instead of expensive SVG turbulence */
+  background-image: url("https://www.transparenttextures.com/patterns/dark-matter.png");
+  opacity: 0.02;
   pointer-events: none;
 }
 
@@ -300,4 +303,71 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ============================================
+   DESIGN CAROUSEL (MARQUEE)
+   ============================================ */
+
+.carousel-container {
+  overflow: hidden;
+  width: 100%;
+  padding: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: #0c0c0c;
+  position: relative;
+}
+
+.carousel-track {
+  display: flex;
+  width: max-content;
+  gap: 2rem;
+}
+
+.scroll-left {
+  animation: scrollLeft 60s linear infinite;
+}
+
+.scroll-right {
+  animation: scrollRight 60s linear infinite;
+}
+
+.carousel-track:hover {
+  animation-play-state: paused;
+}
+
+.carousel-image-wrapper {
+  width: 350px;
+  height: 450px;
+  border-radius: 2rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
+  background: #111;
+}
+
+.carousel-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: grayscale(0.2) contrast(1.1);
+}
+
+.carousel-image-wrapper:hover img {
+  transform: scale(1.05);
+  filter: grayscale(0) contrast(1);
+}
+
+@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scrollRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
 }

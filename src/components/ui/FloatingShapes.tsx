@@ -12,7 +12,7 @@ const Scene = () => {
       <directionalLight position={[10, 10, 5]} intensity={1} />
       
       <Float speed={2} rotationIntensity={1} floatIntensity={2}>
-        <Sphere args={[1, 64, 64]} position={[2, 0, 0]}>
+        <Sphere args={[1, 32, 32]} position={[2, 0, 0]}>
           <MeshDistortMaterial
             color="#333"
             speed={3}
@@ -35,7 +35,7 @@ const Scene = () => {
 export const FloatingShapes = () => {
   return (
     <div className="absolute inset-0 -z-10 opacity-30">
-      <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
+      <Canvas camera={{ position: [0, 0, 5], fov: 75 }} dpr={[1, 1.5]} gl={{ antialias: false }}>
         <Scene />
       </Canvas>
     </div>

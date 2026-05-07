@@ -1,75 +1,127 @@
 "use client";
 
-import { Star } from "lucide-react";
-import { Accordion } from "@/components/ui/Accordion";
-import { SectionReveal } from "@/components/ui/SectionReveal";
-import { faqs } from "@/lib/data";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Plus, Minus, Star } from "lucide-react";
+import Image from "next/image";
 
-export function FAQ() {
+export const FAQ = () => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(0);
+
+  const faqs = [
+    {
+      question: "What services do you offer?",
+      answer: "I specialize in AI video synthesis, professional video editing (Premiere Pro/After Effects), graphic design, and cinematic brand storytelling tailored for digital platforms."
+    },
+    {
+      question: "How do I start working with you?",
+      answer: "Simply fill out the contact form or send an email. We'll schedule a quick consultation to discuss your project goals, timelines, and visual requirements."
+    },
+    {
+      question: "What AI tools do you use?",
+      answer: "I leverage cutting-edge tools like Veo 3, Nano Banana, Higgsfield AI, and Runway ML for synthesis, combined with industry-standard Adobe Creative Cloud for final polish."
+    },
+    {
+      question: "How long does a project take?",
+      answer: "Timelines depend on complexity, but most AI-driven ad campaigns and cinematic edits are delivered within 7 to 14 business days."
+    },
+    {
+      question: "Do you provide revisions?",
+      answer: "Absolutely. I offer a structured revision process to ensure the final output perfectly matches your brand's vision and performance goals."
+    }
+  ];
+
   return (
-    <section id="faq" className="section-padding">
-      <div className="section-container">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
-          {/* Left Column: Header & Author Card */}
-          <div className="lg:col-span-5 flex flex-col justify-center">
-            <SectionReveal variant="slide-right">
-              <div className="mb-4 inline-flex items-center justify-center rounded-full border border-border bg-muted px-3 py-1">
-                <span className="text-xs font-medium text-muted-foreground uppercase tracking-widest">
-                  FAQ Section
-                </span>
+    <section id="faq" className="py-32 bg-[#0c0c0c]">
+      <div className="max-w-[1400px] mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-20">
+          
+          {/* Left Side: Info & Testimonial */}
+          <div className="lg:col-span-5 flex flex-col gap-12">
+            <div className="flex flex-col gap-6">
+              <div className="px-4 py-1.5 rounded-full border border-white/10 bg-white/5 flex items-center gap-2 w-fit">
+                <span className="text-[10px] text-white">⊙</span>
+                <span className="text-xs font-medium uppercase tracking-widest text-white/80">FAQ Section</span>
               </div>
-              <h2 className="heading-2 mb-4">
-                Questions, <span className="text-muted-foreground">Answers</span>
+              <h2 className="text-6xl font-serif text-white">
+                Questions, <span className="text-white/40 italic">Answers</span>
               </h2>
-              <p className="text-muted-foreground mb-10">
+              <p className="text-white/40 text-lg">
                 Get quick answers to your most pressing questions.
               </p>
+            </div>
 
-              {/* Author Card */}
-              <div className="rounded-2xl border border-border bg-muted p-6 mb-10">
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="h-12 w-12 rounded-lg bg-[#1a1a1a] flex items-center justify-center text-lg font-bold border border-border overflow-hidden relative">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-[var(--gradient-start)]/40 to-transparent" />
-                    SS
-                  </div>
-                  <div>
-                    <p className="text-base font-semibold text-foreground">Suryansh Srivastava</p>
-                    <p className="text-xs text-muted-foreground">Expert Developer</p>
-                  </div>
+            {/* Featured Testimonial Card */}
+            <div className="p-8 rounded-[2rem] border border-white/10 bg-white/[0.02] relative group">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-16 h-16 rounded-2xl overflow-hidden relative border border-white/10">
+                  <div className="absolute inset-0 bg-[#333] flex items-center justify-center text-white/20 font-bold">RJ</div>
                 </div>
-
-                <div className="mb-4 flex gap-1 items-center">
-                  <span className="text-sm font-medium mr-1">5.0</span>
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-3 w-3 fill-[#f59e0b] text-[#f59e0b]" />
-                  ))}
+                <div>
+                  <h4 className="text-white font-serif text-xl">Ryan Harper</h4>
+                  <p className="text-white/40 text-sm">Harper Education</p>
                 </div>
-
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  Exceptional creativity and attention to detail! The final product not only looks great but also enhances user engagement.
-                </p>
               </div>
-
-              {/* CTA Buttons */}
-              <div className="flex flex-wrap gap-4">
-                <button className="rounded-full bg-transparent border border-border px-6 py-3 text-sm font-medium text-foreground hover:bg-muted transition-colors">
-                  See All Projects
-                </button>
-                <button className="rounded-full bg-white px-6 py-3 text-sm font-medium text-black hover:bg-white/90 transition-colors">
-                  Contact Now
-                </button>
+              <div className="flex gap-1 mb-6">
+                {[1, 2, 3, 4, 5].map((s) => (
+                  <Star key={s} className="w-4 h-4 fill-white text-white" />
+                ))}
+                <span className="text-white text-sm ml-2">5.0</span>
               </div>
-            </SectionReveal>
+              <p className="text-white/60 leading-relaxed italic">
+                "Exceptional creativity and attention to detail! The final product not only looks great but also enhances user engagement significantly."
+              </p>
+            </div>
+
+            <div className="flex gap-4">
+              <button className="px-8 py-4 border border-white/10 text-white rounded-full font-bold hover:bg-white/5 transition-all">
+                See All Projects
+              </button>
+              <button className="px-8 py-4 bg-white text-black rounded-full font-bold hover:bg-white/90 transition-all">
+                Contact Now
+              </button>
+            </div>
           </div>
 
-          {/* Right Column: Accordion */}
-          <div className="lg:col-span-7">
-            <SectionReveal variant="slide-left">
-              <Accordion items={faqs} />
-            </SectionReveal>
+          {/* Right Side: Accordion */}
+          <div className="lg:col-span-7 flex flex-col gap-4">
+            {faqs.map((faq, i) => (
+              <div 
+                key={i}
+                className="rounded-[1.5rem] border border-white/10 bg-white/[0.02] overflow-hidden transition-all duration-500"
+              >
+                <button
+                  onClick={() => setActiveIndex(activeIndex === i ? null : i)}
+                  className="w-full px-8 py-6 flex items-center justify-between text-left group"
+                >
+                  <span className={`text-xl font-serif transition-colors duration-500 ${activeIndex === i ? 'text-white' : 'text-white/60 group-hover:text-white'}`}>
+                    {faq.question}
+                  </span>
+                  <div className={`w-10 h-10 rounded-full border border-white/10 flex items-center justify-center transition-all duration-500 ${activeIndex === i ? 'bg-white text-black border-white' : 'text-white/40 group-hover:text-white'}`}>
+                    {activeIndex === i ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+                  </div>
+                </button>
+
+                <AnimatePresence>
+                  {activeIndex === i && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.5, ease: "easeInOut" }}
+                    >
+                      <div className="px-8 pb-8 text-white/40 leading-relaxed max-w-2xl">
+                        {faq.answer}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ))}
           </div>
+
         </div>
       </div>
     </section>
   );
-}
+};

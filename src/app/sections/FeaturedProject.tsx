@@ -26,20 +26,20 @@ export const FeaturedProject = () => {
         {/* Left Side — Info */}
         <div className="flex flex-col gap-8">
           <div className="flex flex-col gap-4">
-            <h2 className="text-6xl font-serif text-white">Stellar App</h2>
+            <h2 className="text-6xl font-serif text-white">FRND Ad Campaign</h2>
             <p className="text-white/60 text-lg leading-relaxed max-w-md">
-              A comprehensive dashboard for cloud infrastructure management. Built with performance and scalability in mind.
+              A high-performance Meta Ads campaign powered by cutting-edge AI video synthesis to create hyper-realistic, high-converting visuals for the FRND social platform.
             </p>
           </div>
 
           <div className="flex flex-col gap-4">
             <div className="flex justify-between border-b border-white/10 pb-4">
               <span className="text-white/40 uppercase tracking-widest text-[10px]">Client</span>
-              <span className="text-white text-sm">Stellar Cloud Inc.</span>
+              <span className="text-white text-sm">FRND (Social Platform)</span>
             </div>
             <div className="flex justify-between border-b border-white/10 pb-4">
               <span className="text-white/40 uppercase tracking-widest text-[10px]">Service</span>
-              <span className="text-white text-sm">UI/UX Design & Web Dev</span>
+              <span className="text-white text-sm">AI Video Synthesis & Meta Ads</span>
             </div>
           </div>
 
@@ -66,7 +66,17 @@ export const FeaturedProject = () => {
                 <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
              </div>
              {/* Mockup Content */}
-             <div className="flex-1 bg-[#1a1a1a]" />
+             <div className="flex-1 bg-[#1a1a1a] relative overflow-hidden">
+                <video 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline 
+                  className="absolute inset-0 w-full h-full object-cover"
+                >
+                  <source src="/Skills/EDITS/Advertisement videos/1.mp4" type="video/mp4" />
+                </video>
+             </div>
           </div>
         </div>
 

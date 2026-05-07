@@ -1,143 +1,133 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { Twitter, Instagram, Dribbble } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { Twitter, Instagram, Globe, Mail } from "lucide-react";
+import Image from "next/image";
 
 export const About = () => {
-  const timelineRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (timelineRef.current) {
-      const rows = timelineRef.current.querySelectorAll(".experience-row");
-      rows.forEach((row) => {
-        const year = row.querySelector(".year-text");
-        gsap.fromTo(
-          year,
-          { x: 50, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: row,
-              start: "top 80%",
-            },
-          }
-        );
-      });
-    }
-  }, []);
-
   const experience = [
-    { role: "Lead UI/UX Designer", company: "Metaverse Lab", year: "2023 — Pres" },
-    { role: "Product Designer", company: "Stellar Cloud", year: "2021 — 2023" },
-    { role: "Visual Designer", company: "Neon Agency", year: "2019 — 2021" },
-    { role: "Junior Designer", company: "Startup Hub", year: "2018 — 2019" },
+    { role: "Secretary", company: "EEL, MMMUT", year: "2025" },
+    { role: "Joint Secretary", company: "NSS, MMMUT", year: "2024" },
+    { role: "Freelance Video Editor", company: "FRND Ad Campaign", year: "2024" },
+    { role: "B.Tech Student", company: "MMMUT Gorakhpur", year: "2023" },
   ];
 
-  const skills = ["Branding", "Webflow", "React", "Three.js", "GSAP", "Figma", "After Effects"];
+  const skills = [
+    "AI Video Synthesis", 
+    "Adobe Premiere Pro", 
+    "After Effects", 
+    "Photoshop", 
+    "Runway ML", 
+    "Higgsfield AI",
+    "Color Grading",
+    "Branding"
+  ];
 
   return (
-    <section id="about" className="py-32 bg-[#0c0c0c]">
-      <div className="max-w-[1400px] mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
+    <section id="about" className="pt-32 pb-24 bg-[#0c0c0c]">
+      <div className="max-w-[1300px] mx-auto px-6">
+        {/* Section Header */}
+        <div className="flex justify-center mb-10">
+          <p className="text-white/40 text-center max-w-md text-base font-medium">
+            Brief initial presentation of myself and my previous experiences.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           
           {/* Left Column — Profile Card */}
-          <div className="flex flex-col gap-8">
+          <div className="lg:col-span-5">
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              className="p-8 rounded-[2rem] border border-white/10 bg-[#111] flex flex-col gap-6 relative overflow-hidden"
+              className="p-8 rounded-[2rem] border border-white/10 bg-[#111] h-full flex flex-col"
             >
-              <div className="relative w-32 h-32 rounded-full overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 border-2 border-white/10">
-                <div className="w-full h-full bg-[#333]" /> {/* Placeholder for profile photo */}
+              <div className="relative aspect-[1/1] rounded-[1.5rem] overflow-hidden bg-[#1a1a1a] mb-10 group">
+                {/* Profile Image */}
+                <Image 
+                  src="/images/suryansh/Profile.jpeg"
+                  alt="Suryansh Srivastava"
+                  fill
+                  className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10" />
+                
+                {/* Available Badge */}
+                <div className="absolute bottom-6 left-6 z-20 flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0c0c0c]/80 backdrop-blur-md border border-white/5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#22c55e] shadow-[0_0_8px_rgba(34,197,94,0.6)]" />
+                  <span className="text-[9px] uppercase tracking-widest text-white/90 font-bold">Available for work</span>
+                </div>
               </div>
 
-              <div className="flex flex-col gap-2">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
-                  <span className="text-[10px] uppercase tracking-widest text-white/40">Available for work</span>
-                </div>
-                <h3 className="text-3xl font-serif text-white">Johan Beker</h3>
-                <p className="text-white/60">UI/UX Designer & Motion Artist based in Berlin, Germany.</p>
+              <div className="flex flex-col gap-3 mb-10">
+                <h3 className="text-4xl font-serif text-white">Hello I am <span className="text-white">Suryansh</span> <span className="text-white/40">Srivastava</span></h3>
+                <p className="text-white/40 text-base">AI Visual Creator & Motion Artist Based in India.</p>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="flex gap-2">
-                  {[Twitter, Instagram, Dribbble].map((Icon, i) => (
-                    <motion.a
-                      key={i}
-                      href="#"
-                      whileHover={{ y: -3 }}
-                      className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/60 hover:text-white hover:border-white/20 transition-all"
-                    >
-                      <Icon className="w-4 h-4" />
-                    </motion.a>
-                  ))}
-                </div>
-                <button className="px-6 py-2.5 rounded-full bg-white text-[#0c0c0c] text-sm font-bold">
-                  Connect with me
-                </button>
+              <div className="mt-auto flex items-center gap-6">
+                {[Twitter, Instagram, Globe].map((Icon, i) => (
+                  <motion.a
+                    key={i}
+                    href="#"
+                    whileHover={{ scale: 1.2, color: "#fff" }}
+                    className="text-white/20 transition-all"
+                  >
+                    <Icon className="w-6 h-6" />
+                  </motion.a>
+                ))}
               </div>
             </motion.div>
+          </div>
 
-            {/* Skill Tags */}
-            <div className="flex flex-col gap-4">
-              <span className="text-[10px] uppercase tracking-widest text-white/40">Expertise</span>
-              <div className="flex gap-3 overflow-x-auto pb-4 no-scrollbar">
+          {/* Right Column — Bio & Experience */}
+          <div className="lg:col-span-7 flex flex-col gap-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="p-10 rounded-[2rem] border border-white/10 bg-[#111] flex flex-col gap-12"
+            >
+              {/* Bio */}
+              <div className="flex flex-col gap-6">
+                <p className="text-xl md:text-2xl text-white/80 leading-relaxed font-serif">
+                  I&apos;m Suryansh Srivastava, a dedicated AI Visual Creator & Motion Artist based in India. I specialize in creative design with seamless technical execution to craft exceptional digital experiences.
+                </p>
+              </div>
+
+              <div className="h-px w-full bg-white/5" />
+
+              {/* Skills Grid */}
+              <div className="flex flex-wrap gap-3">
                 {skills.map((skill) => (
                   <span 
                     key={skill}
-                    className="flex-shrink-0 px-5 py-2 rounded-full border border-white/10 text-white/80 text-sm whitespace-nowrap bg-white/5"
+                    className="px-6 py-3 rounded-xl bg-white/[0.03] border border-white/5 text-white/80 text-sm font-medium hover:bg-white/10 transition-all cursor-default"
                   >
                     {skill}
                   </span>
                 ))}
               </div>
-            </div>
-          </div>
 
-          {/* Right Column — Experience Timeline */}
-          <div className="flex flex-col gap-12" ref={timelineRef}>
-            <div className="flex flex-col gap-4">
-               <h2 className="text-5xl font-serif text-white">My Journey</h2>
-               <p className="text-white/40 max-w-md">Over 6 years of experience working with global brands and startups to deliver premium digital products.</p>
-            </div>
+              <div className="h-px w-full bg-white/5" />
 
-            <div className="flex flex-col border-t border-white/10">
-              {experience.map((exp, i) => (
-                <div 
-                  key={i}
-                  className="experience-row flex items-center justify-between py-8 border-b border-white/10 hover:bg-white/5 px-4 transition-all group"
-                >
-                  <div className="flex flex-col gap-1">
-                    <span className="text-xl text-white font-medium group-hover:translate-x-2 transition-transform duration-300">{exp.role}</span>
-                    <span className="text-sm text-white/40">{exp.company}</span>
+              {/* Experience List */}
+              <div className="flex flex-col gap-8">
+                {experience.map((exp, i) => (
+                  <div 
+                    key={i}
+                    className="flex flex-col md:grid md:grid-cols-12 gap-2 md:gap-0 items-start md:items-center text-white/80 group"
+                  >
+                    <span className="md:col-span-5 text-lg font-medium group-hover:text-white transition-colors">{exp.role}</span>
+                    <span className="md:col-span-5 text-base text-white/40 group-hover:text-white/60 transition-colors">{exp.company}</span>
+                    <span className="md:col-span-2 text-base font-mono text-white/20 md:text-right group-hover:text-white/40 transition-colors">{exp.year}</span>
                   </div>
-                  <span className="year-text text-sm font-mono text-white/60">{exp.year}</span>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            </motion.div>
           </div>
 
         </div>
       </div>
-
-      <style jsx>{`
-        .no-scrollbar::-webkit-scrollbar {
-          display: none;
-        }
-        .no-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-      `}</style>
     </section>
   );
 };

@@ -29,25 +29,48 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Suryansh Srivastava — UI/UX & Graphic Designer',
-  description: 'Portfolio of Suryansh Srivastava — graphic design, AI videos, carousels, menus and social media posts.',
+  title: 'Suryansh Srivastava | AI Visual Creator & Motion Artist',
+  description: 'The creative portfolio of Suryansh Srivastava — specializing in premium AI video synthesis, cinematic motion arts, and high-fidelity brand storytelling. Transforming visions into cinematic digital experiences.',
+  keywords: ['AI Visual Creator', 'Motion Artist', 'AI Video Synthesis', 'Cinematic Brand Storytelling', 'Graphic Designer', 'Runway ML', 'Higgsfield AI', 'Video Editing Portfolio', 'Premium Web Design'],
+  authors: [{ name: 'Suryansh Srivastava' }],
+  creator: 'Suryansh Srivastava',
+  publisher: 'Suryansh Srivastava',
   metadataBase: new URL('https://suryanshsrivastavaa.vercel.app'),
   openGraph: {
-    title: 'Suryansh Srivastava — Designer',
-    description: 'UI/UX & Graphic Designer — AI Videos, Carousels, Edits, Menus',
+    title: 'Suryansh Srivastava | AI Visual Creator & Motion Artist',
+    description: 'High-end AI Video Synthesis & Cinematic Motion Arts. Explore the portfolio of Suryansh Srivastava.',
     url: 'https://suryanshsrivastavaa.vercel.app',
-    images: [{ url: '/og-image.png', width: 1200, height: 630 }],
+    siteName: 'Suryansh Srivastava Portfolio',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Suryansh Srivastava — AI Visual Creator & Motion Artist Portfolio',
+      },
+    ],
+    locale: 'en_US',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Suryansh Srivastava — Designer',
+    title: 'Suryansh Srivastava | AI Visual Creator & Motion Artist',
+    description: 'Specializing in premium AI video synthesis and cinematic brand storytelling.',
     images: ['/og-image.png'],
+    creator: '@Suryansh_S',
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
+  category: 'technology',
 };
 
 export default function RootLayout({
@@ -64,9 +87,8 @@ export default function RootLayout({
       <body>
         <ThemeProvider>
           <SmoothScrollProvider>
+            <InteractiveBackground />
             <div className="grain-overlay" />
-            <div className="glow-blob top-[-10%] left-[-10%]" />
-            <div className="glow-blob bottom-[-10%] right-[-10%]" />
             <CustomCursor />
             {children}
           </SmoothScrollProvider>
