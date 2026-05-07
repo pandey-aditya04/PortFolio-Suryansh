@@ -37,6 +37,7 @@ export function CarouselShowcase() {
   }, [emblaApi, onScroll]);
 
   if (!category || !category.images) return null;
+  const images = category.images;
 
   return (
     <section className="section-padding bg-[#09090f]">
@@ -60,7 +61,7 @@ export function CarouselShowcase() {
 
       <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
         <div className="flex touch-pan-y ml-[calc(1rem*-1)] py-10">
-          {category.images.map((image, index) => (
+          {images.map((image, index) => (
             <CarouselItem 
               key={index} 
               image={image} 
@@ -75,7 +76,7 @@ export function CarouselShowcase() {
       <Lightbox 
         isOpen={lightbox.isOpen}
         onClose={() => setLightbox({ ...lightbox, isOpen: false })}
-        images={category.images}
+        images={images}
         currentIndex={lightbox.index}
         onNavigate={(index) => setLightbox({ ...lightbox, index })}
       />
