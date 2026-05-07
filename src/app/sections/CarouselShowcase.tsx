@@ -9,6 +9,8 @@ import { skillCategories } from "@/lib/skillsData";
 
 export function CarouselShowcase() {
   const category = skillCategories.find(c => c.id === "carousel");
+  const [lightbox, setLightbox] = useState({ isOpen: false, index: 0 });
+
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { 
       loop: true,
@@ -64,15 +66,26 @@ export function CarouselShowcase() {
               image={image} 
               index={index} 
               emblaApi={emblaApi}
+              onClick={() => setLightbox({ isOpen: true, index })}
             />
           ))}
         </div>
       </div>
+
+      <Lightbox 
+        isOpen={lightbox.isOpen}
+        onClose={() => setLightbox({ ...lightbox, isOpen: false })}
+        images={category.images}
+        currentIndex={lightbox.index}
+        onNavigate={(index) => setLightbox({ ...lightbox, index })}
+      />
     </section>
   );
 }
 
-function CarouselItem({ image, index, emblaApi }: { image: string, index: number, emblaApi: any }) {
+import { Lightbox } from "@/components/ui/Lightbox";
+
+function CarouselItem({ image, index, emblaApi, onClick }: { image: string, index: number, emblaApi: any, onClick: () => void }) {
   const [scale, setScale] = useState(0.8);
   const [opacity, setOpacity] = useState(0.5);
 
@@ -108,8 +121,9 @@ function CarouselItem({ image, index, emblaApi }: { image: string, index: number
         opacity: opacity,
         transition: "transform 0.2s ease-out, opacity 0.2s ease-out",
       }}
+      onClick={onClick}
     >
-      <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-border bg-surface shadow-2xl shadow-black/40">
+      <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-border bg-surface shadow-2xl shadow-black/40 cursor-pointer">
         <img 
           src={image} 
           alt={`Carousel ${index + 1}`} 

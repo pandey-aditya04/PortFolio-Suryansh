@@ -5,9 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 import { skillCategories } from "@/lib/skillsData";
 
+import { Lightbox } from "@/components/ui/Lightbox";
+
 export function MenuShowcase() {
   const category = skillCategories.find(c => c.id === "menu");
   const [activeIndex, setActiveIndex] = useState(0);
+  const [lightbox, setLightbox] = useState({ isOpen: false, index: 0 });
   
   if (!category || !category.images) return null;
 
@@ -41,12 +44,18 @@ export function MenuShowcase() {
               className="relative flex gap-4 md:gap-8 preserve-3d"
             >
               {/* Left Page Mockup */}
-              <div className="w-[180px] md:w-[350px] aspect-[1/1.4] bg-white rounded-sm shadow-2xl overflow-hidden origin-right -rotate-y-12 border border-black/10">
+              <div 
+                onClick={() => setLightbox({ isOpen: true, index: activeIndex })}
+                className="w-[180px] md:w-[350px] aspect-[1/1.4] bg-white rounded-sm shadow-2xl overflow-hidden origin-right -rotate-y-12 border border-black/10 cursor-pointer"
+              >
                 <img src={category.images[activeIndex]} alt="Menu Page 1" className="w-full h-full object-cover" />
               </div>
               
               {/* Right Page Mockup */}
-              <div className="w-[180px] md:w-[350px] aspect-[1/1.4] bg-white rounded-sm shadow-2xl overflow-hidden origin-left rotate-y-12 border border-black/10">
+              <div 
+                onClick={() => setLightbox({ isOpen: true, index: (activeIndex + 1) % category.images.length })}
+                className="w-[180px] md:w-[350px] aspect-[1/1.4] bg-white rounded-sm shadow-2xl overflow-hidden origin-left rotate-y-12 border border-black/10 cursor-pointer"
+              >
                 <img src={category.images[(activeIndex + 1) % category.images.length]} alt="Menu Page 2" className="w-full h-full object-cover" />
               </div>
 
@@ -71,6 +80,14 @@ export function MenuShowcase() {
           ))}
         </div>
       </div>
+
+      <Lightbox 
+        isOpen={lightbox.isOpen}
+        onClose={() => setLightbox({ ...lightbox, isOpen: false })}
+        images={category.images}
+        currentIndex={lightbox.index}
+        onNavigate={(index) => setLightbox({ ...lightbox, index })}
+      />
     </section>
   );
 }

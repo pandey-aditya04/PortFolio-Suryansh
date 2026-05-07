@@ -4,7 +4,12 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 
+import { useState } from "react";
+import { Lightbox } from "@/components/ui/Lightbox";
+
 export const RecentDesigns = () => {
+  const [selectedImage, setSelectedImage] = useState<{src: string, alt: string} | null>(null);
+
   const designs = [
     {
       id: 1,
@@ -89,6 +94,7 @@ export const RecentDesigns = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
+              onClick={() => setSelectedImage({ src: design.image, alt: design.title })}
               className={`group relative rounded-[2.5rem] overflow-hidden border border-white/10 bg-[#111] cursor-pointer will-change-transform ${design.className}`}
             >
               <div className="relative w-full h-full">
@@ -122,6 +128,14 @@ export const RecentDesigns = () => {
           ))}
         </div>
       </div>
+
+      <Lightbox 
+        isOpen={!!selectedImage} 
+        onClose={() => setSelectedImage(null)}
+        images={selectedImage ? [selectedImage.src] : []}
+        currentIndex={0}
+        onNavigate={() => {}}
+      />
     </section>
   );
 };
