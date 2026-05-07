@@ -33,9 +33,8 @@ const MediaContent = ({ item, isHovered }: { item: any, isHovered: boolean }) =>
 
   return (
     <div ref={containerRef} className="absolute inset-0 w-full h-full overflow-hidden bg-[#0a0a0a]">
-      {/* 1. Media Layer (Stays active in background when in view) */}
-      {isInView && (
-        <div className="absolute inset-0 w-full h-full z-0">
+      {isInView ? (
+        <div className="absolute inset-0 w-full h-full">
           {item.type === 'youtube' ? (
             <div className={`absolute w-[100%] h-[155%] -top-[27.5%] left-0 transform-gpu ${item.isVertical ? 'scale-[1.35]' : 'scale-[1.3]'}`}>
               <iframe
@@ -56,27 +55,21 @@ const MediaContent = ({ item, isHovered }: { item: any, isHovered: boolean }) =>
             />
           ) : (
             <div 
-              className="w-full h-full bg-cover bg-center"
+              className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
               style={{ backgroundImage: `url(${item.src})` }}
             />
           )}
         </div>
+      ) : (
+        <div 
+          className="w-full h-full bg-[#0a0a0a] bg-cover bg-center"
+          style={{ 
+            backgroundImage: item.type === 'youtube' 
+              ? `url(https://img.youtube.com/vi/${item.videoId}/maxresdefault.jpg)` 
+              : `url(${item.src})` 
+          }}
+        />
       )}
-
-      {/* 2. Placeholder Overlay (Blurred, visible when not hovered) */}
-      <div className={cn(
-        "absolute inset-0 w-full h-full transition-all duration-700 bg-cover bg-center z-10",
-        isHovered ? "opacity-0 scale-105 blur-0" : "opacity-100 scale-100 blur-[12px]"
-      )}
-      style={{ 
-        backgroundImage: item.type === 'youtube' 
-          ? `url(https://img.youtube.com/vi/${item.videoId}/maxresdefault.jpg)` 
-          : `url(${item.src})` 
-      }}
-      >
-        {/* Subtle Gradient to prevent harsh edges */}
-        <div className="absolute inset-0 bg-black/20" />
-      </div>
     </div>
   );
 };
