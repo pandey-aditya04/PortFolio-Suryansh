@@ -122,80 +122,104 @@ const AllWork = () => {
   ];
 
   return (
-    <section className="projects-section py-24 md:py-32 bg-[#080808] font-['DM_Sans']">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-10">
+    <section className="projects-section py-32 bg-black relative overflow-hidden font-sans">
+      {/* Ambient background glow */}
+      <div className="absolute top-1/4 -left-20 w-96 h-96 bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
         
         {/* Section header */}
-        <div className="flex items-center gap-3 mb-4">
-          <div className="w-2 h-2 rounded-full bg-[#f5a623] animate-pulse" />
-          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-white/40">⊙ All Work</span>
+        <div className="flex flex-col items-center text-center gap-6 mb-24">
+          <div className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 w-fit">
+            <span className="w-2 h-2 rounded-full bg-white/40 animate-pulse" />
+            <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/40">Portfolio Archive</span>
+          </div>
+          <h2 className="text-6xl md:text-8xl font-serif text-white tracking-tight">
+            All <span className="text-white/40 italic">Work</span>
+          </h2>
         </div>
-        <h2 className="font-['Bebas_Neue'] text-[clamp(52px,8vw,92px)] leading-[0.95] tracking-[0.01em] text-white mb-16 md:mb-20">
-          ARCHIVE<br/><span className="text-[#f5a623]">2024-25</span>
-        </h2>
 
         {categories.map((category) => (
-          <div key={category.index} id={`work-${category.name.toLowerCase().replace(/\s+/g, '-')}`} className="mb-24 relative pt-20 -mt-20">
-            <div className="flex items-baseline gap-5 mb-8 pb-4 border-b border-white/10">
-              <span className="font-mono text-[11px] text-white/40 tracking-[0.1em]">{category.index}</span>
-              <div className="flex items-baseline gap-4 flex-1">
-                <span className="font-['Bebas_Neue'] text-3xl md:text-4xl tracking-[0.04em] text-white uppercase">{category.name}</span>
+          <div key={category.index} id={`work-${category.name.toLowerCase().replace(/\s+/g, '-')}`} className="mb-32 relative pt-20 -mt-20">
+            {/* Category Header */}
+            <div className="flex flex-col gap-4 mb-12">
+              <div className="flex items-center gap-4">
+                <span className="text-xs font-bold text-white/20 tracking-widest uppercase">0{category.index}</span>
+                <div className="h-[1px] flex-1 bg-gradient-to-r from-white/10 to-transparent" />
+              </div>
+              <div className="flex items-baseline gap-4">
+                <h3 className="text-4xl md:text-6xl font-serif text-white tracking-tight">
+                  {category.name.split(' ')[0]} <span className="text-white/40 italic">{category.name.split(' ').slice(1).join(' ')}</span>
+                </h3>
                 {category.badge && (
-                  <span className="font-mono text-[9px] tracking-[0.14em] uppercase px-2.5 py-1 rounded-[3px] bg-[#f5a623]/10 text-[#f5a623] border border-[#f5a623]/20 self-center">
+                  <span className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-white/10 text-white/40">
                     {category.badge}
                   </span>
                 )}
               </div>
-              <div className="w-9 h-[2px] rounded-[2px] hidden md:block" style={{ backgroundColor: category.accent }} />
             </div>
 
             {category.subcategories.map((sub, sIdx) => (
-              <div key={sub.name} className={sIdx === 0 ? "mt-1" : "mt-8"}>
-                <div className="font-mono text-[10px] tracking-[0.15em] uppercase text-white/40 mb-4 flex items-center gap-2.5">
-                  {sub.name}
-                  <div className="h-[1px] bg-white/10 flex-1" />
+              <div key={sub.name} className={sIdx === 0 ? "mt-0" : "mt-16"}>
+                <div className="flex items-center gap-4 mb-8">
+                   <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/20">{sub.name}</span>
+                   <div className="h-[1px] flex-1 border-t border-dashed border-white/5" />
                 </div>
 
-                <div className={`grid ${sub.gridCols} gap-4`}>
+                <div className={`grid ${sub.gridCols} gap-6 md:gap-8`}>
                   {sub.items.map((item: any) => (
                     <motion.div
                       key={item.id}
-                      whileHover={{ y: -5 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      whileHover={{ y: -8, scale: 1.02 }}
                       onClick={() => setSelectedVideo(item)}
-                      className={`video-card group relative rounded-lg overflow-hidden bg-[#141414] border border-white/10 cursor-pointer transition-all duration-300 ${category.cardType}`}
+                      className={`group relative overflow-hidden rounded-[2.5rem] bg-[#0a0a0a] border border-white/5 cursor-pointer transition-all duration-500`}
                     >
-                      <div className="video-thumb aspect-video relative overflow-hidden flex items-center justify-center">
-                         {/* Thumbnail Preview */}
-                         <div className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-60" 
-                              style={{ backgroundImage: `url(${item.type === 'youtube' ? `https://img.youtube.com/vi/${item.videoId}/maxresdefault.jpg` : item.src})` }} 
-                         />
-                         
-                         {/* Accent Overlay */}
-                         <div className="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500" />
-                         <div className="absolute inset-0 opacity-10 pointer-events-none" 
-                              style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '32px 32px' }} 
-                         />
-                         
-                         {/* Play Ring */}
-                         <div className="relative z-10 w-12 h-12 md:w-14 md:h-14 rounded-full border-2 border-white/60 flex items-center justify-center opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300"
-                              style={{ borderColor: category.accent }}>
-                           <Play className="w-5 h-5 md:w-6 md:h-6 fill-current text-white ml-1" style={{ color: category.accent }} />
-                         </div>
+                      {/* Background Preview */}
+                      <div className="absolute inset-0 w-full h-full pointer-events-none opacity-40 group-hover:opacity-100 transition-all duration-700 overflow-hidden">
+                        {item.type === 'youtube' ? (
+                          <div className={`absolute w-full h-[145%] -top-[22.5%] left-0 scale-[1.2] transform-gpu`}>
+                            <iframe
+                              src={`https://www.youtube.com/embed/${item.videoId}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=${item.videoId}&enablejsapi=1&playsinline=1`}
+                              className="w-full h-full border-none pointer-events-none"
+                              allow="autoplay; encrypted-media"
+                              title={item.title}
+                            />
+                          </div>
+                        ) : item.type === 'image' ? (
+                          <div 
+                            className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                            style={{ backgroundImage: `url(${item.src})` }}
+                          />
+                        ) : (
+                          <video
+                            src={item.src}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-cover"
+                          />
+                        )}
                       </div>
 
-                      <div className="p-4 bg-[#0f0f0f]">
-                        <p className="text-[13px] font-medium text-white mb-2 truncate group-hover:text-white transition-colors">
-                          {item.title}
-                        </p>
-                        <div className="flex items-center justify-between gap-2">
-                          <span className="font-mono text-[9px] tracking-[0.12em] uppercase px-2 py-0.5 rounded-[3px] transition-colors"
-                                style={{ backgroundColor: `${category.accent}15`, color: category.accent }}>
-                            {item.tag}
-                          </span>
-                          <button className="font-mono text-[10px] text-white/40 flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-white/5 hover:border-white/20 hover:text-white transition-all">
-                             <ExternalLink size={10} />
-                             VIEW
-                          </button>
+                      {/* Content Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10" />
+                      
+                      <div className="relative z-20 h-[250px] md:h-[300px] p-8 flex flex-col justify-end">
+                        <div className="flex flex-col gap-1 transform group-hover:translate-x-2 transition-transform duration-500">
+                           <span className="text-[10px] uppercase tracking-widest font-bold" style={{ color: category.accent }}>{item.tag}</span>
+                           <h4 className="text-xl md:text-2xl font-serif text-white tracking-wide">{item.title}</h4>
+                        </div>
+                        
+                        {/* Play Icon */}
+                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-30">
+                          <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white">
+                            <Play className="w-6 h-6 fill-current ml-1" />
+                          </div>
                         </div>
                       </div>
                     </motion.div>
@@ -227,7 +251,7 @@ const AllWork = () => {
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="relative w-full max-w-6xl aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+              className="relative w-full max-w-6xl aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-black"
             >
               {selectedVideo.type === 'youtube' ? (
                 <iframe
@@ -243,24 +267,13 @@ const AllWork = () => {
                   src={selectedVideo.src}
                   controls
                   autoPlay
-                  className="w-full h-full bg-black"
+                  className="w-full h-full"
                 />
               )}
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-
-      <style jsx>{`
-        .video-card:hover {
-          border-color: rgba(255,255,255,0.2) !important;
-        }
-        .card-amber:hover { border-color: #f5a62340 !important; }
-        .card-teal:hover { border-color: #00c8a840 !important; }
-        .card-coral:hover { border-color: #ff6b4a40 !important; }
-        .card-violet:hover { border-color: #a78bfa40 !important; }
-        .card-rose:hover { border-color: #f472b640 !important; }
-      `}</style>
     </section>
   );
 };
