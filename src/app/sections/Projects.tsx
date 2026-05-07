@@ -22,9 +22,11 @@ export const Projects = () => {
             <div className="absolute inset-0 w-full h-full pointer-events-none opacity-60 group-hover:opacity-80 transition-opacity duration-700 overflow-hidden">
               <div className="absolute w-full h-[120%] -top-[10%] left-0 scale-[1.1] transform-gpu">
                 <iframe
-                  src="https://www.youtube.com/embed/OHEWAcivxCA?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&showinfo=0&iv_load_policy=3&playlist=OHEWAcivxCA"
+                  src="https://www.youtube.com/embed/OHEWAcivxCA?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=OHEWAcivxCA&enablejsapi=1&playsinline=1"
                   className="w-full h-full border-none pointer-events-none"
                   allow="autoplay; encrypted-media"
+                  title="Electra CS"
+                  referrerPolicy="strict-origin-when-cross-origin"
                 />
               </div>
             </div>
@@ -61,9 +63,11 @@ export const Projects = () => {
               <div className="absolute inset-0 w-full h-full pointer-events-none opacity-40 group-hover:opacity-60 transition-opacity duration-700 overflow-hidden">
                 <div className="absolute w-full h-[120%] -top-[10%] left-0 scale-[1.2] transform-gpu">
                   <iframe
-                    src="https://www.youtube.com/embed/zQArTonc-FQ?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&showinfo=0&iv_load_policy=3&playlist=zQArTonc-FQ"
+                    src="https://www.youtube.com/embed/zQArTonc-FQ?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=zQArTonc-FQ&enablejsapi=1&playsinline=1"
                     className="w-full h-full border-none pointer-events-none"
                     allow="autoplay; encrypted-media"
+                    title="Electra 25"
+                    referrerPolicy="strict-origin-when-cross-origin"
                   />
                 </div>
               </div>
@@ -95,9 +99,11 @@ export const Projects = () => {
               <div className="absolute inset-0 w-full h-full pointer-events-none opacity-20 group-hover:opacity-40 transition-opacity duration-700 overflow-hidden">
                 <div className="absolute w-full h-[120%] -top-[10%] left-0 scale-[1.2] transform-gpu">
                   <iframe
-                    src="https://www.youtube.com/embed/ICPDfLbCpSo?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&showinfo=0&iv_load_policy=3&playlist=ICPDfLbCpSo"
+                    src="https://www.youtube.com/embed/ICPDfLbCpSo?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=ICPDfLbCpSo&enablejsapi=1&playsinline=1"
                     className="w-full h-full border-none pointer-events-none"
                     allow="autoplay; encrypted-media"
+                    title="FRND Ad"
+                    referrerPolicy="strict-origin-when-cross-origin"
                   />
                 </div>
               </div>
@@ -128,9 +134,11 @@ export const Projects = () => {
               <div className="absolute inset-0 w-full h-full pointer-events-none opacity-30 group-hover:opacity-50 transition-opacity duration-700 overflow-hidden">
                 <div className="absolute w-full h-[120%] -top-[10%] left-0 scale-[1.2] transform-gpu">
                   <iframe
-                    src="https://www.youtube.com/embed/d3HpHGpXFuE?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&showinfo=0&iv_load_policy=3&playlist=d3HpHGpXFuE"
+                    src="https://www.youtube.com/embed/d3HpHGpXFuE?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=d3HpHGpXFuE&enablejsapi=1&playsinline=1"
                     className="w-full h-full border-none pointer-events-none"
                     allow="autoplay; encrypted-media"
+                    title="Commercial"
+                    referrerPolicy="strict-origin-when-cross-origin"
                   />
                 </div>
               </div>

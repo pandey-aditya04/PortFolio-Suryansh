@@ -97,9 +97,11 @@ const VideoBentoBox = () => {
               <div className="absolute inset-0 w-full h-full pointer-events-none opacity-60 group-hover:opacity-100 transition-all duration-700 overflow-hidden">
                 <div className={`absolute w-full h-[120%] -top-[10%] left-0 ${video.scale} transform-gpu`}>
                    <iframe
-                    src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&showinfo=0&iv_load_policy=3&playlist=${video.videoId}`}
+                    src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=${video.videoId}&enablejsapi=1&playsinline=1`}
                     className="w-full h-full border-none pointer-events-none"
                     allow="autoplay; encrypted-media"
+                    title={video.title}
+                    referrerPolicy="strict-origin-when-cross-origin"
                   />
                 </div>
               </div>
