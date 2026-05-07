@@ -28,7 +28,7 @@ export const Navigation = () => {
       animate={{ y: 0, x: "-50%", opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
-        "fixed top-5 left-1/2 z-[100] flex items-center gap-6 px-6 py-3 rounded-full border border-white/10 bg-[#141414]/85 backdrop-blur-xl transition-all duration-500",
+        "fixed top-5 left-1/2 z-[100] flex items-center gap-3 md:gap-6 px-4 md:px-6 py-2.5 md:py-3 rounded-full border border-white/10 bg-[#141414]/85 backdrop-blur-xl transition-all duration-500",
         isScrolled ? "shadow-[0_20px_50px_rgba(255,255,255,0.05)] border-white/15" : "shadow-none"
       )}
     >

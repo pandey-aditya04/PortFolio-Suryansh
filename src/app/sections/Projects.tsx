@@ -11,7 +11,7 @@ export const Projects = () => {
   return (
     <section id="projects" className="py-32">
       <div className="max-w-[1400px] mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 h-[800px]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 h-auto lg:h-[800px]">
           
           {/* Left Large Card */}
           <motion.div 

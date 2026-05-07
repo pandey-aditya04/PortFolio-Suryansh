@@ -13,21 +13,21 @@ export const Hero = () => {
 
       <div className="max-w-[1400px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center w-full">
         {/* Left Column */}
-        <div className="flex flex-col gap-12 lg:col-span-7">
+        <div className="flex flex-col gap-8 md:gap-12 lg:col-span-7">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 w-fit"
+            className="flex items-center gap-2 px-3 md:px-4 py-1.5 rounded-full border border-white/10 bg-white/5 w-fit max-w-full"
           >
-            <span className="text-[10px] text-white">⊙</span>
-            <span className="text-xs font-medium uppercase tracking-widest text-white/80">Video Editor | Graphic Designer | AI Visual Creator</span>
+            <span className="text-[10px] text-white shrink-0">⊙</span>
+            <span className="text-[9px] md:text-xs font-medium uppercase tracking-widest text-white/80 whitespace-nowrap overflow-hidden text-ellipsis">Video Editor | Graphic Designer | AI Visual Creator</span>
           </motion.div>
 
           <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-4">
-              <h1 className="text-6xl md:text-7xl font-serif tracking-tight leading-tight flex items-center gap-x-4 flex-wrap">
-                <div className="flex items-center gap-x-4">
+              <h1 className="text-4xl md:text-7xl font-serif tracking-tight leading-tight flex items-center gap-x-2 md:gap-x-4 flex-wrap">
+                <div className="flex items-center gap-x-2 md:gap-x-4">
                   <motion.span
                     initial={{ y: 40, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
@@ -48,9 +48,9 @@ export const Hero = () => {
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ delay: 0.6, type: "spring", stiffness: 200 }}
-                    className="flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-full border border-white/10 bg-white/5 align-middle hover:bg-white hover:text-black transition-colors duration-500"
+                    className="flex items-center justify-center w-8 h-8 md:w-14 md:h-14 rounded-full border border-white/10 bg-white/5 align-middle hover:bg-white hover:text-black transition-colors duration-500"
                   >
-                    <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5" />
+                    <ArrowUpRight className="w-3 h-3 md:w-5 md:h-5" />
                   </motion.div>
                 </div>
               </h1>
@@ -60,7 +60,7 @@ export const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="text-lg md:text-xl text-white/50 max-w-xl leading-relaxed"
+              className="text-base md:text-xl text-white/50 max-w-xl leading-relaxed"
             >
               I&apos;m a versatile visual artist specializing in video editing, AI video synthesis, and graphic design to help brands tell compelling stories through premium aesthetics.
             </motion.p>
@@ -70,17 +70,17 @@ export const Hero = () => {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.9 }}
-            className="flex flex-wrap gap-6 mt-4"
+            className="flex flex-wrap gap-4 md:gap-6 mt-4"
           >
             <button 
               onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-4 border border-white/10 text-white rounded-full font-semibold hover:bg-white/5 transition-all"
+              className="px-6 md:px-8 py-3 md:py-4 border border-white/10 text-white rounded-full font-semibold hover:bg-white/5 transition-all text-sm md:text-base"
             >
               See All Projects
             </button>
             <button 
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-8 py-4 bg-white text-[#0c0c0c] rounded-full font-semibold hover:bg-white/90 transition-all"
+              className="px-6 md:px-8 py-3 md:py-4 bg-white text-[#0c0c0c] rounded-full font-semibold hover:bg-white/90 transition-all text-sm md:text-base"
             >
               Contact Now
             </button>
@@ -88,7 +88,7 @@ export const Hero = () => {
         </div>
 
         {/* Right Column — Antigravity Cluster */}
-        <div className="relative h-[500px] flex items-center justify-center lg:justify-end lg:col-span-5">
+        <div className="relative h-[400px] md:h-[500px] hidden lg:flex items-center justify-center lg:justify-end lg:col-span-5">
           {/* Card 1 */}
           <motion.div
             animate={{
@@ -136,7 +136,7 @@ export const Hero = () => {
               </div>
             </div>
           </motion.div>
-
+        </div>
         </div>
       </div>
     </section>

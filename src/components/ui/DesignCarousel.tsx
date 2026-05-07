@@ -32,8 +32,8 @@ const DesignCarousel = () => {
                 Design Inspirations
               </span>
             </div>
-            <h2 className="text-5xl md:text-6xl font-serif text-white leading-tight">
-              Thinking design doesn&apos;t matter <br/> in Editing? <span className="text-white/40 italic">Think Again.</span>
+            <h2 className="text-3xl md:text-6xl font-serif text-white leading-tight">
+              Thinking design doesn&apos;t matter <br className="hidden md:block"/> in Editing? <span className="text-white/40 italic">Think Again.</span>
             </h2>
         </div>
       </div>

@@ -62,10 +62,10 @@ export const RecentDesigns = () => {
               <span className="text-[10px] text-white">⊙</span>
               <span className="text-xs font-medium uppercase tracking-widest text-white/80">Recent Projects</span>
             </div>
-            <h2 className="text-6xl font-serif text-white flex items-center gap-4">
+            <h2 className="text-4xl md:text-6xl font-serif text-white flex items-center gap-4 flex-wrap">
               Recent <span className="text-white/40 italic">Designs</span>
-              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center">
-                 <ArrowUpRight className="w-5 h-5 text-white/40" />
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/10 flex items-center justify-center shrink-0">
+                 <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5 text-white/40" />
               </div>
             </h2>
             <p className="text-white/40 text-lg max-w-md">
