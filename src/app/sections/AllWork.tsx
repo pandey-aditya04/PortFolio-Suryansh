@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Play, ExternalLink, ArrowUpRight } from 'lucide-react';
+import { cn } from "@/lib/utils";
 
 interface WorkItem {
   id: string;
@@ -255,38 +256,29 @@ const AllWork = () => {
                       </div>
                     </div>
                   ) : (
-                    <div className="flex flex-col gap-16">
-                      {/* Landscape Grid */}
-                      {landscapeItems.length > 0 && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
-                          {landscapeItems.map((item, idx) => (
-                            <div key={item.id} className="min-h-0">
-                              <WorkCard 
-                                item={item} 
-                                category={category} 
-                                onClick={() => setSelectedVideo(item as any)} 
-                                index={idx}
-                              />
+                    <div className="grid grid-cols-6 gap-6 max-w-[1400px] mx-auto">
+                      {sub.items.map((item: any, idx) => (
+                        <div 
+                          key={item.id} 
+                          className={cn(
+                            "relative overflow-hidden rounded-2xl border border-white/10 bg-[#0a0a0a] transition-transform duration-500 hover:scale-[1.02] group cursor-pointer",
+                            item.isVertical ? "col-span-3 md:col-span-2 aspect-[9/16]" : "col-span-6 md:col-span-3 aspect-video"
+                          )}
+                          onClick={() => setSelectedVideo(item as any)}
+                        >
+                          <MediaContent item={item} isHovered={false} />
+                          
+                          {/* Aesthetic Overlay */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+                          
+                          {/* Interaction Icon */}
+                          <div className="absolute bottom-4 left-4 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                            <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center shadow-2xl">
+                              <ArrowUpRight className="w-4 h-4" />
                             </div>
-                          ))}
+                          </div>
                         </div>
-                      )}
-
-                      {/* Portrait Grid */}
-                      {portraitItems.length > 0 && (
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-start">
-                          {portraitItems.map((item, idx) => (
-                            <div key={item.id} className="min-h-0">
-                              <WorkCard 
-                                item={item} 
-                                category={category} 
-                                onClick={() => setSelectedVideo(item as any)} 
-                                index={idx}
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      )}
+                      ))}
                     </div>
                   )}
                 </div>
