@@ -27,10 +27,10 @@ const WorkCard = ({ item, category, onClick }: { item: any, category: any, onCli
       onClick={onClick}
       className={`group relative overflow-hidden rounded-[2.5rem] bg-[#0a0a0a] border border-white/5 cursor-pointer transition-all duration-500 ${item.isVertical ? 'aspect-[9/16]' : 'aspect-video'}`}
     >
-      {/* Background Preview - Autoplay enabled */}
+      {/* Background Preview - Autoplay with Cinematic Crop */}
       <div className="absolute inset-0 w-full h-full pointer-events-none opacity-40 group-hover:opacity-100 transition-all duration-700 overflow-hidden">
         {item.type === 'youtube' ? (
-          <div className={`absolute w-full h-full left-0 transform-gpu ${!item.isVertical ? 'h-[145%] -top-[22.5%] scale-[1.2]' : ''}`}>
+          <div className={`absolute w-[100%] h-[155%] -top-[27.5%] left-0 transform-gpu ${item.isVertical ? 'scale-[1.35]' : 'scale-[1.3]'}`}>
             <iframe
               src={`https://www.youtube.com/embed/${item.videoId}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=${item.videoId}&enablejsapi=1&playsinline=1`}
               className="w-full h-full border-none pointer-events-none"
@@ -232,12 +232,7 @@ const AllWork = () => {
             )}
 
             {category.subcategories.map((sub, sIdx) => (
-              <div key={sub.name} className={sIdx === 0 ? "mt-0" : "mt-16"}>
-                <div className="flex items-center gap-4 mb-8">
-                   <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-white/20">{sub.name}</span>
-                   <div className="h-[1px] flex-1 border-t border-dashed border-white/5" />
-                </div>
-
+              <div key={sub.name} className={sIdx === 0 ? "mt-0" : "mt-24"}>
                 {category.name === "Carousel" || category.name === "Post Designs" ? (
                   <div className="flex flex-col gap-12 -mx-12 overflow-hidden py-4">
                     {/* Row 1 - Left */}
@@ -277,7 +272,7 @@ const AllWork = () => {
                 ) : (
                 <div className={sub.items.length < 4 ? "flex flex-wrap gap-6 md:gap-8" : `grid ${sub.gridCols} gap-6 md:gap-8`}>
                   {sub.items.map((item: any) => (
-                    <div key={item.id} className={sub.items.length < 4 ? "w-full md:w-[calc(25%-1.5rem)] min-w-[250px]" : ""}>
+                    <div key={item.id} className={sub.items.length < 4 ? "w-full md:w-[calc(33.33%-1.5rem)] min-w-[300px]" : ""}>
                       <WorkCard 
                         item={item} 
                         category={category} 
