@@ -99,7 +99,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${dmSerifDisplay.variable} ${dmSans.variable}`}
       suppressHydrationWarning
     >
-      <body>
+      <body suppressHydrationWarning>
         <ThemeProvider>
           <SmoothScrollProvider>
             <InteractiveBackground />
