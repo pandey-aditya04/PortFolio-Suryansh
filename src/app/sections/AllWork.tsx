@@ -28,9 +28,12 @@ const MediaContent = ({ item, isHovered }: { item: any, isHovered: boolean }) =>
     return () => observer.disconnect();
   }, []);
 
+  // Performance Guard: Only play if in view AND hovered
+  const shouldPlay = isInView && isHovered;
+
   return (
-    <div ref={containerRef} className="absolute inset-0 w-full h-full pointer-events-none opacity-60 group-hover:opacity-100 transition-all duration-700 overflow-hidden">
-      {isInView ? (
+    <div ref={containerRef} className="absolute inset-0 w-full h-full pointer-events-none transition-all duration-700 overflow-hidden">
+      {shouldPlay ? (
         <>
           {item.type === 'youtube' ? (
             <div className={`absolute w-[100%] h-[155%] -top-[27.5%] left-0 transform-gpu ${item.isVertical ? 'scale-[1.35]' : 'scale-[1.3]'}`}>
@@ -52,15 +55,19 @@ const MediaContent = ({ item, isHovered }: { item: any, isHovered: boolean }) =>
             />
           ) : (
             <div 
-              className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+              className="w-full h-full bg-cover bg-center transition-transform duration-700 scale-110"
               style={{ backgroundImage: `url(${item.src})` }}
             />
           )}
         </>
       ) : (
         <div 
-          className="w-full h-full bg-[#0a0a0a] bg-cover bg-center"
-          style={{ backgroundImage: item.src ? `url(${item.src})` : 'none' }}
+          className="w-full h-full bg-[#0a0a0a] bg-cover bg-center transition-transform duration-700"
+          style={{ 
+            backgroundImage: item.type === 'youtube' 
+              ? `url(https://img.youtube.com/vi/${item.videoId}/maxresdefault.jpg)` 
+              : `url(${item.src})` 
+          }}
         />
       )}
     </div>
@@ -75,11 +82,14 @@ const WorkCard = ({ item, category, onClick, index }: { item: any, category: any
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      whileHover={{ y: -8, scale: 1.02 }}
+      whileHover={{ y: -8, scale: 1.05 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}
-      className={`group relative overflow-hidden rounded-[2rem] bg-[#0a0a0a] border border-white/5 cursor-pointer transition-all duration-500 ${item.isVertical ? 'aspect-[9/16]' : 'aspect-video'}`}
+      className={cn(
+        "relative overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a0a] group cursor-pointer transition-all duration-500",
+        item.isVertical ? "col-span-3 md:col-span-2 aspect-[9/16]" : "col-span-6 md:col-span-3 aspect-video"
+      )}
     >
       <MediaContent item={item} isHovered={isHovered} />
 
@@ -87,16 +97,9 @@ const WorkCard = ({ item, category, onClick, index }: { item: any, category: any
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
       
       {/* Interaction Arrow Icon */}
-      <div className="absolute bottom-4 left-4 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+      <div className="absolute bottom-6 left-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
         <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center shadow-2xl">
           <ArrowUpRight className="w-4 h-4" />
-        </div>
-      </div>
-
-      {/* Play Icon - Center */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20">
-        <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white scale-90 group-hover:scale-100 transition-transform duration-500">
-          <Play className="w-5 h-5 fill-current ml-0.5" />
         </div>
       </div>
     </motion.div>

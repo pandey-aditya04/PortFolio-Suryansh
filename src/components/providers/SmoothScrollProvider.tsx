@@ -15,7 +15,10 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
     if (prefersReducedMotion) return;
 
     const lenis = new Lenis({
-      lerp: 0.1,
+      duration: 1.2,
+      lerp: 0.08,
+      wheelMultiplier: 1,
+      touchMultiplier: 2,
       smoothWheel: true,
     });
 
