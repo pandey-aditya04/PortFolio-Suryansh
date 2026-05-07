@@ -89,13 +89,6 @@ export const Testimonials = () => {
                 className="bg-[#0f0f0f]/80 backdrop-blur-sm p-10 rounded-[2.5rem] border border-white/5 shadow-2xl flex flex-col gap-6"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-xl overflow-hidden grayscale">
-                    <img 
-                      src={t.image} 
-                      alt={t.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
                   <div className="flex flex-col">
                     <span className="text-2xl font-bold text-white tracking-tight">{t.name}</span>
                     <span className="text-xs text-white/30 uppercase tracking-[0.2em] font-medium">{t.role}</span>

@@ -106,7 +106,6 @@ export const Hero = () => {
               "Suryansh's AI video synthesis is revolutionary. The level of detail and realism is far beyond anything we've seen."
             </p>
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-white/10" />
               <div>
                 <p className="text-xs font-bold text-white">Sarah Jenkins</p>
                 <p className="text-[10px] text-white/40">CEO, TechFlow</p>
@@ -131,7 +130,6 @@ export const Hero = () => {
               "A master of his craft. The way he integrates AI tools into professional editing is seamless and impactful."
             </p>
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-white/10" />
               <div>
                 <p className="text-xs font-bold text-white">Michael Chen</p>
                 <p className="text-[10px] text-white/40">Founder, Arise</p>
