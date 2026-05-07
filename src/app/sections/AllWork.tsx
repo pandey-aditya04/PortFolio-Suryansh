@@ -32,19 +32,23 @@ const MediaContent = ({ item, isHovered }: { item: any, isHovered: boolean }) =>
   const shouldPlay = isInView && isHovered;
 
   return (
-    <div ref={containerRef} className="absolute inset-0 w-full h-full pointer-events-none transition-all duration-700 overflow-hidden">
-      {shouldPlay ? (
-        <div className="w-full h-full transition-all duration-700 blur-0">
+    <div ref={containerRef} className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden bg-[#0a0a0a]">
+      {/* 1. Media Layer (Mounted when in view, visible on hover) */}
+      {isInView && (
+        <div className={cn(
+          "absolute inset-0 w-full h-full transition-opacity duration-700 z-10",
+          isHovered ? "opacity-100" : "opacity-0"
+        )}>
           {item.type === 'youtube' ? (
             <div className={`absolute w-[100%] h-[155%] -top-[27.5%] left-0 transform-gpu ${item.isVertical ? 'scale-[1.35]' : 'scale-[1.3]'}`}>
               <iframe
                 src={`https://www.youtube.com/embed/${item.videoId}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=${item.videoId}&enablejsapi=1&playsinline=1`}
-                className="w-full h-full border-none pointer-events-none"
+                className="w-full h-full border-none"
                 allow="autoplay; encrypted-media"
                 title={item.title}
               />
             </div>
-          ) : item.type === 'video' || (item.type === 'cloudinary' && item.src?.endsWith('.mp4')) ? (
+          ) : (item.type === 'video' || (item.type === 'cloudinary' && item.src?.endsWith('.mp4'))) ? (
             <video
               src={item.src}
               autoPlay
@@ -55,21 +59,24 @@ const MediaContent = ({ item, isHovered }: { item: any, isHovered: boolean }) =>
             />
           ) : (
             <div 
-              className="w-full h-full bg-cover bg-center transition-transform duration-700 scale-110"
+              className="w-full h-full bg-cover bg-center"
               style={{ backgroundImage: `url(${item.src})` }}
             />
           )}
         </div>
-      ) : (
-        <div 
-          className="w-full h-full bg-[#0a0a0a] bg-cover bg-center transition-all duration-700 blur-[8px] opacity-60 scale-110"
-          style={{ 
-            backgroundImage: item.type === 'youtube' 
-              ? `url(https://img.youtube.com/vi/${item.videoId}/maxresdefault.jpg)` 
-              : `url(${item.src})` 
-          }}
-        />
       )}
+
+      {/* 2. Placeholder Layer (Blurred, visible when not hovered) */}
+      <div className={cn(
+        "absolute inset-0 w-full h-full transition-all duration-700 bg-cover bg-center z-0",
+        isHovered ? "opacity-0 scale-105 blur-0" : "opacity-60 scale-100 blur-[10px]"
+      )}
+      style={{ 
+        backgroundImage: item.type === 'youtube' 
+          ? `url(https://img.youtube.com/vi/${item.videoId}/maxresdefault.jpg)` 
+          : `url(${item.src})` 
+      }}
+      />
     </div>
   );
 };
