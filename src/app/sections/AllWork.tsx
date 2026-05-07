@@ -11,24 +11,32 @@ interface WorkItem {
   type: 'youtube' | 'cloudinary' | 'image';
   videoId?: string;
   src?: string;
+  isVertical?: boolean;
 }
 
-const WorkCard = ({ item, category, onClick }: { item: any, category: any, onClick: () => void }) => {
+const WorkCard = ({ item, category, onClick, index }: { item: any, category: any, onClick: () => void, index: number }) => {
   const [isHovered, setIsHovered] = useState(false);
+
+  // Bento spanning logic based on index
+  const getSpanClass = () => {
+    if (item.isVertical) return "md:row-span-2";
+    if (index === 0) return "md:col-span-2 md:aspect-[21/9]";
+    return "";
+  };
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      whileHover={{ y: -8, scale: 1.02 }}
+      whileHover={{ y: -8, scale: 1.01 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}
-      className={`group relative overflow-hidden rounded-[2.5rem] bg-[#0a0a0a] border border-white/5 cursor-pointer transition-all duration-500 ${item.isVertical ? 'aspect-[9/16]' : 'aspect-video'}`}
+      className={`group relative overflow-hidden rounded-[2.5rem] bg-[#0a0a0a] border border-white/5 cursor-pointer transition-all duration-500 ${getSpanClass()} ${item.isVertical ? 'aspect-[9/16]' : 'aspect-video'}`}
     >
       {/* Background Preview - Autoplay with Cinematic Crop */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none opacity-40 group-hover:opacity-100 transition-all duration-700 overflow-hidden">
+      <div className="absolute inset-0 w-full h-full pointer-events-none opacity-60 group-hover:opacity-100 transition-all duration-700 overflow-hidden">
         {item.type === 'youtube' ? (
           <div className={`absolute w-[100%] h-[155%] -top-[27.5%] left-0 transform-gpu ${item.isVertical ? 'scale-[1.35]' : 'scale-[1.3]'}`}>
             <iframe
@@ -56,20 +64,20 @@ const WorkCard = ({ item, category, onClick }: { item: any, category: any, onCli
         )}
       </div>
 
-      {/* Content Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10" />
+      {/* Aesthetic Minimalist Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
       
-      <div className="relative z-20 h-full p-8 flex flex-col justify-end">
-        <div className="flex flex-col gap-1 transform group-hover:translate-x-2 transition-transform duration-500">
-           <span className="text-[10px] uppercase tracking-widest font-bold" style={{ color: category.accent }}>{item.tag}</span>
-           <h4 className="text-xl md:text-2xl font-serif text-white tracking-wide">{item.title}</h4>
+      {/* Bento Arrow Icon (Bottom Left) */}
+      <div className="absolute bottom-6 left-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+        <div className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center shadow-2xl">
+          <ArrowUpRight className="w-5 h-5" />
         </div>
-        
-        {/* Play Icon */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-30">
-          <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white">
-            <Play className="w-6 h-6 fill-current ml-1" />
-          </div>
+      </div>
+
+      {/* Play Icon - Center */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20">
+        <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white scale-90 group-hover:scale-100 transition-transform duration-500">
+          <Play className="w-6 h-6 fill-current ml-1" />
         </div>
       </div>
     </motion.div>
@@ -80,7 +88,6 @@ const AllWork = () => {
   const [selectedVideo, setSelectedVideo] = useState<WorkItem | null>(null);
 
   const categories = [
-    // ... categories data remains same ...
     {
       index: "01",
       name: "AI Videos",
@@ -90,25 +97,13 @@ const AllWork = () => {
       subcategories: [
         {
           name: "Advertisements",
-          gridCols: "grid-cols-1 md:grid-cols-3",
+          gridCols: "grid grid-cols-1 md:grid-cols-2 gap-8",
           items: [
             { id: "ai-adv-1", title: "Realistic Product Advertisement", tag: "Product Ad", type: "youtube", videoId: "u2MwVays7fo", isVertical: true },
-            { id: "ai-adv-2", title: "Abstract Motion Design", tag: "Motion Art", type: "youtube", videoId: "DU68DVJCTq4", isVertical: true }
-          ]
-        },
-        {
-          name: "AI Storytelling",
-          gridCols: "grid-cols-1 md:grid-cols-3",
-          items: [
-             { id: "ai-story-1", title: "Cyberpunk Narrative Short", tag: "Narrative", type: "youtube", videoId: "WJS5_laqbno", isVertical: true }
-          ]
-        },
-        {
-          name: "Landscape",
-          gridCols: "grid-cols-1 md:grid-cols-2",
-          items: [
             { id: "ai-land-1", title: "Mountain Vista Cinematic", tag: "Cinematic", type: "youtube", videoId: "VHdLncCBl9M" },
-            { id: "ai-land-2", title: "Nature Synthesis Exploration", tag: "Visual Art", type: "youtube", videoId: "d3HpHGpXFuE" }
+            { id: "ai-land-2", title: "Nature Synthesis Exploration", tag: "Visual Art", type: "youtube", videoId: "d3HpHGpXFuE" },
+            { id: "ai-adv-2", title: "Abstract Motion Design", tag: "Motion Art", type: "youtube", videoId: "DU68DVJCTq4", isVertical: true },
+            { id: "ai-story-1", title: "Cyberpunk Narrative Short", tag: "Narrative", type: "youtube", videoId: "WJS5_laqbno", isVertical: true }
           ]
         }
       ]
@@ -116,25 +111,18 @@ const AllWork = () => {
     {
       index: "02",
       name: "Carousel",
+      badge: "Featured",
       accent: "#00c8a8",
       cardType: "card-teal",
       subcategories: [
         {
-          name: "Instagram Designs",
-          gridCols: "",
+          name: "Motion Graphics",
+          gridCols: "grid-cols-2 md:grid-cols-4",
           items: [
-            { id: "car-1", title: "Design A1", tag: "Engagement", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788557/skills/Carousel/A1.jpg" },
-            { id: "car-2", title: "Design A2", tag: "Branding", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788561/skills/Carousel/A2.jpg" },
-            { id: "car-3", title: "Design AA-1", tag: "Strategy", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788576/skills/Carousel/AA-1.jpg" },
-            { id: "car-4", title: "Design AA-2", tag: "Creative", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788591/skills/Carousel/AA-2.jpg" },
-            { id: "car-5", title: "Design AA-3", tag: "Growth", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778095643/skills/Carousel/AA-3.jpg" },
-            { id: "car-6", title: "Design AA-4", tag: "Impact", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788624/skills/Carousel/AA-4.jpg" },
-            { id: "car-7", title: "Design B-1", tag: "Social", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788625/skills/Carousel/B-1.jpg" },
-            { id: "car-8", title: "Design B-2", tag: "Concept", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788627/skills/Carousel/B-2.jpg" },
-            { id: "car-9", title: "Design C-1", tag: "Visuals", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788632/skills/Carousel/C-1.jpg" },
-            { id: "car-10", title: "Design C-2", tag: "Art", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788640/skills/Carousel/C-2.jpg" },
-            { id: "car-11", title: "Design C-3", tag: "Identity", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788646/skills/Carousel/C-3.jpg" },
-            { id: "car-12", title: "Design C-4", tag: "Style", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788652/skills/Carousel/C-4.jpg" }
+            { id: "car-1", title: "Future Aesthetics", tag: "Concept", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777790890/skills/Carousel/A1.jpg" },
+            { id: "car-2", title: "Neon Pulse", tag: "Motion", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777790895/skills/Carousel/A2.jpg" },
+            { id: "car-3", title: "Cyber Flow", tag: "VFX", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777790900/skills/Carousel/A3.jpg" },
+            { id: "car-4", title: "Glitch Dream", tag: "Art", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777790905/skills/Carousel/A4.jpg" }
           ]
         }
       ]
@@ -147,16 +135,10 @@ const AllWork = () => {
       subcategories: [
         {
           name: "Professional Works",
-          gridCols: "grid-cols-1 md:grid-cols-2",
+          gridCols: "grid grid-cols-1 md:grid-cols-2 gap-8",
           items: [
             { id: "edit-1", title: "Electra CS Master Edit", tag: "Production", type: "youtube", videoId: "OHEWAcivxCA" },
-            { id: "edit-2", title: "Cinematic Commercial Story", tag: "Commercial", type: "youtube", videoId: "zQArTonc-FQ" }
-          ]
-        },
-        {
-          name: "Advertisement Videos",
-          gridCols: "grid-cols-1 md:grid-cols-3",
-          items: [
+            { id: "edit-2", title: "Cinematic Commercial Story", tag: "Commercial", type: "youtube", videoId: "zQArTonc-FQ" },
             { id: "adv-v-1", title: "High-Impact Social Ad", tag: "Advertising", type: "youtube", videoId: "-MhFhPmehbg", isVertical: true },
             { id: "adv-v-2", title: "FRND Ad Campaign Master", tag: "Performance", type: "youtube", videoId: "ICPDfLbCpSo" }
           ]
@@ -192,7 +174,6 @@ const AllWork = () => {
 
   return (
     <section className="projects-section py-32 bg-black relative overflow-hidden font-sans">
-      {/* Ambient background glow */}
       <div className="absolute top-1/4 -left-20 w-96 h-96 bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
 
@@ -210,7 +191,7 @@ const AllWork = () => {
         </div>
 
         {categories.map((category) => (
-          <div key={category.index} id={`work-${category.name.toLowerCase().replace(/\s+/g, '-')}`} className="mb-32 relative pt-20 -mt-20">
+          <div key={category.index} id={`work-${category.name.toLowerCase().replace(/\s+/g, '-')}`} className="mb-32 relative">
             {/* Category Header */}
             {category.name !== "Post Designs" && (
               <div className="flex flex-col gap-4 mb-12">
@@ -222,11 +203,6 @@ const AllWork = () => {
                   <h3 className="text-4xl md:text-6xl font-serif text-white tracking-tight">
                     {category.name.split(' ')[0]} <span className="text-white/40 italic">{category.name.split(' ').slice(1).join(' ')}</span>
                   </h3>
-                  {category.badge && (
-                    <span className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-white/10 text-white/40">
-                      {category.badge}
-                    </span>
-                  )}
                 </div>
               </div>
             )}
@@ -244,10 +220,6 @@ const AllWork = () => {
                           onClick={() => setSelectedVideo(item)}
                         >
                           <img src={item.src} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                             <span className="text-[10px] text-purple-400 font-bold tracking-widest uppercase mb-1">{item.tag}</span>
-                             <h4 className="text-white font-serif text-lg">{item.title}</h4>
-                          </div>
                         </div>
                       ))}
                     </div>
@@ -261,24 +233,20 @@ const AllWork = () => {
                           onClick={() => setSelectedVideo(item)}
                         >
                           <img src={item.src} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
-                             <span className="text-[10px] text-purple-400 font-bold tracking-widest uppercase mb-1">{item.tag}</span>
-                             <h4 className="text-white font-serif text-lg">{item.title}</h4>
-                          </div>
                         </div>
                       ))}
                     </div>
                   </div>
                 ) : (
-                <div className={sub.items.length < 4 ? "flex flex-wrap gap-6 md:gap-8" : `grid ${sub.gridCols} gap-6 md:gap-8`}>
-                  {sub.items.map((item: any) => (
-                    <div key={item.id} className={sub.items.length < 4 ? "w-full md:w-[calc(33.33%-1.5rem)] min-w-[300px]" : ""}>
-                      <WorkCard 
-                        item={item} 
-                        category={category} 
-                        onClick={() => setSelectedVideo(item)} 
-                      />
-                    </div>
+                <div className={sub.gridCols}>
+                  {sub.items.map((item: any, idx: number) => (
+                    <WorkCard 
+                      key={item.id}
+                      item={item} 
+                      category={category} 
+                      onClick={() => setSelectedVideo(item)} 
+                      index={idx}
+                    />
                   ))}
                 </div>
                 )}
@@ -316,6 +284,7 @@ const AllWork = () => {
                   className="w-full h-full border-none"
                   allow="autoplay; encrypted-media; fullscreen"
                   allowFullScreen
+                  title={selectedVideo.title}
                 />
               ) : selectedVideo.type === 'image' ? (
                 <img src={selectedVideo.src} className="w-full h-full object-contain" alt={selectedVideo.title} />
