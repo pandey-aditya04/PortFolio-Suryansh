@@ -50,9 +50,10 @@ const WorkCard = ({ item, category, onClick, index }: { item: any, category: any
             className="w-full h-full object-cover"
           />
         ) : (
-          <div 
-            className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-            style={{ backgroundImage: `url(${item.src})` }}
+          <img 
+            src={item.src} 
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            alt={item.title}
           />
         )}
       </div>
@@ -202,66 +203,39 @@ const AllWork = () => {
 
               return (
                 <div key={sub.name} className={sIdx === 0 ? "mt-0" : "mt-24"}>
-                  {category.name === "Carousel" || category.name === "Post Designs" ? (
-                    <div className="flex flex-col gap-12 -mx-12 overflow-hidden py-4">
-                      <div className="carousel-track scroll-left">
-                        {[...sub.items, ...sub.items].map((item: any, idx) => (
-                          <div 
-                            key={`row1-${idx}`} 
-                            className="w-[280px] h-[380px] md:w-[350px] md:h-[450px] rounded-[2rem] overflow-hidden border border-white/5 relative group cursor-pointer shrink-0"
-                            onClick={() => setSelectedVideo(item)}
-                          >
-                            <img src={item.src} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
+                  <div className="flex flex-col gap-16">
+                    {/* Landscape Grid */}
+                    {landscapeItems.length > 0 && (
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+                        {landscapeItems.map((item, idx) => (
+                          <div key={item.id} className="min-h-0">
+                            <WorkCard 
+                              item={item} 
+                              category={category} 
+                              onClick={() => setSelectedVideo(item)} 
+                              index={idx}
+                            />
                           </div>
                         ))}
                       </div>
-                      <div className="carousel-track scroll-right">
-                        {[...sub.items.reverse(), ...sub.items].map((item: any, idx) => (
-                          <div 
-                            key={`row2-${idx}`} 
-                            className="w-[280px] h-[380px] md:w-[350px] md:h-[450px] rounded-[2rem] overflow-hidden border border-white/5 relative group cursor-pointer shrink-0"
-                            onClick={() => setSelectedVideo(item)}
-                          >
-                            <img src={item.src} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="flex flex-col gap-16">
-                      {/* Landscape Grid */}
-                      {landscapeItems.length > 0 && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
-                          {landscapeItems.map((item, idx) => (
-                            <div key={item.id} className="min-h-0">
-                              <WorkCard 
-                                item={item} 
-                                category={category} 
-                                onClick={() => setSelectedVideo(item)} 
-                                index={idx}
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      )}
+                    )}
 
-                      {/* Portrait Grid */}
-                      {portraitItems.length > 0 && (
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-start">
-                          {portraitItems.map((item, idx) => (
-                            <div key={item.id} className="min-h-0">
-                              <WorkCard 
-                                item={item} 
-                                category={category} 
-                                onClick={() => setSelectedVideo(item)} 
-                                index={idx}
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  )}
+                    {/* Portrait Grid */}
+                    {portraitItems.length > 0 && (
+                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-start">
+                        {portraitItems.map((item, idx) => (
+                          <div key={item.id} className="min-h-0">
+                            <WorkCard 
+                              item={item} 
+                              category={category} 
+                              onClick={() => setSelectedVideo(item)} 
+                              index={idx}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
               );
             })}
