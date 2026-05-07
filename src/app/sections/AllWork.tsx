@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Play, ExternalLink, ArrowUpRight } from 'lucide-react';
+import { X, ArrowUpRight } from 'lucide-react';
 import { cn } from "@/lib/utils";
 
 interface WorkItem {
@@ -15,7 +15,7 @@ interface WorkItem {
   isVertical?: boolean;
 }
 
-const MediaContent = ({ item, isHovered }: { item: any, isHovered: boolean }) => {
+const MediaContent = ({ item }: { item: any }) => {
   const [isInView, setIsInView] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
 
@@ -27,9 +27,6 @@ const MediaContent = ({ item, isHovered }: { item: any, isHovered: boolean }) =>
     if (containerRef.current) observer.observe(containerRef.current);
     return () => observer.disconnect();
   }, []);
-
-  // Performance Guard: Only play if in view AND hovered
-  const shouldPlay = isInView && isHovered;
 
   return (
     <div ref={containerRef} className="absolute inset-0 w-full h-full overflow-hidden bg-[#0a0a0a]">
@@ -74,38 +71,6 @@ const MediaContent = ({ item, isHovered }: { item: any, isHovered: boolean }) =>
   );
 };
 
-const WorkCard = ({ item, category, onClick, index }: { item: any, category: any, onClick: () => void, index: number }) => {
-  const [isHovered, setIsHovered] = React.useState(false);
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      whileHover={{ y: -8, scale: 1.05 }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onClick={onClick}
-      className={cn(
-        "relative overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a0a] group cursor-pointer transition-all duration-500",
-        item.isVertical ? "col-span-3 md:col-span-2 aspect-[9/16]" : "col-span-6 md:col-span-3 aspect-video"
-      )}
-    >
-      <MediaContent item={item} isHovered={isHovered} />
-
-      {/* Aesthetic Minimalist Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
-      
-      {/* Interaction Arrow Icon */}
-      <div className="absolute bottom-6 left-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-        <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center shadow-2xl">
-          <ArrowUpRight className="w-4 h-4" />
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
 const optimizeCloudinaryUrl = (url: string) => {
   if (!url || !url.includes('cloudinary.com')) return url;
   if (url.includes('upload/')) {
@@ -117,7 +82,7 @@ const optimizeCloudinaryUrl = (url: string) => {
 const AllWork = () => {
   const [selectedVideo, setSelectedVideo] = useState<WorkItem | null>(null);
 
-  const categories = [
+  const categories = useMemo(() => [
     {
       index: "01",
       name: "AI Videos",
@@ -203,7 +168,7 @@ const AllWork = () => {
         }
       ]
     }
-  ];
+  ], []);
 
   return (
     <section id="projects" className="projects-section pt-40 pb-32 bg-[#080808] relative overflow-hidden font-sans">
@@ -282,18 +247,18 @@ const AllWork = () => {
                       </div>
                     </div>
                   ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-6 gap-6 max-w-[1400px] mx-auto">
+                    <div className="grid grid-cols-6 gap-4 md:gap-6 max-w-[1400px] mx-auto">
                       {sub.items.map((item: any, idx) => (
                         <div 
                           key={item.id} 
                           className={cn(
                             "relative overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a0a] group cursor-pointer transition-all duration-500",
-                            item.isVertical ? "col-span-3 md:col-span-2 aspect-[9/16]" : "col-span-6 md:col-span-3 aspect-video"
+                            item.isVertical ? "col-span-6 md:col-span-2 aspect-[9/16]" : "col-span-6 md:col-span-3 aspect-video"
                           )}
                           onClick={() => setSelectedVideo(item as any)}
                         >
                           <div className="absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105">
-                            <MediaContent item={item} isHovered={false} />
+                            <MediaContent item={item} />
                           </div>
                           
                           {/* Aesthetic Overlay */}

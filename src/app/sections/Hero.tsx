@@ -2,7 +2,12 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import { FloatingShapes } from "@/components/ui/FloatingShapes";
+import dynamic from "next/dynamic";
+
+const FloatingShapes = dynamic(
+  () => import("@/components/ui/FloatingShapes").then(m => ({ default: m.FloatingShapes })),
+  { ssr: false }
+);
 
 export const Hero = () => {
   return (

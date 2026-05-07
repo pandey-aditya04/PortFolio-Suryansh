@@ -1,42 +1,32 @@
 "use client";
 
-import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import { Navigation } from "@/components/ui/Navigation";
 import { Hero } from "./sections/Hero";
-import { About } from "./sections/About";
-import { Testimonials } from "./sections/Testimonials";
-import { Contact } from "./sections/Contact";
-import { Footer } from "./sections/Footer";
-import { Process } from "./sections/Process";
-import { Comparison } from "./sections/Comparison";
-import { FAQ } from "./sections/FAQ";
-import AllWork from "./sections/AllWork";
+
+// Below-the-fold sections: lazy-loaded to keep initial bundle lean
+const About = dynamic(() => import("./sections/About").then(m => ({ default: m.About })), { ssr: true });
+const AllWork = dynamic(() => import("./sections/AllWork"), { ssr: true });
+const Process = dynamic(() => import("./sections/Process").then(m => ({ default: m.Process })), { ssr: true });
+const Comparison = dynamic(() => import("./sections/Comparison").then(m => ({ default: m.Comparison })), { ssr: true });
+const Testimonials = dynamic(() => import("./sections/Testimonials").then(m => ({ default: m.Testimonials })), { ssr: true });
+const FAQ = dynamic(() => import("./sections/FAQ").then(m => ({ default: m.FAQ })), { ssr: true });
+const Contact = dynamic(() => import("./sections/Contact").then(m => ({ default: m.Contact })), { ssr: true });
+const Footer = dynamic(() => import("./sections/Footer").then(m => ({ default: m.Footer })), { ssr: true });
 
 export default function Home() {
   return (
     <>
       <Navigation />
       <main className="overflow-hidden">
-        <motion.div
-          initial="initial"
-          animate="animate"
-          variants={{
-            animate: {
-              transition: {
-                staggerChildren: 0.1
-              }
-            }
-          }}
-        >
-          <Hero />
-          <About />
-          <AllWork />
-          <Process />
-          <Comparison />
-          <Testimonials />
-          <FAQ />
-          <Contact />
-        </motion.div>
+        <Hero />
+        <About />
+        <AllWork />
+        <Process />
+        <Comparison />
+        <Testimonials />
+        <FAQ />
+        <Contact />
       </main>
       <Footer />
     </>
