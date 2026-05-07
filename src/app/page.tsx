@@ -12,9 +12,9 @@ import { Process } from "./sections/Process";
 import { RecentDesigns } from "./sections/RecentDesigns";
 import { Comparison } from "./sections/Comparison";
 import { FAQ } from "./sections/FAQ";
+import AllWork from "./sections/AllWork";
 
 import DesignCarousel from "@/components/ui/DesignCarousel";
-import AIVideos from "./sections/AIVideos";
 
 export default function Home() {
   return (
@@ -33,13 +33,10 @@ export default function Home() {
           }}
         >
           <Hero />
-          <AIVideos />
-          <ProfessionalEdits />
           <About />
           <Process />
           <Comparison />
-          <RecentDesigns />
-          <DesignCarousel />
+          <AllWork />
           <Testimonials />
           <FAQ />
           <Contact />

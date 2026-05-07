@@ -16,10 +16,10 @@ export const Navigation = () => {
   }, []);
 
   const navLinks = [
-    { name: "AI Videos", href: "#ai-videos" },
-    { name: "Edits", href: "#edits" },
+    { name: "AI Videos", href: "#work-ai-videos" },
+    { name: "Edits", href: "#work-edits" },
+    { name: "Designs", href: "#work-post-designs" },
     { name: "About", href: "#about" },
-    { name: "Contact", href: "#footer" },
   ];
 
   return (
