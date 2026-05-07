@@ -157,10 +157,13 @@ const AllWork = () => {
         {
           name: "Professional Works",
           items: [
+            // Row 1: 2 Landscape
             { id: "edit-1", title: "Electra CS Master Edit", tag: "Production", type: "youtube", videoId: "OHEWAcivxCA" },
             { id: "edit-2", title: "Cinematic Commercial Story", tag: "Commercial", type: "youtube", videoId: "zQArTonc-FQ" },
+            // Row 2: 3 Portrait
             { id: "adv-v-1", title: "High-Impact Social Ad", tag: "Advertising", type: "youtube", videoId: "-MhFhPmehbg", isVertical: true },
-            { id: "adv-v-2", title: "FRND Ad Campaign Master", tag: "Performance", type: "youtube", videoId: "ICPDfLbCpSo" }
+            { id: "adv-v-2", title: "Performance Marketing Ad", tag: "Performance", type: "youtube", videoId: "ICPDfLbCpSo", isVertical: true },
+            { id: "adv-v-3", title: "Vertical Brand Story", tag: "Social", type: "youtube", videoId: "WJS5_laqbno", isVertical: true }
           ]
         }
       ]
