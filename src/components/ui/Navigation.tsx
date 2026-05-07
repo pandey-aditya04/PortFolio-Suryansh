@@ -16,11 +16,10 @@ export const Navigation = () => {
   }, []);
 
   const navLinks = [
-    { name: "Services", href: "#services" },
     { name: "Projects", href: "#projects" },
     { name: "About", href: "#about" },
     { name: "Testimonials", href: "#testimonials" },
-    { name: "Contact", href: "#contact" },
+    { name: "Contact", href: "#footer" },
   ];
 
   return (
@@ -34,8 +33,11 @@ export const Navigation = () => {
       )}
     >
       {/* Logo */}
-      <div className="flex items-center gap-2 pr-4 border-r border-white/10">
-        <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-[#0c0c0c] font-bold">
+      <div 
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="flex items-center gap-2 pr-4 border-r border-white/10 cursor-pointer group"
+      >
+        <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-[#0c0c0c] font-bold transition-transform group-hover:scale-110">
           S
         </div>
         <span className="text-white font-medium tracking-tight">Suryansh S.</span>
@@ -47,6 +49,12 @@ export const Navigation = () => {
           <a
             key={link.name}
             href={link.href}
+            onClick={(e) => {
+              if (link.href.startsWith('#')) {
+                e.preventDefault();
+                document.querySelector(link.href)?.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
             className="text-sm font-medium text-white/60 hover:text-white transition-colors"
           >
             {link.name}
@@ -60,7 +68,7 @@ export const Navigation = () => {
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+        onClick={() => document.getElementById('footer')?.scrollIntoView({ behavior: 'smooth' })}
         className="flex items-center gap-2 bg-white text-[#0c0c0c] px-5 py-2 rounded-full text-sm font-semibold hover:bg-white/90 transition-colors"
       >
         <span>✦</span>
