@@ -50,7 +50,7 @@ async function walk(dir, relativePath = '') {
       if (file.match(/\.(jpg|jpeg|png|gif|svg|webp)$/i)) {
         if (mapping['/Skills/' + rel]) {
           console.log(`⏩ Skipping (already mapped): ${rel}`);
-          return;
+          continue;
         }
         const url = await uploadFile(fullPath, rel);
         if (url) mapping['/Skills/' + rel] = url;
