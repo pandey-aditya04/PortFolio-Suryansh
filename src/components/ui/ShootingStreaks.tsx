@@ -29,7 +29,7 @@ export default function ShootingStreaks() {
     canvas.height = height;
 
     let streaks: Streak[] = [];
-    const MAX_STREAKS = 5;
+    const MAX_STREAKS = 15;
 
     const createStreak = (): Streak => {
       const angle = (30 + Math.random() * 20) * (Math.PI / 180);
@@ -39,7 +39,7 @@ export default function ShootingStreaks() {
         y: Math.random() * height * 0.6,
         angle,
         length: 80 + Math.random() * 140,
-        speed: 900 + Math.random() * 900,
+        speed: 1800 + Math.random() * 2200,
         alpha: 0.55 + Math.random() * 0.3,
         lineWidth: 0.6 + Math.random() * 0.4,
         progress: 0,
@@ -48,7 +48,7 @@ export default function ShootingStreaks() {
     };
 
     let lastSpawn = 0;
-    const spawnInterval = 800 + Math.random() * 2200;
+    const spawnInterval = 100 + Math.random() * 600;
 
     const animate = (time: number) => {
       ctx.clearRect(0, 0, width, height);
