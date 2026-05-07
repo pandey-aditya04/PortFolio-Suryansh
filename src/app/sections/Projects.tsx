@@ -20,7 +20,7 @@ export const Projects = () => {
             onClick={() => setSelectedVideo('OHEWAcivxCA')}
           >
             <div className="absolute inset-0 w-full h-full pointer-events-none opacity-60 group-hover:opacity-80 transition-opacity duration-700 overflow-hidden">
-              <div className="absolute inset-0 scale-[1.1] transform-gpu">
+              <div className="absolute w-full h-[120%] -top-[10%] left-0 scale-[1.1] transform-gpu">
                 <iframe
                   src="https://www.youtube.com/embed/OHEWAcivxCA?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&showinfo=0&iv_load_policy=3&playlist=OHEWAcivxCA"
                   className="w-full h-full border-none pointer-events-none"
@@ -56,12 +56,10 @@ export const Projects = () => {
           {/* Right Column */}
           <div className="lg:col-span-5 flex flex-col gap-8 h-full">
             {/* Card A — Electra 25 */}
-            <div 
-              onClick={() => setSelectedVideo('zQArTonc-FQ')}
-              className="flex-1 rounded-[2.5rem] overflow-hidden border border-white/10 relative group cursor-pointer bg-[#111]"
+            <div className="flex-1 rounded-[2.5rem] overflow-hidden border border-white/10 relative group cursor-pointer bg-[#111]"
             >
               <div className="absolute inset-0 w-full h-full pointer-events-none opacity-40 group-hover:opacity-60 transition-opacity duration-700 overflow-hidden">
-                <div className="absolute inset-0 scale-[1.2] transform-gpu">
+                <div className="absolute w-full h-[120%] -top-[10%] left-0 scale-[1.2] transform-gpu">
                   <iframe
                     src="https://www.youtube.com/embed/zQArTonc-FQ?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&showinfo=0&iv_load_policy=3&playlist=zQArTonc-FQ"
                     className="w-full h-full border-none pointer-events-none"
@@ -95,7 +93,7 @@ export const Projects = () => {
               className="flex-1 rounded-[2.5rem] overflow-hidden border border-white/10 bg-[#111] relative group flex items-center justify-center cursor-pointer"
             >
               <div className="absolute inset-0 w-full h-full pointer-events-none opacity-20 group-hover:opacity-40 transition-opacity duration-700 overflow-hidden">
-                <div className="absolute inset-0 scale-[1.2] transform-gpu">
+                <div className="absolute w-full h-[120%] -top-[10%] left-0 scale-[1.2] transform-gpu">
                   <iframe
                     src="https://www.youtube.com/embed/ICPDfLbCpSo?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&showinfo=0&iv_load_policy=3&playlist=ICPDfLbCpSo"
                     className="w-full h-full border-none pointer-events-none"
@@ -128,7 +126,7 @@ export const Projects = () => {
               className="flex-1 rounded-[2.5rem] overflow-hidden border border-white/10 relative group cursor-pointer bg-[#111]"
             >
               <div className="absolute inset-0 w-full h-full pointer-events-none opacity-30 group-hover:opacity-50 transition-opacity duration-700 overflow-hidden">
-                <div className="absolute inset-0 scale-[1.2] transform-gpu">
+                <div className="absolute w-full h-[120%] -top-[10%] left-0 scale-[1.2] transform-gpu">
                   <iframe
                     src="https://www.youtube.com/embed/d3HpHGpXFuE?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&showinfo=0&iv_load_policy=3&playlist=d3HpHGpXFuE"
                     className="w-full h-full border-none pointer-events-none"
