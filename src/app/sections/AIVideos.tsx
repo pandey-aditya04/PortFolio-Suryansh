@@ -5,41 +5,45 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Play, Sparkles } from 'lucide-react';
 
 const AIVideos = () => {
-  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [selectedVideo, setSelectedVideo] = useState<any>(null);
 
   const aiVideos = [
     {
       id: 1,
-      videoId: '-MhFhPmehbg',
-      title: 'The AI Narrative',
-      subtitle: 'Cinematic AI Short',
+      type: 'youtube',
+      videoId: 'd3HpHGpXFuE',
+      title: 'Motion Graphics',
+      subtitle: 'AI Synthesis',
       className: 'md:col-span-3 md:row-span-2',
-      scale: 'scale-[1.5]',
+      scale: 'scale-[1.2]',
       featured: true
     },
     {
       id: 2,
-      videoId: 'd3HpHGpXFuE',
-      title: 'Commercial Visuals',
-      subtitle: 'AI Synthesis',
+      type: 'cloudinary',
+      src: 'https://res.cloudinary.com/daeio5gbf/video/upload/v1777787883/skills/AI%20VIDEOS/Landscape/1.mp4',
+      title: 'Realistic Product Ad',
+      subtitle: 'AI Generated',
       className: 'md:col-span-1 md:row-span-1',
-      scale: 'scale-[1.2]',
+      scale: 'scale-[1.0]',
     },
     {
       id: 3,
-      videoId: 'zQArTonc-FQ',
-      title: 'Future Aesthetics',
-      subtitle: 'Motion Synthesis',
+      type: 'cloudinary',
+      src: 'https://res.cloudinary.com/daeio5gbf/video/upload/v1777787883/skills/AI%20VIDEOS/Landscape/4.mp4',
+      title: 'Cinematic Landscape',
+      subtitle: 'AI Motion',
       className: 'md:col-span-1 md:row-span-1',
-      scale: 'scale-[1.3]',
+      scale: 'scale-[1.0]',
     },
     {
       id: 4,
-      videoId: 'ICPDfLbCpSo', // Using this as an AI showcase for now if it fits, or I can find another. 
-      title: 'Product Narrative',
-      subtitle: 'AI Enhanced',
+      type: 'cloudinary',
+      src: 'https://res.cloudinary.com/daeio5gbf/video/upload/v1777787883/skills/AI%20VIDEOS/Landscape/3.mp4',
+      title: 'Visual Evolution',
+      subtitle: 'AI Art',
       className: 'md:col-span-1 md:row-span-1',
-      scale: 'scale-[1.2]',
+      scale: 'scale-[1.0]',
     }
   ];
 
@@ -82,20 +86,30 @@ const AIVideos = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              onClick={() => setSelectedVideo(video.videoId)}
+              onClick={() => setSelectedVideo(video)}
               className={`group relative overflow-hidden rounded-[2.5rem] bg-[#0a0a0a] border border-white/5 cursor-pointer ${video.className}`}
             >
-              {/* YouTube Background Previews */}
+              {/* Background Preview */}
               <div className="absolute inset-0 w-full h-full pointer-events-none opacity-40 group-hover:opacity-100 transition-all duration-700 overflow-hidden">
-                <div className={`absolute w-full h-[145%] -top-[22.5%] left-0 ${video.scale} transform-gpu`}>
-                   <iframe
-                    src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=${video.videoId}&enablejsapi=1&playsinline=1`}
-                    className="w-full h-full border-none pointer-events-none"
-                    allow="autoplay; encrypted-media"
-                    title={video.title}
-                    referrerPolicy="strict-origin-when-cross-origin"
+                {video.type === 'youtube' ? (
+                  <div className={`absolute w-full h-[145%] -top-[22.5%] left-0 ${video.scale} transform-gpu`}>
+                    <iframe
+                      src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=${video.videoId}&enablejsapi=1&playsinline=1`}
+                      className="w-full h-full border-none pointer-events-none"
+                      allow="autoplay; encrypted-media"
+                      title={video.title}
+                    />
+                  </div>
+                ) : (
+                  <video
+                    src={video.src}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover"
                   />
-                </div>
+                )}
               </div>
 
               {/* Overlay Gradient */}
@@ -147,12 +161,21 @@ const AIVideos = () => {
               exit={{ scale: 0.9, y: 20 }}
               className="relative w-full max-w-6xl aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/10"
             >
-              <iframe
-                src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1&rel=0&modestbranding=1`}
-                className="w-full h-full border-none"
-                allow="autoplay; encrypted-media; fullscreen"
-                allowFullScreen
-              />
+              {selectedVideo.type === 'youtube' ? (
+                <iframe
+                  src={`https://www.youtube.com/embed/${selectedVideo.videoId}?autoplay=1&rel=0&modestbranding=1`}
+                  className="w-full h-full border-none"
+                  allow="autoplay; encrypted-media; fullscreen"
+                  allowFullScreen
+                />
+              ) : (
+                <video
+                  src={selectedVideo.src}
+                  controls
+                  autoPlay
+                  className="w-full h-full bg-black"
+                />
+              )}
             </motion.div>
           </motion.div>
         )}
