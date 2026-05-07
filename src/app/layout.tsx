@@ -29,24 +29,39 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Suryansh Srivastava | AI Visual Creator & Motion Artist',
-  description: 'The creative portfolio of Suryansh Srivastava — specializing in premium AI video synthesis, cinematic motion arts, and high-fidelity brand storytelling. Transforming visions into cinematic digital experiences.',
-  keywords: ['AI Visual Creator', 'Motion Artist', 'AI Video Synthesis', 'Cinematic Brand Storytelling', 'Graphic Designer', 'Runway ML', 'Higgsfield AI', 'Video Editing Portfolio', 'Premium Web Design'],
-  authors: [{ name: 'Suryansh Srivastava' }],
+  title: {
+    default: 'Suryansh Srivastava | AI Visual Creator & Motion Artist',
+    template: '%s | Suryansh Srivastava'
+  },
+  description: 'Creative portfolio of Suryansh Srivastava. Specializing in high-end AI Video Synthesis, Cinematic Motion Arts, and Premium Brand Storytelling. Transforming complex ideas into cinematic digital masterpieces.',
+  keywords: [
+    'Suryansh Srivastava', 
+    'AI Visual Creator', 
+    'Motion Artist India', 
+    'AI Video Synthesis Portfolio', 
+    'Cinematic Motion Graphics', 
+    'Runway ML Expert', 
+    'Luma AI Video', 
+    'High-end Video Editor', 
+    'Premium Graphic Design'
+  ],
+  authors: [{ name: 'Suryansh Srivastava', url: 'https://suryanshsrivastavaa.vercel.app' }],
   creator: 'Suryansh Srivastava',
-  publisher: 'Suryansh Srivastava',
   metadataBase: new URL('https://suryanshsrivastavaa.vercel.app'),
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: 'Suryansh Srivastava | AI Visual Creator & Motion Artist',
-    description: 'High-end AI Video Synthesis & Cinematic Motion Arts. Explore the portfolio of Suryansh Srivastava.',
+    description: 'Transforming visions into cinematic digital experiences. Explore the premium portfolio of Suryansh Srivastava.',
     url: 'https://suryanshsrivastavaa.vercel.app',
-    siteName: 'Suryansh Srivastava Portfolio',
+    siteName: 'Suryansh Srivastava',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Suryansh Srivastava — AI Visual Creator & Motion Artist Portfolio',
+        alt: 'Suryansh Srivastava — AI Visual Creator & Motion Artist',
       },
     ],
     locale: 'en_US',
@@ -55,10 +70,11 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Suryansh Srivastava | AI Visual Creator & Motion Artist',
-    description: 'Specializing in premium AI video synthesis and cinematic brand storytelling.',
+    description: 'High-end AI Video Synthesis & Cinematic Motion Arts.',
     images: ['/og-image.png'],
     creator: '@Suryansh_S',
   },
+  viewport: 'width=device-width, initial-scale=1',
   robots: {
     index: true,
     follow: true,
@@ -70,7 +86,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  category: 'technology',
 };
 
 export default function RootLayout({
