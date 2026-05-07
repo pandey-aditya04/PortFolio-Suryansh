@@ -3,6 +3,8 @@
 import { useEffect, useState, useMemo } from "react";
 import { motion } from "framer-motion";
 
+import SmokeBackground from "./SmokeBackground";
+
 export function InteractiveBackground() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
@@ -40,17 +42,6 @@ export function InteractiveBackground() {
           animation-delay: var(--delay);
           will-change: opacity, transform;
         }
-        .smoke {
-          animation: smoke-float var(--d) infinite ease-in-out;
-          filter: blur(120px);
-          mix-blend-mode: screen;
-          will-change: transform, opacity;
-        }
-        @keyframes smoke-float {
-          0% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.02; }
-          50% { transform: translate3d(5%, 5%, 0) scale(1.1); opacity: 0.04; }
-          100% { transform: translate3d(0, 0, 0) scale(1); opacity: 0.02; }
-        }
       `}</style>
       
       {/* 1. Star Field */}
@@ -71,22 +62,9 @@ export function InteractiveBackground() {
         ))}
       </div>
 
-      {/* 2. Optimized Smoke Layers */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div 
-          className="smoke absolute top-[-10%] left-[-10%] w-[100vw] h-[100vw] rounded-full"
-          style={{
-            background: "radial-gradient(circle at center, rgba(255,255,255,0.08) 0%, transparent 70%)",
-            '--d': '30s'
-          } as any}
-        />
-        <div 
-          className="smoke absolute bottom-[-10%] right-[-10%] w-[110vw] h-[110vw] rounded-full"
-          style={{
-            background: "radial-gradient(circle at center, rgba(255,255,255,0.06) 0%, transparent 70%)",
-            '--d': '40s'
-          } as any}
-        />
+      {/* 2. Advanced Canvas Smoke Background */}
+      <div className="absolute inset-0 z-0 opacity-40">
+        <SmokeBackground />
       </div>
       
       {/* 3. The Solid Crescent Planet */}

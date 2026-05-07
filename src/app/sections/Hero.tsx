@@ -72,10 +72,16 @@ export const Hero = () => {
             transition={{ duration: 0.8, delay: 0.9 }}
             className="flex flex-wrap gap-6 mt-4"
           >
-            <button className="px-8 py-4 border border-white/10 text-white rounded-full font-semibold hover:bg-white/5 transition-all">
+            <button 
+              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-8 py-4 border border-white/10 text-white rounded-full font-semibold hover:bg-white/5 transition-all"
+            >
               See All Projects
             </button>
-            <button className="px-8 py-4 bg-white text-[#0c0c0c] rounded-full font-semibold hover:bg-white/90 transition-all">
+            <button 
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-8 py-4 bg-white text-[#0c0c0c] rounded-full font-semibold hover:bg-white/90 transition-all"
+            >
               Contact Now
             </button>
           </motion.div>

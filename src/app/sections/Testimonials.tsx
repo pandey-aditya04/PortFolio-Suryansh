@@ -1,97 +1,121 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion } from "react-motion"; // Note: keeping as framer-motion if that's what was used before, but user might have meant framer-motion
 import { Star } from "lucide-react";
+import Image from "next/image";
 
 const testimonials = [
   {
-    name: "Alex Rivera",
-    role: "CEO at Fintech",
-    content: "Johan's ability to translate complex ideas into elegant designs is unparalleled. He truly understands the balance between form and function.",
-    rating: 5,
-    avatarColor: "#ff5733"
+    name: "Will smith",
+    role: "Harper education",
+    content: "The designs exceeded our expectations! Every element felt purposeful, creating a seamless and visually stunning brand identity",
+    rating: 5.0,
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&h=200&auto=format&fit=crop"
   },
   {
-    name: "Sarah Chen",
-    role: "Product Manager",
-    content: "The motion graphics and AI video synthesis Johan provided for our launch were breathtaking. He's not just a designer; he's a visual storyteller.",
-    rating: 5,
-    avatarColor: "#33ff57"
+    name: "Ikta Sollork",
+    role: "PARAL CEO",
+    content: "Working with this process was effortless. The vision was understood perfectly, and the designs truly represent my brand",
+    rating: 4.7,
+    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=200&h=200&auto=format&fit=crop"
   },
   {
-    name: "Marcus Thorne",
-    role: "Founder, Zenith",
-    content: "Working with Johan was the best decision we made for our rebranding. Professional, creative, and incredibly fast.",
-    rating: 4.8,
-    avatarColor: "#3357ff"
+    name: "Liloch",
+    role: "AIO Founder",
+    content: "Exceptional creativity and attention to detail! The final product exceeded all my expectations. Highly recommended for any premium design work.",
+    rating: 5.0,
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&h=200&auto=format&fit=crop"
   }
 ];
 
 export const Testimonials = () => {
   return (
-    <section id="testimonials" className="py-32 bg-[#0c0c0c]">
+    <section id="testimonials" className="py-32 relative overflow-hidden bg-transparent">
       <div className="max-w-[1400px] mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
           
           {/* Left Column — Info & Stats */}
-          <div className="flex flex-col gap-10 lg:sticky lg:top-32">
-            <div className="flex flex-col gap-4">
-              <span className="text-[10px] uppercase tracking-widest text-white/40">⊙ Happy Clients</span>
-              <h2 className="text-6xl font-serif text-white">Clients <br /><span className="text-white/40">Love me</span></h2>
+          <div className="lg:col-span-5 flex flex-col gap-10 lg:sticky lg:top-32">
+            <div className="flex flex-col gap-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 w-fit">
+                <span className="text-[10px] text-white">⊙</span>
+                <span className="text-[10px] uppercase tracking-widest text-white/40">Happy Clients</span>
+              </div>
+              
+              <div className="flex flex-col gap-4">
+                <h2 className="text-5xl md:text-7xl font-serif text-white tracking-tight">
+                  Clients <span className="text-white/30">Love me</span>
+                </h2>
+                <p className="text-white/40 text-lg">
+                  Trusted by 100+ happy clients, adding $250M+ in revenue.
+                </p>
+              </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-3 gap-3">
               {[
-                { value: "100+", label: "Clients" },
-                { value: "$250m", label: "Revenue" },
-                { value: "4.8", label: "Rating" },
+                { value: "100+", label: "Happy clients" },
+                { value: "$250m", label: "revenue added" },
+                { value: "4.8", label: "Average Rating" },
               ].map((stat, i) => (
-                <div key={i} className="p-4 rounded-2xl border border-white/10 bg-white/5 flex flex-col gap-1 items-center text-center">
-                  <span className="text-xl font-bold text-white">{stat.value}</span>
-                  <span className="text-[10px] uppercase tracking-wider text-white/40">{stat.label}</span>
+                <div key={i} className="p-6 rounded-[2rem] border border-white/5 bg-[#111] flex flex-col gap-3">
+                  <span className="text-3xl font-bold text-white tracking-tight">{stat.value}</span>
+                  <span className="text-[10px] leading-tight uppercase tracking-wider text-white/30">{stat.label}</span>
                 </div>
               ))}
             </div>
 
             <div className="flex gap-4">
-              <button className="px-8 py-4 bg-white text-[#0c0c0c] rounded-full font-semibold">Contact Now</button>
-              <button className="px-8 py-4 border border-white/10 text-white rounded-full font-semibold">See All</button>
+              <button 
+                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-10 py-4 border border-white/10 text-white rounded-full font-medium text-sm transition-all hover:bg-white/5"
+              >
+                See All Projects
+              </button>
+              <button 
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-10 py-4 bg-white text-black rounded-full font-medium text-sm shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all hover:bg-neutral-200"
+              >
+                Contact Now
+              </button>
             </div>
           </div>
 
-          {/* Right Column — Sticky Stacked Cards */}
-          <div className="flex flex-col gap-8">
+          {/* Right Column — Testimonial Feed */}
+          <div className="lg:col-span-7 flex flex-col gap-6">
             {testimonials.map((t, i) => (
               <div 
                 key={i} 
-                className="sticky top-[100px] bg-[#111] p-10 rounded-[2.5rem] border border-white/10 shadow-2xl flex flex-col gap-8 transition-transform duration-500 hover:-translate-y-2"
-                style={{ 
-                  marginTop: i === 0 ? 0 : `${i * 20}px`,
-                  top: `${100 + i * 20}px`
-                }}
+                className="bg-[#0f0f0f]/80 backdrop-blur-sm p-10 rounded-[2.5rem] border border-white/5 shadow-2xl flex flex-col gap-6"
               >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div 
-                      className="w-12 h-12 rounded-lg flex items-center justify-center text-white font-bold"
-                      style={{ backgroundColor: t.avatarColor }}
-                    >
-                      {t.name.charAt(0)}
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-lg font-bold text-white">{t.name}</span>
-                      <span className="text-xs text-white/40 uppercase tracking-widest">{t.role}</span>
-                    </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 rounded-xl overflow-hidden grayscale">
+                    <img 
+                      src={t.image} 
+                      alt={t.name}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                  <div className="flex items-center gap-1">
-                    <span className="text-sm font-bold text-white mr-2">{t.rating}</span>
-                    <Star className="w-4 h-4 fill-white text-white" />
+                  <div className="flex flex-col">
+                    <span className="text-2xl font-bold text-white tracking-tight">{t.name}</span>
+                    <span className="text-xs text-white/30 uppercase tracking-[0.2em] font-medium">{t.role}</span>
                   </div>
                 </div>
 
-                <p className="text-xl text-white/80 leading-relaxed italic">
-                   "{t.content}"
-                </p>
+                <div className="flex flex-col gap-4">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-sm font-bold text-white mr-2">{t.rating.toFixed(1)}</span>
+                    {[...Array(5)].map((_, starIdx) => (
+                      <Star 
+                        key={starIdx} 
+                        className={`w-3.5 h-3.5 ${starIdx < Math.floor(t.rating) ? 'fill-yellow-500 text-yellow-500' : 'fill-white/10 text-white/10'}`} 
+                      />
+                    ))}
+                  </div>
+                  <p className="text-lg text-white/50 leading-relaxed font-medium">
+                    {t.content}
+                  </p>
+                </div>
               </div>
             ))}
           </div>

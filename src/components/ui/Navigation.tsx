@@ -60,6 +60,7 @@ export const Navigation = () => {
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
+        onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
         className="flex items-center gap-2 bg-white text-[#0c0c0c] px-5 py-2 rounded-full text-sm font-semibold hover:bg-white/90 transition-colors"
       >
         <span>✦</span>

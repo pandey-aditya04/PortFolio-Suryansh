@@ -43,7 +43,10 @@ export const FeaturedProject = () => {
             </div>
           </div>
 
-          <button className="w-fit px-8 py-4 border border-white/10 text-white rounded-full font-semibold hover:bg-white/5 transition-all">
+          <button 
+            onClick={() => window.open('https://frnd.app', '_blank')}
+            className="w-fit px-8 py-4 border border-white/10 text-white rounded-full font-semibold hover:bg-white/5 transition-all"
+          >
             Live Site Preview
           </button>
         </div>

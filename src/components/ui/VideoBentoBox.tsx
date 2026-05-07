@@ -1,40 +1,47 @@
 "use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, Play } from 'lucide-react';
 
 const VideoBentoBox = () => {
-  // Array defining the 5 videos, their paths, titles, and grid sizing
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+
   const videos = [
     {
       id: 1,
-      src: '/Skills/AIVIDEOS/Advertisements/2.mp4',
-      title: 'AI Product Advertisement',
-      className: 'md:col-span-2 md:row-span-2', 
+      videoId: 'OHEWAcivxCA',
+      title: 'Electra CS Campaign',
+      className: 'md:col-span-2 md:row-span-2',
+      scale: 'scale-[1.1]', // Horizontal video in wide card
     },
     {
       id: 2,
-      src: 'https://res.cloudinary.com/daeio5gbf/video/upload/v1777787883/skills/AI%20VIDEOS/Advertisements%28Realistic%20Product%20Advertisement%29-keep%20this%20at%20top/3.mp4',
-      title: 'Realistic Product Ad',
-      className: 'md:col-span-1 md:row-span-1', 
+      videoId: 'VHdLncCBl9M',
+      title: 'Cinematic Landscape',
+      className: 'md:col-span-1 md:row-span-1',
+      scale: 'scale-[1.2]', // Horizontal in square
     },
     {
       id: 3, 
-      src: '/Skills/AIVIDEOS/Landscape/1.mp4',
-      title: 'Cinematic Landscape Ad',
-      className: 'md:col-span-1 md:row-span-1', 
+      videoId: 'u2MwVays7fo',
+      title: 'AI Product Ad',
+      className: 'md:col-span-1 md:row-span-1',
+      scale: 'scale-[1.8]', // Vertical in square (needs more scale to fill)
     },
     {
       id: 4,
-      src: '/Skills/AIVIDEOS/AIStorytelling/2.mp4',
-      title: 'AI Narrative Storytelling',
-      className: 'md:col-span-2 md:row-span-1', 
+      videoId: 'zQArTonc-FQ',
+      title: 'Electra 25 Visuals',
+      className: 'md:col-span-2 md:row-span-1',
+      scale: 'scale-[1.1]', // Horizontal video in wide card
     },
     {
       id: 5,
-      src: '/Skills/AIVIDEOS/Landscape/4.mp4',
-      title: 'Commercial Visual Concept',
-      className: 'md:col-span-1 md:row-span-1', 
+      videoId: 'd3HpHGpXFuE',
+      title: 'Commercial Visuals',
+      className: 'md:col-span-1 md:row-span-1',
+      scale: 'scale-[1.2]', // Horizontal in square
     },
   ];
 
@@ -61,12 +68,13 @@ const VideoBentoBox = () => {
               </span>
             </div>
             <h2 className="text-5xl md:text-6xl font-serif text-white tracking-tight">
-              Featured <span className="text-white/40 italic">Projects</span>
+              Featured <span className="text-white/40 italic">Edits</span>
             </h2>
           </div>
           <motion.button 
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
             className="bg-white text-black px-8 py-3 rounded-full font-medium hover:bg-neutral-200 transition-colors text-sm uppercase tracking-wider"
           >
             See All Videos
@@ -82,18 +90,19 @@ const VideoBentoBox = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-              className={`group relative overflow-hidden rounded-[2.5rem] bg-[#111] border border-white/5 cursor-none ${video.className}`}
+              onClick={() => setSelectedVideo(video.videoId)}
+              className={`group relative overflow-hidden rounded-[2.5rem] bg-[#111] border border-white/5 cursor-pointer ${video.className}`}
             >
-              {/* Video Element */}
-              <video
-                src={video.src}
-                className="absolute inset-0 w-full h-full object-cover opacity-60 transition-all duration-700 group-hover:scale-105 group-hover:opacity-100 will-change-transform"
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-              />
+              {/* YouTube Background Previews (No local videos) - Fixed Cover Issue */}
+              <div className="absolute inset-0 w-full h-full pointer-events-none opacity-60 group-hover:opacity-100 transition-all duration-700 overflow-hidden">
+                <div className={`absolute inset-0 ${video.scale} transform-gpu`}>
+                   <iframe
+                    src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&showinfo=0&iv_load_policy=3&playlist=${video.videoId}`}
+                    className="w-full h-full border-none pointer-events-none"
+                    allow="autoplay; encrypted-media"
+                  />
+                </div>
+              </div>
 
               {/* Overlay Gradient for readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
@@ -107,13 +116,11 @@ const VideoBentoBox = () => {
                   </h3>
                 </div>
                 
-                {/* Arrow Icon */}
+                {/* Play Icon/Button */}
                 <motion.div 
-                  className="bg-white/10 backdrop-blur-xl border border-white/20 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 group-hover:-rotate-45 group-hover:bg-white group-hover:text-black text-white"
+                  className="bg-white/10 backdrop-blur-xl border border-white/20 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:bg-white group-hover:text-black text-white"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-                  </svg>
+                  <Play size={18} fill="currentColor" className="ml-1" />
                 </motion.div>
               </div>
             </motion.div>
@@ -121,6 +128,41 @@ const VideoBentoBox = () => {
         </div>
 
       </div>
+
+      {/* Cinema Mode Modal */}
+      <AnimatePresence>
+        {selectedVideo && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-2xl p-4 md:p-10"
+          >
+            <motion.button
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              onClick={() => setSelectedVideo(null)}
+              className="absolute top-6 right-6 md:top-10 md:right-10 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors z-[110]"
+            >
+              <X size={24} />
+            </motion.button>
+
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="relative w-full max-w-6xl aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+            >
+              <iframe
+                src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1&rel=0&modestbranding=1`}
+                className="w-full h-full border-none"
+                allow="autoplay; encrypted-media; fullscreen"
+                allowFullScreen
+              />
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

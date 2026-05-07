@@ -65,10 +65,16 @@ export const RecentDesigns = () => {
             </p>
           </div>
           <div className="flex gap-4">
-            <button className="px-8 py-4 border border-white/10 text-white rounded-full font-bold hover:bg-white/5 transition-all">
+            <button 
+              onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-8 py-4 border border-white/10 text-white rounded-full font-bold hover:bg-white/5 transition-all"
+            >
               See All Projects
             </button>
-            <button className="px-8 py-4 bg-white text-black rounded-full font-bold hover:bg-white/90 transition-all">
+            <button 
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-8 py-4 bg-white text-black rounded-full font-bold hover:bg-white/90 transition-all"
+            >
               Contact Now
             </button>
           </div>
