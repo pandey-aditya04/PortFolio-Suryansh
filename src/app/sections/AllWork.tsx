@@ -104,7 +104,7 @@ const AllWork = () => {
           gridCols: "grid-cols-2 md:grid-cols-4",
           items: [
             { id: "ai-adv-1", title: "Realistic Product Advertisement", tag: "Product Ad", type: "youtube", videoId: "u2MwVays7fo", isVertical: true },
-            { id: "ai-adv-2", title: "Abstract Motion Design", tag: "Motion Art", type: "youtube", videoId: "DU688DVJCTq4", isVertical: true }
+            { id: "ai-adv-2", title: "Abstract Motion Design", tag: "Motion Art", type: "youtube", videoId: "DU68DVJCTq4", isVertical: true }
           ]
         },
         {
@@ -284,64 +284,17 @@ const AllWork = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className={`grid ${sub.gridCols} gap-6 md:gap-8`}>
-                    {sub.items.map((item: any) => (
-                      <motion.div
-                        key={item.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        whileHover={{ y: -8, scale: 1.02 }}
-                        onClick={() => setSelectedVideo(item)}
-                        className={`group relative overflow-hidden rounded-[2.5rem] bg-[#0a0a0a] border border-white/5 cursor-pointer transition-all duration-500`}
-                      >
-                        {/* Background Preview */}
-                        <div className="absolute inset-0 w-full h-full pointer-events-none opacity-40 group-hover:opacity-100 transition-all duration-700 overflow-hidden">
-                          {item.type === 'youtube' ? (
-                            <div className={`absolute w-full h-[145%] -top-[22.5%] left-0 scale-[1.2] transform-gpu`}>
-                              <iframe
-                                src={`https://www.youtube.com/embed/${item.videoId}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=${item.videoId}&enablejsapi=1&playsinline=1`}
-                                className="w-full h-full border-none pointer-events-none"
-                                allow="autoplay; encrypted-media"
-                                title={item.title}
-                              />
-                            </div>
-                          ) : item.type === 'image' ? (
-                            <div 
-                              className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                              style={{ backgroundImage: `url(${item.src})` }}
-                            />
-                          ) : (
-                            <video
-                              src={item.src}
-                              autoPlay
-                              loop
-                              muted
-                              playsInline
-                              className="w-full h-full object-cover"
-                            />
-                          )}
-                        </div>
-
-                        {/* Content Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10" />
-                        
-                        <div className="relative z-20 h-[250px] md:h-[300px] p-8 flex flex-col justify-end">
-                          <div className="flex flex-col gap-1 transform group-hover:translate-x-2 transition-transform duration-500">
-                             <span className="text-[10px] uppercase tracking-widest font-bold" style={{ color: category.accent }}>{item.tag}</span>
-                             <h4 className="text-xl md:text-2xl font-serif text-white tracking-wide">{item.title}</h4>
-                          </div>
-                          
-                          {/* Play Icon */}
-                          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-30">
-                            <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white">
-                              <Play className="w-6 h-6 fill-current ml-1" />
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
+                <div className={sub.items.length < 4 ? "flex flex-wrap gap-6 md:gap-8" : `grid ${sub.gridCols} gap-6 md:gap-8`}>
+                  {sub.items.map((item: any) => (
+                    <div key={item.id} className={sub.items.length < 4 ? "w-full md:w-[calc(25%-1.5rem)] min-w-[250px]" : ""}>
+                      <WorkCard 
+                        item={item} 
+                        category={category} 
+                        onClick={() => setSelectedVideo(item)} 
+                      />
+                    </div>
+                  ))}
+                </div>
                 )}
               </div>
             ))}
