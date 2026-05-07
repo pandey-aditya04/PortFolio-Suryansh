@@ -34,7 +34,7 @@ const MediaContent = ({ item, isHovered }: { item: any, isHovered: boolean }) =>
   return (
     <div ref={containerRef} className="absolute inset-0 w-full h-full pointer-events-none transition-all duration-700 overflow-hidden">
       {shouldPlay ? (
-        <>
+        <div className="w-full h-full transition-all duration-700 blur-0">
           {item.type === 'youtube' ? (
             <div className={`absolute w-[100%] h-[155%] -top-[27.5%] left-0 transform-gpu ${item.isVertical ? 'scale-[1.35]' : 'scale-[1.3]'}`}>
               <iframe
@@ -59,10 +59,10 @@ const MediaContent = ({ item, isHovered }: { item: any, isHovered: boolean }) =>
               style={{ backgroundImage: `url(${item.src})` }}
             />
           )}
-        </>
+        </div>
       ) : (
         <div 
-          className="w-full h-full bg-[#0a0a0a] bg-cover bg-center transition-transform duration-700"
+          className="w-full h-full bg-[#0a0a0a] bg-cover bg-center transition-all duration-700 blur-[8px] opacity-60 scale-110"
           style={{ 
             backgroundImage: item.type === 'youtube' 
               ? `url(https://img.youtube.com/vi/${item.videoId}/maxresdefault.jpg)` 
