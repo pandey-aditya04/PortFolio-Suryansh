@@ -137,7 +137,6 @@ export const Hero = () => {
             </div>
           </motion.div>
         </div>
-        </div>
       </div>
     </section>
   );
