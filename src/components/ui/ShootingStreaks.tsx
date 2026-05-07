@@ -39,9 +39,9 @@ export default function ShootingStreaks() {
     const stars: Star[] = Array.from({ length: 200 }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      size: Math.random() * 1.2 + 0.1,
-      opacity: Math.random() * 0.4 + 0.1,
-      twinkleSpeed: Math.random() * 0.05 + 0.01,
+      size: Math.random() * 1.0 + 0.1,
+      opacity: Math.random() * 0.15 + 0.05,
+      twinkleSpeed: Math.random() * 0.03 + 0.005,
     }));
 
     let streaks: Streak[] = [];
@@ -71,7 +71,7 @@ export default function ShootingStreaks() {
 
       // Draw faint glowing stars
       stars.forEach(star => {
-        const twinkle = Math.sin(time * star.twinkleSpeed) * 0.15;
+        const twinkle = Math.sin(time * star.twinkleSpeed) * 0.04;
         ctx.fillStyle = `rgba(255, 255, 255, ${Math.max(0, star.opacity + twinkle)})`;
         ctx.beginPath();
         ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
@@ -138,7 +138,7 @@ export default function ShootingStreaks() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-0 pointer-events-none"
+      className="absolute inset-0 z-0 pointer-events-none"
       style={{ background: "transparent" }}
     />
   );

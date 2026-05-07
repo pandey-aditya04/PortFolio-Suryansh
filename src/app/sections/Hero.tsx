@@ -6,7 +6,7 @@ import { FloatingShapes } from "@/components/ui/FloatingShapes";
 
 export const Hero = () => {
   return (
-    <section id="hero" className="relative min-h-[85vh] flex items-center justify-center overflow-hidden pt-16 pb-12">
+    <section id="hero" className="relative flex items-center justify-center overflow-hidden pt-32 pb-24">
       <FloatingShapes />
       {/* Background Glow */}
       <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] bg-[#646464]/10 rounded-full blur-[120px] -z-10" />
