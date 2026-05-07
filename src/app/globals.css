@@ -40,10 +40,12 @@
 
 * {
   border-color: var(--border);
+  cursor: none !important;
 }
 
 html {
   scroll-behavior: smooth;
+  cursor: none !important;
 }
 
 body {
@@ -53,6 +55,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  cursor: none !important;
 }
 
 ::selection {
