@@ -28,23 +28,23 @@ const AllWork = () => {
           name: "Advertisements",
           gridCols: "grid-cols-1 md:grid-cols-2",
           items: [
-            { id: "ai-adv-1", title: "AI Product Advertisement", tag: "Shorts", type: "youtube", videoId: "u2MwVays7fo" },
-            { id: "ai-adv-2", title: "Motion Art Series", tag: "Shorts", type: "youtube", videoId: "DU68DVJCTq4" }
+            { id: "ai-adv-1", title: "Realistic Product Advertisement", tag: "Product Ad", type: "youtube", videoId: "u2MwVays7fo" },
+            { id: "ai-adv-2", title: "Abstract Motion Design", tag: "Motion Art", type: "youtube", videoId: "DU68DVJCTq4" }
           ]
         },
         {
           name: "AI Storytelling",
           gridCols: "grid-cols-1 md:grid-cols-1",
           items: [
-             { id: "ai-story-1", title: "Narrative Concept Short", tag: "Shorts", type: "youtube", videoId: "WJS5_laqbno" }
+             { id: "ai-story-1", title: "Cyberpunk Narrative Short", tag: "Narrative", type: "youtube", videoId: "WJS5_laqbno" }
           ]
         },
         {
           name: "Landscape",
           gridCols: "grid-cols-1 md:grid-cols-2",
           items: [
-            { id: "ai-land-1", title: "Mountain Vista AI", tag: "Runway Gen-3", type: "youtube", videoId: "VHdLncCBl9M" },
-            { id: "ai-land-2", title: "Nature Synthesis", tag: "Luma Dream Machine", type: "youtube", videoId: "d3HpHGpXFuE" }
+            { id: "ai-land-1", title: "Mountain Vista Cinematic", tag: "Cinematic", type: "youtube", videoId: "VHdLncCBl9M" },
+            { id: "ai-land-2", title: "Nature Synthesis Exploration", tag: "Visual Art", type: "youtube", videoId: "d3HpHGpXFuE" }
           ]
         }
       ]
@@ -85,38 +85,22 @@ const AllWork = () => {
           name: "Professional Works",
           gridCols: "grid-cols-1 md:grid-cols-2",
           items: [
-            { id: "edit-1", title: "Electra CS Master Edit", tag: "Premiere Pro", type: "youtube", videoId: "OHEWAcivxCA" },
-            { id: "edit-2", title: "Cinematic Commercial", tag: "After Effects", type: "youtube", videoId: "zQArTonc-FQ" }
+            { id: "edit-1", title: "Electra CS Master Edit", tag: "Production", type: "youtube", videoId: "OHEWAcivxCA" },
+            { id: "edit-2", title: "Cinematic Commercial Story", tag: "Commercial", type: "youtube", videoId: "zQArTonc-FQ" }
           ]
         },
         {
           name: "Advertisement Videos",
           gridCols: "grid-cols-1 md:grid-cols-2",
           items: [
-            { id: "adv-v-1", title: "Social Media Ad", tag: "Shorts", type: "youtube", videoId: "-MhFhPmehbg" },
-            { id: "adv-v-2", title: "FRND Ad Campaign", tag: "Performance", type: "youtube", videoId: "ICPDfLbCpSo" }
+            { id: "adv-v-1", title: "High-Impact Social Ad", tag: "Advertising", type: "youtube", videoId: "-MhFhPmehbg" },
+            { id: "adv-v-2", title: "FRND Ad Campaign Master", tag: "Performance", type: "youtube", videoId: "ICPDfLbCpSo" }
           ]
         }
       ]
     },
     {
       index: "04",
-      name: "Menu",
-      accent: "#a78bfa",
-      cardType: "card-violet",
-      subcategories: [
-        {
-          name: "Motion Menus",
-          gridCols: "grid-cols-1 md:grid-cols-3",
-          items: [
-            { id: "menu-1", title: "Menu Design 01", tag: "Motion", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778096395/skills/Menu/1.jpg" },
-            { id: "menu-2", title: "Menu Design 02", tag: "Motion", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778096395/skills/Menu/2.jpg" }
-          ]
-        }
-      ]
-    },
-    {
-      index: "05",
       name: "Post Designs",
       accent: "#f472b6",
       cardType: "card-rose",
@@ -125,10 +109,17 @@ const AllWork = () => {
           name: "Social Media",
           gridCols: "grid-cols-2 md:grid-cols-4",
           items: [
-            { id: "post-1", title: "Design 01", tag: "Graphic", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777790980/skills/PostDesigns/1.jpg" },
-            { id: "post-2", title: "Design 02", tag: "Graphic", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777790982/skills/PostDesigns/2.jpg" },
-            { id: "post-3", title: "Design 03", tag: "Branding", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777790985/skills/PostDesigns/3.jpg" },
-            { id: "post-4", title: "Design 04", tag: "Branding", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777790991/skills/PostDesigns/4.png" }
+            { id: "post-1", title: "Modern Minimalist 01", tag: "Graphic", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777790980/skills/PostDesigns/1.jpg" },
+            { id: "post-2", title: "Branding Concept 02", tag: "Branding", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777790982/skills/PostDesigns/2.jpg" },
+            { id: "post-3", title: "Typography Study 03", tag: "Design", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777790985/skills/PostDesigns/3.jpg" },
+            { id: "post-4", title: "Digital Masterpiece 04", tag: "Art", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777790991/skills/PostDesigns/4.png" },
+            { id: "post-5", title: "Visual Identity 05", tag: "Branding", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777791040/skills/PostDesigns/5.png" },
+            { id: "post-6", title: "Content Design 06", tag: "Social", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777791043/skills/PostDesigns/6.jpg" },
+            { id: "post-7", title: "Impactful Visual 07", tag: "Graphic", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778092736/skills/PostDesigns/7.jpg" },
+            { id: "post-8", title: "Creative Layout 08", tag: "Design", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778092738/skills/PostDesigns/8.jpg" },
+            { id: "post-9", title: "Style Exploration 09", tag: "Art", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778092749/skills/PostDesigns/9.jpg" },
+            { id: "post-10", title: "Merchandise Concept A", tag: "Merch", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777791103/skills/PostDesigns/merch-1.png" },
+            { id: "post-11", title: "Merchandise Concept B", tag: "Merch", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777791118/skills/PostDesigns/merch-2.png" }
           ]
         }
       ]
