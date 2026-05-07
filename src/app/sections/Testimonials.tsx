@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "react-motion"; // Note: keeping as framer-motion if that's what was used before, but user might have meant framer-motion
+import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import Image from "next/image";
 
