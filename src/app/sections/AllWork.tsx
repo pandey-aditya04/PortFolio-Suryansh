@@ -57,12 +57,20 @@ const AllWork = () => {
       subcategories: [
         {
           name: "Instagram Designs",
-          gridCols: "grid-cols-2 md:grid-cols-4",
+          gridCols: "",
           items: [
-            { id: "car-1", title: "Carousel A1", tag: "Graphic", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788557/skills/Carousel/A1.jpg" },
-            { id: "car-2", title: "Carousel A2", tag: "Graphic", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788561/skills/Carousel/A2.jpg" },
-            { id: "car-3", title: "Carousel AA-1", tag: "Graphic", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788576/skills/Carousel/AA-1.jpg" },
-            { id: "car-4", title: "Carousel AA-2", tag: "Graphic", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788591/skills/Carousel/AA-2.jpg" }
+            { id: "car-1", title: "Design A1", tag: "Engagement", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788557/skills/Carousel/A1.jpg" },
+            { id: "car-2", title: "Design A2", tag: "Branding", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788561/skills/Carousel/A2.jpg" },
+            { id: "car-3", title: "Design AA-1", tag: "Strategy", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788576/skills/Carousel/AA-1.jpg" },
+            { id: "car-4", title: "Design AA-2", tag: "Creative", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788591/skills/Carousel/AA-2.jpg" },
+            { id: "car-5", title: "Design AA-3", tag: "Growth", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778095643/skills/Carousel/AA-3.jpg" },
+            { id: "car-6", title: "Design AA-4", tag: "Impact", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788624/skills/Carousel/AA-4.jpg" },
+            { id: "car-7", title: "Design B-1", tag: "Social", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788625/skills/Carousel/B-1.jpg" },
+            { id: "car-8", title: "Design B-2", tag: "Concept", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788627/skills/Carousel/B-2.jpg" },
+            { id: "car-9", title: "Design C-1", tag: "Visuals", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788632/skills/Carousel/C-1.jpg" },
+            { id: "car-10", title: "Design C-2", tag: "Art", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788640/skills/Carousel/C-2.jpg" },
+            { id: "car-11", title: "Design C-3", tag: "Identity", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788646/skills/Carousel/C-3.jpg" },
+            { id: "car-12", title: "Design C-4", tag: "Style", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788652/skills/Carousel/C-4.jpg" }
           ]
         }
       ]
@@ -173,64 +181,102 @@ const AllWork = () => {
                    <div className="h-[1px] flex-1 border-t border-dashed border-white/5" />
                 </div>
 
-                <div className={`grid ${sub.gridCols} gap-6 md:gap-8`}>
-                  {sub.items.map((item: any) => (
-                    <motion.div
-                      key={item.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      whileHover={{ y: -8, scale: 1.02 }}
-                      onClick={() => setSelectedVideo(item)}
-                      className={`group relative overflow-hidden rounded-[2.5rem] bg-[#0a0a0a] border border-white/5 cursor-pointer transition-all duration-500`}
-                    >
-                      {/* Background Preview */}
-                      <div className="absolute inset-0 w-full h-full pointer-events-none opacity-40 group-hover:opacity-100 transition-all duration-700 overflow-hidden">
-                        {item.type === 'youtube' ? (
-                          <div className={`absolute w-full h-[145%] -top-[22.5%] left-0 scale-[1.2] transform-gpu`}>
-                            <iframe
-                              src={`https://www.youtube.com/embed/${item.videoId}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=${item.videoId}&enablejsapi=1&playsinline=1`}
-                              className="w-full h-full border-none pointer-events-none"
-                              allow="autoplay; encrypted-media"
-                              title={item.title}
-                            />
+                {category.name === "Carousel" ? (
+                  <div className="flex flex-col gap-12 -mx-12 overflow-hidden py-4">
+                    {/* Row 1 - Left */}
+                    <div className="carousel-track scroll-left">
+                      {[...sub.items, ...sub.items].map((item: any, idx) => (
+                        <div 
+                          key={`row1-${idx}`} 
+                          className="w-[280px] h-[380px] md:w-[350px] md:h-[450px] rounded-[2rem] overflow-hidden border border-white/5 relative group cursor-pointer shrink-0"
+                          onClick={() => setSelectedVideo(item)}
+                        >
+                          <img src={item.src} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                             <span className="text-[10px] text-purple-400 font-bold tracking-widest uppercase mb-1">{item.tag}</span>
+                             <h4 className="text-white font-serif text-lg">{item.title}</h4>
                           </div>
-                        ) : item.type === 'image' ? (
-                          <div 
-                            className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                            style={{ backgroundImage: `url(${item.src})` }}
-                          />
-                        ) : (
-                          <video
-                            src={item.src}
-                            autoPlay
-                            loop
-                            muted
-                            playsInline
-                            className="w-full h-full object-cover"
-                          />
-                        )}
-                      </div>
+                        </div>
+                      ))}
+                    </div>
 
-                      {/* Content Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10" />
-                      
-                      <div className="relative z-20 h-[250px] md:h-[300px] p-8 flex flex-col justify-end">
-                        <div className="flex flex-col gap-1 transform group-hover:translate-x-2 transition-transform duration-500">
-                           <span className="text-[10px] uppercase tracking-widest font-bold" style={{ color: category.accent }}>{item.tag}</span>
-                           <h4 className="text-xl md:text-2xl font-serif text-white tracking-wide">{item.title}</h4>
-                        </div>
-                        
-                        {/* Play Icon */}
-                        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-30">
-                          <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white">
-                            <Play className="w-6 h-6 fill-current ml-1" />
+                    {/* Row 2 - Right (using different items for variety if possible) */}
+                    <div className="carousel-track scroll-right">
+                      {[...sub.items.reverse(), ...sub.items].map((item: any, idx) => (
+                        <div 
+                          key={`row2-${idx}`} 
+                          className="w-[280px] h-[380px] md:w-[350px] md:h-[450px] rounded-[2rem] overflow-hidden border border-white/5 relative group cursor-pointer shrink-0"
+                          onClick={() => setSelectedVideo(item)}
+                        >
+                          <img src={item.src} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
+                             <span className="text-[10px] text-purple-400 font-bold tracking-widest uppercase mb-1">{item.tag}</span>
+                             <h4 className="text-white font-serif text-lg">{item.title}</h4>
                           </div>
                         </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className={`grid ${sub.gridCols} gap-6 md:gap-8`}>
+                    {sub.items.map((item: any) => (
+                      <motion.div
+                        key={item.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        whileHover={{ y: -8, scale: 1.02 }}
+                        onClick={() => setSelectedVideo(item)}
+                        className={`group relative overflow-hidden rounded-[2.5rem] bg-[#0a0a0a] border border-white/5 cursor-pointer transition-all duration-500`}
+                      >
+                        {/* Background Preview */}
+                        <div className="absolute inset-0 w-full h-full pointer-events-none opacity-40 group-hover:opacity-100 transition-all duration-700 overflow-hidden">
+                          {item.type === 'youtube' ? (
+                            <div className={`absolute w-full h-[145%] -top-[22.5%] left-0 scale-[1.2] transform-gpu`}>
+                              <iframe
+                                src={`https://www.youtube.com/embed/${item.videoId}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=${item.videoId}&enablejsapi=1&playsinline=1`}
+                                className="w-full h-full border-none pointer-events-none"
+                                allow="autoplay; encrypted-media"
+                                title={item.title}
+                              />
+                            </div>
+                          ) : item.type === 'image' ? (
+                            <div 
+                              className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                              style={{ backgroundImage: `url(${item.src})` }}
+                            />
+                          ) : (
+                            <video
+                              src={item.src}
+                              autoPlay
+                              loop
+                              muted
+                              playsInline
+                              className="w-full h-full object-cover"
+                            />
+                          )}
+                        </div>
+
+                        {/* Content Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10" />
+                        
+                        <div className="relative z-20 h-[250px] md:h-[300px] p-8 flex flex-col justify-end">
+                          <div className="flex flex-col gap-1 transform group-hover:translate-x-2 transition-transform duration-500">
+                             <span className="text-[10px] uppercase tracking-widest font-bold" style={{ color: category.accent }}>{item.tag}</span>
+                             <h4 className="text-xl md:text-2xl font-serif text-white tracking-wide">{item.title}</h4>
+                          </div>
+                          
+                          {/* Play Icon */}
+                          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-30">
+                            <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white">
+                              <Play className="w-6 h-6 fill-current ml-1" />
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>
