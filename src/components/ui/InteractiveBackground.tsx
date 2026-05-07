@@ -4,13 +4,13 @@ import { useEffect, useState, useMemo } from "react";
 import { motion } from "framer-motion";
 
 import SmokeBackground from "./SmokeBackground";
+import ShootingStreaks from "./ShootingStreaks";
 
 export function InteractiveBackground() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      // Small optimization: only update if movement is significant or on requestAnimationFrame
       setMousePos({ x: e.clientX, y: e.clientY });
     };
 
@@ -18,49 +18,11 @@ export function InteractiveBackground() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
-  // Reduced star count for better performance
-  const stars = useMemo(() => {
-    return Array.from({ length: 45 }).map((_, i) => ({
-      id: i,
-      left: `${Math.random() * 100}%`,
-      top: `${Math.random() * 100}%`,
-      size: Math.random() * 2 + 1,
-      duration: Math.random() * 4 + 3,
-      delay: Math.random() * 5
-    }));
-  }, []);
-
   return (
-    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-black">
-      <style jsx>{`
-        @keyframes twinkle {
-          0%, 100% { opacity: 0.2; transform: scale(0.8); }
-          50% { opacity: 0.8; transform: scale(1.1); }
-        }
-        .star {
-          animation: twinkle var(--d) infinite ease-in-out;
-          animation-delay: var(--delay);
-          will-change: opacity, transform;
-        }
-      `}</style>
+    <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none bg-[#080808]">
       
-      {/* 1. Star Field */}
-      <div className="absolute inset-0 z-0">
-        {stars.map((star) => (
-          <div
-            key={star.id}
-            className="star absolute bg-white/30 rounded-full"
-            style={{
-              left: star.left,
-              top: star.top,
-              width: `${star.size * 0.7}px`,
-              height: `${star.size * 0.7}px`,
-              '--d': `${star.duration}s`,
-              '--delay': `${star.delay}s`,
-            } as any}
-          />
-        ))}
-      </div>
+      {/* 1. Cinematic Shooting Streaks (Razor-thin diagonal motion) */}
+      <ShootingStreaks />
 
       {/* 2. Advanced Canvas Smoke Background */}
       <div className="absolute inset-0 z-0 opacity-40">
