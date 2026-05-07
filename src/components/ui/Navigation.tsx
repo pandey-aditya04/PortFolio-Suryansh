@@ -16,9 +16,9 @@ export const Navigation = () => {
   }, []);
 
   const navLinks = [
-    { name: "Projects", href: "#projects" },
+    { name: "AI Videos", href: "#ai-videos" },
+    { name: "Edits", href: "#edits" },
     { name: "About", href: "#about" },
-    { name: "Testimonials", href: "#testimonials" },
     { name: "Contact", href: "#footer" },
   ];
 

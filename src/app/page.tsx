@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Navigation } from "@/components/ui/Navigation";
 import { Hero } from "./sections/Hero";
 import { About } from "./sections/About";
-import { Projects } from "./sections/Projects";
+import { ProfessionalEdits } from "./sections/ProfessionalEdits";
 import { Testimonials } from "./sections/Testimonials";
 import { Contact } from "./sections/Contact";
 import { Footer } from "./sections/Footer";
@@ -13,9 +13,8 @@ import { RecentDesigns } from "./sections/RecentDesigns";
 import { Comparison } from "./sections/Comparison";
 import { FAQ } from "./sections/FAQ";
 
-import { FeaturedProject } from "./sections/FeaturedProject";
 import DesignCarousel from "@/components/ui/DesignCarousel";
-import VideoBentoBox from "@/components/ui/VideoBentoBox";
+import AIVideos from "./sections/AIVideos";
 
 export default function Home() {
   return (
@@ -34,12 +33,11 @@ export default function Home() {
           }}
         >
           <Hero />
-          <VideoBentoBox />
-          <FeaturedProject />
+          <AIVideos />
+          <ProfessionalEdits />
           <About />
           <Process />
           <Comparison />
-          <Projects />
           <RecentDesigns />
           <DesignCarousel />
           <Testimonials />
