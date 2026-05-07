@@ -17,23 +17,16 @@ interface WorkItem {
 const WorkCard = ({ item, category, onClick, index }: { item: any, category: any, onClick: () => void, index: number }) => {
   const [isHovered, setIsHovered] = useState(false);
 
-  // Bento spanning logic based on index
-  const getSpanClass = () => {
-    if (item.isVertical) return "md:row-span-2";
-    if (index === 0) return "md:col-span-2 md:aspect-[21/9]";
-    return "";
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      whileHover={{ y: -8, scale: 1.01 }}
+      whileHover={{ y: -8, scale: 1.02 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       onClick={onClick}
-      className={`group relative overflow-hidden rounded-[2.5rem] bg-[#0a0a0a] border border-white/5 cursor-pointer transition-all duration-500 ${getSpanClass()} ${item.isVertical ? 'aspect-[9/16]' : 'aspect-video'}`}
+      className={`group relative overflow-hidden rounded-[2rem] bg-[#0a0a0a] border border-white/5 cursor-pointer transition-all duration-500 ${item.isVertical ? 'aspect-[9/16]' : 'aspect-video'}`}
     >
       {/* Background Preview - Autoplay with Cinematic Crop */}
       <div className="absolute inset-0 w-full h-full pointer-events-none opacity-60 group-hover:opacity-100 transition-all duration-700 overflow-hidden">
@@ -67,17 +60,17 @@ const WorkCard = ({ item, category, onClick, index }: { item: any, category: any
       {/* Aesthetic Minimalist Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
       
-      {/* Bento Arrow Icon (Bottom Left) */}
-      <div className="absolute bottom-6 left-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-        <div className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center shadow-2xl">
-          <ArrowUpRight className="w-5 h-5" />
+      {/* Interaction Arrow Icon */}
+      <div className="absolute bottom-4 left-4 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+        <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center shadow-2xl">
+          <ArrowUpRight className="w-4 h-4" />
         </div>
       </div>
 
       {/* Play Icon - Center */}
       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-20">
-        <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white scale-90 group-hover:scale-100 transition-transform duration-500">
-          <Play className="w-6 h-6 fill-current ml-1" />
+        <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center text-white scale-90 group-hover:scale-100 transition-transform duration-500">
+          <Play className="w-5 h-5 fill-current ml-0.5" />
         </div>
       </div>
     </motion.div>
@@ -97,7 +90,7 @@ const AllWork = () => {
       subcategories: [
         {
           name: "Advertisements",
-          gridCols: "grid grid-cols-1 md:grid-cols-2 gap-8",
+          gridCols: "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6",
           items: [
             { id: "ai-adv-1", title: "Realistic Product Advertisement", tag: "Product Ad", type: "youtube", videoId: "u2MwVays7fo", isVertical: true },
             { id: "ai-land-1", title: "Mountain Vista Cinematic", tag: "Cinematic", type: "youtube", videoId: "VHdLncCBl9M" },
@@ -135,7 +128,7 @@ const AllWork = () => {
       subcategories: [
         {
           name: "Professional Works",
-          gridCols: "grid grid-cols-1 md:grid-cols-2 gap-8",
+          gridCols: "grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6",
           items: [
             { id: "edit-1", title: "Electra CS Master Edit", tag: "Production", type: "youtube", videoId: "OHEWAcivxCA" },
             { id: "edit-2", title: "Cinematic Commercial Story", tag: "Commercial", type: "youtube", videoId: "zQArTonc-FQ" },
