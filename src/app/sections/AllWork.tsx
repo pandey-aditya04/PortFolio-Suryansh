@@ -14,8 +14,60 @@ interface WorkItem {
   isVertical?: boolean;
 }
 
+const MediaContent = ({ item, isHovered }: { item: any, isHovered: boolean }) => {
+  const [isInView, setIsInView] = React.useState(false);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={containerRef} className="absolute inset-0 w-full h-full pointer-events-none opacity-60 group-hover:opacity-100 transition-all duration-700 overflow-hidden">
+      {isInView ? (
+        <>
+          {item.type === 'youtube' ? (
+            <div className={`absolute w-[100%] h-[155%] -top-[27.5%] left-0 transform-gpu ${item.isVertical ? 'scale-[1.35]' : 'scale-[1.3]'}`}>
+              <iframe
+                src={`https://www.youtube.com/embed/${item.videoId}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=${item.videoId}&enablejsapi=1&playsinline=1`}
+                className="w-full h-full border-none pointer-events-none"
+                allow="autoplay; encrypted-media"
+                title={item.title}
+              />
+            </div>
+          ) : item.type === 'video' || (item.type === 'cloudinary' && item.src?.endsWith('.mp4')) ? (
+            <video
+              src={item.src}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div 
+              className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+              style={{ backgroundImage: `url(${item.src})` }}
+            />
+          )}
+        </>
+      ) : (
+        <div 
+          className="w-full h-full bg-[#0a0a0a] bg-cover bg-center"
+          style={{ backgroundImage: item.src ? `url(${item.src})` : 'none' }}
+        />
+      )}
+    </div>
+  );
+};
+
 const WorkCard = ({ item, category, onClick, index }: { item: any, category: any, onClick: () => void, index: number }) => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = React.useState(false);
 
   return (
     <motion.div
@@ -28,34 +80,7 @@ const WorkCard = ({ item, category, onClick, index }: { item: any, category: any
       onClick={onClick}
       className={`group relative overflow-hidden rounded-[2rem] bg-[#0a0a0a] border border-white/5 cursor-pointer transition-all duration-500 ${item.isVertical ? 'aspect-[9/16]' : 'aspect-video'}`}
     >
-      {/* Background Preview - Autoplay with Cinematic Crop */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none opacity-60 group-hover:opacity-100 transition-all duration-700 overflow-hidden">
-        {item.type === 'youtube' ? (
-          <div className={`absolute w-[100%] h-[155%] -top-[27.5%] left-0 transform-gpu ${item.isVertical ? 'scale-[1.35]' : 'scale-[1.3]'}`}>
-            <iframe
-              src={`https://www.youtube.com/embed/${item.videoId}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=${item.videoId}&enablejsapi=1&playsinline=1`}
-              className="w-full h-full border-none pointer-events-none"
-              allow="autoplay; encrypted-media"
-              title={item.title}
-              loading="lazy"
-            />
-          </div>
-        ) : item.type === 'video' || (item.type === 'cloudinary' && item.src?.endsWith('.mp4')) ? (
-          <video
-            src={item.src}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-          />
-        ) : (
-          <div 
-            className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-            style={{ backgroundImage: `url(${item.src})` }}
-          />
-        )}
-      </div>
+      <MediaContent item={item} isHovered={isHovered} />
 
       {/* Aesthetic Minimalist Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
@@ -164,7 +189,7 @@ const AllWork = () => {
   ];
 
   return (
-    <section className="projects-section pt-40 pb-32 bg-black relative overflow-hidden font-sans">
+    <section id="projects" className="projects-section pt-40 pb-32 bg-[#080808] relative overflow-hidden font-sans">
       <div className="absolute top-1/4 -left-20 w-96 h-96 bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
 
@@ -199,8 +224,8 @@ const AllWork = () => {
             )}
 
             {category.subcategories.map((sub, sIdx) => {
-              const landscapeItems = sub.items.filter(item => !item.isVertical);
-              const portraitItems = sub.items.filter(item => item.isVertical);
+              const landscapeItems = sub.items.filter(item => !((item as any).isVertical));
+              const portraitItems = sub.items.filter(item => (item as any).isVertical);
 
               return (
                 <div key={sub.name} className={sIdx === 0 ? "mt-0" : "mt-24"}>
@@ -211,7 +236,7 @@ const AllWork = () => {
                           <div 
                             key={`row1-${idx}`} 
                             className="w-[280px] h-[380px] md:w-[350px] md:h-[450px] rounded-[2rem] overflow-hidden border border-white/5 relative group cursor-pointer shrink-0"
-                            onClick={() => setSelectedVideo(item)}
+                            onClick={() => setSelectedVideo(item as any)}
                           >
                             <img src={item.src} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
                           </div>
@@ -222,7 +247,7 @@ const AllWork = () => {
                           <div 
                             key={`row2-${idx}`} 
                             className="w-[280px] h-[380px] md:w-[350px] md:h-[450px] rounded-[2rem] overflow-hidden border border-white/5 relative group cursor-pointer shrink-0"
-                            onClick={() => setSelectedVideo(item)}
+                            onClick={() => setSelectedVideo(item as any)}
                           >
                             <img src={item.src} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
                           </div>
@@ -239,7 +264,7 @@ const AllWork = () => {
                               <WorkCard 
                                 item={item} 
                                 category={category} 
-                                onClick={() => setSelectedVideo(item)} 
+                                onClick={() => setSelectedVideo(item as any)} 
                                 index={idx}
                               />
                             </div>
@@ -255,7 +280,7 @@ const AllWork = () => {
                               <WorkCard 
                                 item={item} 
                                 category={category} 
-                                onClick={() => setSelectedVideo(item)} 
+                                onClick={() => setSelectedVideo(item as any)} 
                                 index={idx}
                               />
                             </div>

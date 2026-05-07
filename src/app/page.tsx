@@ -4,17 +4,13 @@ import { motion } from "framer-motion";
 import { Navigation } from "@/components/ui/Navigation";
 import { Hero } from "./sections/Hero";
 import { About } from "./sections/About";
-import { ProfessionalEdits } from "./sections/ProfessionalEdits";
 import { Testimonials } from "./sections/Testimonials";
 import { Contact } from "./sections/Contact";
 import { Footer } from "./sections/Footer";
 import { Process } from "./sections/Process";
-import { RecentDesigns } from "./sections/RecentDesigns";
 import { Comparison } from "./sections/Comparison";
 import { FAQ } from "./sections/FAQ";
 import AllWork from "./sections/AllWork";
-
-import DesignCarousel from "@/components/ui/DesignCarousel";
 
 export default function Home() {
   return (

@@ -1,9 +1,16 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#0c0c0c',
+};
 import { Geist, Geist_Mono, DM_Serif_Display, DM_Sans } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { InteractiveBackground } from "@/components/ui/InteractiveBackground";
 import { siteConfig } from "@/lib/constants";
+import { CustomCursor } from "@/components/ui/CustomCursor";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -73,7 +80,6 @@ export const metadata: Metadata = {
     images: ['/og-image.png'],
     creator: '@Suryansh_S',
   },
-  viewport: 'width=device-width, initial-scale=1',
   robots: {
     index: true,
     follow: true,
@@ -103,6 +109,7 @@ export default function RootLayout({
           <SmoothScrollProvider>
             <InteractiveBackground />
             <div className="grain-overlay" />
+            <CustomCursor />
             {children}
           </SmoothScrollProvider>
         </ThemeProvider>
