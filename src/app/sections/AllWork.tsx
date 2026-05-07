@@ -133,26 +133,6 @@ const AllWork = () => {
     },
     {
       index: "02",
-      name: "Carousel",
-      badge: "Featured",
-      accent: "#00c8a8",
-      cardType: "card-teal",
-      subcategories: [
-        {
-          name: "Motion Graphics",
-          items: [
-            { id: "car-1", title: "Future Aesthetics", tag: "Concept", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788557/skills/Carousel/A1.jpg" },
-            { id: "car-2", title: "Neon Pulse", tag: "Motion", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788561/skills/Carousel/A2.jpg" },
-            { id: "car-3", title: "Cyber Flow", tag: "VFX", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788576/skills/Carousel/AA-1.jpg" },
-            { id: "car-4", title: "Glitch Dream", tag: "Art", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788591/skills/Carousel/AA-2.jpg" },
-            { id: "car-5", title: "Visual Flow", tag: "VFX", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778095643/skills/Carousel/AA-3.jpg" },
-            { id: "car-6", title: "Digital Pulse", tag: "Motion", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788624/skills/Carousel/AA-4.jpg" }
-          ]
-        }
-      ]
-    },
-    {
-      index: "03",
       name: "Edits",
       accent: "#ff6b4a",
       cardType: "card-coral",
@@ -167,6 +147,26 @@ const AllWork = () => {
             { id: "adv-v-1", title: "High-Impact Social Ad", tag: "Advertising", type: "youtube", videoId: "-MhFhPmehbg", isVertical: true },
             { id: "adv-v-2", title: "Performance Marketing Ad", tag: "Performance", type: "youtube", videoId: "ICPDfLbCpSo", isVertical: true },
             { id: "adv-v-3", title: "Vertical Brand Story", tag: "Social", type: "youtube", videoId: "WJS5_laqbno", isVertical: true }
+          ]
+        }
+      ]
+    },
+    {
+      index: "03",
+      name: "Carousel",
+      badge: "Featured",
+      accent: "#00c8a8",
+      cardType: "card-teal",
+      subcategories: [
+        {
+          name: "Motion Graphics",
+          items: [
+            { id: "car-1", title: "Future Aesthetics", tag: "Concept", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788557/skills/Carousel/A1.jpg" },
+            { id: "car-2", title: "Neon Pulse", tag: "Motion", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788561/skills/Carousel/A2.jpg" },
+            { id: "car-3", title: "Cyber Flow", tag: "VFX", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788576/skills/Carousel/AA-1.jpg" },
+            { id: "car-4", title: "Glitch Dream", tag: "Art", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788591/skills/Carousel/AA-2.jpg" },
+            { id: "car-5", title: "Visual Flow", tag: "VFX", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778095643/skills/Carousel/AA-3.jpg" },
+            { id: "car-6", title: "Digital Pulse", tag: "Motion", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788624/skills/Carousel/AA-4.jpg" }
           ]
         }
       ]
