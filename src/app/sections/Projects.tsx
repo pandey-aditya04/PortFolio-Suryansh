@@ -89,22 +89,22 @@ export const Projects = () => {
               </div>
             </div>
 
-            {/* Card B — Cinematic Landscape */}
+            {/* Card B — FRND Ad Campaign */}
             <motion.div 
-              onClick={() => setSelectedVideo('VHdLncCBl9M')}
+              onClick={() => setSelectedVideo('ICPDfLbCpSo')}
               className="flex-1 rounded-[2.5rem] overflow-hidden border border-white/10 bg-[#111] relative group flex items-center justify-center cursor-pointer"
             >
               <div className="absolute inset-0 w-full h-full pointer-events-none opacity-20 group-hover:opacity-40 transition-opacity duration-700 overflow-hidden">
                 <div className="absolute inset-0 scale-[1.2] transform-gpu">
                   <iframe
-                    src="https://www.youtube.com/embed/VHdLncCBl9M?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&showinfo=0&iv_load_policy=3&playlist=VHdLncCBl9M"
+                    src="https://www.youtube.com/embed/ICPDfLbCpSo?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&showinfo=0&iv_load_policy=3&playlist=ICPDfLbCpSo"
                     className="w-full h-full border-none pointer-events-none"
                     allow="autoplay; encrypted-media"
                   />
                 </div>
               </div>
               <h3 className="relative z-10 text-3xl font-serif text-white text-center px-10 leading-tight group-hover:opacity-0 transition-opacity duration-500">
-                Cinematic AI Landscapes
+                FRND Ad Campaign
               </h3>
               
               {/* Centered View Project Pill */}

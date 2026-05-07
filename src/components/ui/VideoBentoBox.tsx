@@ -17,15 +17,15 @@ const VideoBentoBox = () => {
     },
     {
       id: 2,
-      videoId: 'VHdLncCBl9M',
-      title: 'Cinematic Landscape',
+      videoId: 'ICPDfLbCpSo',
+      title: 'FRND Ad Campaign',
       className: 'md:col-span-1 md:row-span-1',
       scale: 'scale-[1.2]', // Horizontal in square
     },
     {
       id: 3, 
-      videoId: 'u2MwVays7fo',
-      title: 'AI Product Ad',
+      videoId: '-MhFhPmehbg',
+      title: 'AI Narrative Short',
       className: 'md:col-span-1 md:row-span-1',
       scale: 'scale-[1.8]', // Vertical in square (needs more scale to fill)
     },
