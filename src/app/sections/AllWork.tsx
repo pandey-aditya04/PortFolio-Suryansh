@@ -50,10 +50,9 @@ const WorkCard = ({ item, category, onClick, index }: { item: any, category: any
             className="w-full h-full object-cover"
           />
         ) : (
-          <img 
-            src={item.src} 
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            alt={item.title}
+          <div 
+            className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+            style={{ backgroundImage: `url(${item.src})` }}
           />
         )}
       </div>
@@ -111,10 +110,12 @@ const AllWork = () => {
         {
           name: "Motion Graphics",
           items: [
-            { id: "car-1", title: "Future Aesthetics", tag: "Concept", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777790890/skills/Carousel/A1.jpg" },
-            { id: "car-2", title: "Neon Pulse", tag: "Motion", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777790895/skills/Carousel/A2.jpg" },
-            { id: "car-3", title: "Cyber Flow", tag: "VFX", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777790900/skills/Carousel/A3.jpg" },
-            { id: "car-4", title: "Glitch Dream", tag: "Art", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777790905/skills/Carousel/A4.jpg" }
+            { id: "car-1", title: "Future Aesthetics", tag: "Concept", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788557/skills/Carousel/A1.jpg" },
+            { id: "car-2", title: "Neon Pulse", tag: "Motion", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788561/skills/Carousel/A2.jpg" },
+            { id: "car-3", title: "Cyber Flow", tag: "VFX", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788576/skills/Carousel/AA-1.jpg" },
+            { id: "car-4", title: "Glitch Dream", tag: "Art", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788591/skills/Carousel/AA-2.jpg" },
+            { id: "car-5", title: "Visual Flow", tag: "VFX", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778095643/skills/Carousel/AA-3.jpg" },
+            { id: "car-6", title: "Digital Pulse", tag: "Motion", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777788624/skills/Carousel/AA-4.jpg" }
           ]
         }
       ]
@@ -203,39 +204,66 @@ const AllWork = () => {
 
               return (
                 <div key={sub.name} className={sIdx === 0 ? "mt-0" : "mt-24"}>
-                  <div className="flex flex-col gap-16">
-                    {/* Landscape Grid */}
-                    {landscapeItems.length > 0 && (
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
-                        {landscapeItems.map((item, idx) => (
-                          <div key={item.id} className="min-h-0">
-                            <WorkCard 
-                              item={item} 
-                              category={category} 
-                              onClick={() => setSelectedVideo(item)} 
-                              index={idx}
-                            />
+                  {category.name === "Carousel" || category.name === "Post Designs" ? (
+                    <div className="flex flex-col gap-12 -mx-12 overflow-hidden py-4">
+                      <div className="carousel-track scroll-left">
+                        {[...sub.items, ...sub.items].map((item: any, idx) => (
+                          <div 
+                            key={`row1-${idx}`} 
+                            className="w-[280px] h-[380px] md:w-[350px] md:h-[450px] rounded-[2rem] overflow-hidden border border-white/5 relative group cursor-pointer shrink-0"
+                            onClick={() => setSelectedVideo(item)}
+                          >
+                            <img src={item.src} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
                           </div>
                         ))}
                       </div>
-                    )}
+                      <div className="carousel-track scroll-right">
+                        {[...sub.items.reverse(), ...sub.items].map((item: any, idx) => (
+                          <div 
+                            key={`row2-${idx}`} 
+                            className="w-[280px] h-[380px] md:w-[350px] md:h-[450px] rounded-[2rem] overflow-hidden border border-white/5 relative group cursor-pointer shrink-0"
+                            onClick={() => setSelectedVideo(item)}
+                          >
+                            <img src={item.src} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col gap-16">
+                      {/* Landscape Grid */}
+                      {landscapeItems.length > 0 && (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
+                          {landscapeItems.map((item, idx) => (
+                            <div key={item.id} className="min-h-0">
+                              <WorkCard 
+                                item={item} 
+                                category={category} 
+                                onClick={() => setSelectedVideo(item)} 
+                                index={idx}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      )}
 
-                    {/* Portrait Grid */}
-                    {portraitItems.length > 0 && (
-                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-start">
-                        {portraitItems.map((item, idx) => (
-                          <div key={item.id} className="min-h-0">
-                            <WorkCard 
-                              item={item} 
-                              category={category} 
-                              onClick={() => setSelectedVideo(item)} 
-                              index={idx}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                      {/* Portrait Grid */}
+                      {portraitItems.length > 0 && (
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-start">
+                          {portraitItems.map((item, idx) => (
+                            <div key={item.id} className="min-h-0">
+                              <WorkCard 
+                                item={item} 
+                                category={category} 
+                                onClick={() => setSelectedVideo(item)} 
+                                index={idx}
+                              />
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               );
             })}
