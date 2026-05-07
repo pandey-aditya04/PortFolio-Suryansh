@@ -13,6 +13,7 @@ export function MenuShowcase() {
   const [lightbox, setLightbox] = useState({ isOpen: false, index: 0 });
   
   if (!category || !category.images) return null;
+  const images = category.images;
 
   return (
     <section className="section-padding bg-[#09090f] overflow-hidden">
@@ -48,15 +49,15 @@ export function MenuShowcase() {
                 onClick={() => setLightbox({ isOpen: true, index: activeIndex })}
                 className="w-[180px] md:w-[350px] aspect-[1/1.4] bg-white rounded-sm shadow-2xl overflow-hidden origin-right -rotate-y-12 border border-black/10 cursor-pointer"
               >
-                <img src={category.images[activeIndex]} alt="Menu Page 1" className="w-full h-full object-cover" />
+                <img src={images[activeIndex]} alt="Menu Page 1" className="w-full h-full object-cover" />
               </div>
               
               {/* Right Page Mockup */}
               <div 
-                onClick={() => setLightbox({ isOpen: true, index: (activeIndex + 1) % category.images.length })}
+                onClick={() => setLightbox({ isOpen: true, index: (activeIndex + 1) % images.length })}
                 className="w-[180px] md:w-[350px] aspect-[1/1.4] bg-white rounded-sm shadow-2xl overflow-hidden origin-left rotate-y-12 border border-black/10 cursor-pointer"
               >
-                <img src={category.images[(activeIndex + 1) % category.images.length]} alt="Menu Page 2" className="w-full h-full object-cover" />
+                <img src={images[(activeIndex + 1) % images.length]} alt="Menu Page 2" className="w-full h-full object-cover" />
               </div>
 
               {/* Decorative elements */}
@@ -67,7 +68,7 @@ export function MenuShowcase() {
 
         {/* Thumbnail Selector */}
         <div className="mt-16 flex justify-center gap-4">
-          {category.images.map((img, idx) => (
+          {images.map((img, idx) => (
             <button
               key={idx}
               onClick={() => setActiveIndex(idx)}
@@ -84,7 +85,7 @@ export function MenuShowcase() {
       <Lightbox 
         isOpen={lightbox.isOpen}
         onClose={() => setLightbox({ ...lightbox, isOpen: false })}
-        images={category.images}
+        images={images}
         currentIndex={lightbox.index}
         onNavigate={(index) => setLightbox({ ...lightbox, index })}
       />
