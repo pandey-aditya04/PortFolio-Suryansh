@@ -70,15 +70,17 @@ export const FeaturedProject = () => {
              </div>
              {/* Mockup Content */}
              <div className="flex-1 bg-[#1a1a1a] relative overflow-hidden">
-                <video 
-                  autoPlay 
-                  loop 
-                  muted 
-                  playsInline 
-                  className="absolute inset-0 w-full h-full object-cover"
-                >
-                  <source src="/Skills/EDITS/Advertisement videos/1.mp4" type="video/mp4" />
-                </video>
+                <div className="absolute inset-0 w-full h-[120%] -top-[10%] left-0 scale-[1.1] transform-gpu pointer-events-none">
+                  <iframe
+                    src="https://www.youtube.com/embed/ICPDfLbCpSo?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=ICPDfLbCpSo&enablejsapi=1&playsinline=1"
+                    className="w-full h-full border-none pointer-events-none"
+                    allow="autoplay; encrypted-media"
+                    title="FRND Ad"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                  />
+                </div>
+                {/* Overlay to ensure readability and click-through */}
+                <div className="absolute inset-0 bg-black/10 pointer-events-none" />
              </div>
           </div>
         </div>

@@ -10,40 +10,43 @@ import { Lightbox } from "@/components/ui/Lightbox";
 export const RecentDesigns = () => {
   const [selectedImage, setSelectedImage] = useState<{src: string, alt: string} | null>(null);
 
+  const CL_IMG = "https://res.cloudinary.com/daeio5gbf/image/upload";
+  const clImg = (version: string, path: string) => `${CL_IMG}/v${version}/skills/${path}`;
+
   const designs = [
     {
       id: 1,
       title: "Premium Brand Identity",
       category: "Graphic Design",
-      image: "/Skills/PostDesigns/1.jpg",
+      image: clImg("1777790980", "PostDesigns/1.jpg"),
       className: "lg:col-span-8 aspect-[16/10]",
     },
     {
       id: 2,
       title: "Digital Art Series",
       category: "Digital Art",
-      image: "/Skills/PostDesigns/2.jpg",
+      image: clImg("1777790982", "PostDesigns/2.jpg"),
       className: "lg:col-span-4 aspect-square",
     },
     {
       id: 3,
       title: "Marketing Visuals",
       category: "Ad Design",
-      image: "/Skills/PostDesigns/3.jpg",
+      image: clImg("1777790985", "PostDesigns/3.jpg"),
       className: "lg:col-span-4 aspect-square",
     },
     {
       id: 4,
       title: "Social Media Strategy",
       category: "Social Design",
-      image: "/Skills/PostDesigns/4.png",
+      image: clImg("1777790991", "PostDesigns/4.png"),
       className: "lg:col-span-4 aspect-square",
     },
     {
       id: 5,
       title: "Cinematic Poster",
       category: "Motion Design",
-      image: "/Skills/PostDesigns/5.png",
+      image: clImg("1777791040", "PostDesigns/5.png"),
       className: "lg:col-span-4 aspect-square",
     },
   ];
