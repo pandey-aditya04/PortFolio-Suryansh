@@ -27,42 +27,31 @@ const WorkCard = ({ item, category, onClick }: { item: any, category: any, onCli
       onClick={onClick}
       className={`group relative overflow-hidden rounded-[2.5rem] bg-[#0a0a0a] border border-white/5 cursor-pointer transition-all duration-500 ${item.isVertical ? 'aspect-[9/16]' : 'aspect-video'}`}
     >
-      {/* Background Preview */}
+      {/* Background Preview - Autoplay enabled */}
       <div className="absolute inset-0 w-full h-full pointer-events-none opacity-40 group-hover:opacity-100 transition-all duration-700 overflow-hidden">
-        {isHovered ? (
-          item.type === 'youtube' ? (
-            <div className={`absolute w-full h-full left-0 transform-gpu ${!item.isVertical ? 'h-[145%] -top-[22.5%] scale-[1.2]' : ''}`}>
-              <iframe
-                src={`https://www.youtube.com/embed/${item.videoId}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=${item.videoId}&enablejsapi=1&playsinline=1`}
-                className="w-full h-full border-none pointer-events-none"
-                allow="autoplay; encrypted-media"
-                title={item.title}
-              />
-            </div>
-          ) : item.type === 'video' || (item.type === 'cloudinary' && item.src?.endsWith('.mp4')) ? (
-            <video
-              src={item.src}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover"
+        {item.type === 'youtube' ? (
+          <div className={`absolute w-full h-full left-0 transform-gpu ${!item.isVertical ? 'h-[145%] -top-[22.5%] scale-[1.2]' : ''}`}>
+            <iframe
+              src={`https://www.youtube.com/embed/${item.videoId}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=${item.videoId}&enablejsapi=1&playsinline=1`}
+              className="w-full h-full border-none pointer-events-none"
+              allow="autoplay; encrypted-media"
+              title={item.title}
+              loading="lazy"
             />
-          ) : (
-            <div 
-              className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-              style={{ backgroundImage: `url(${item.src})` }}
-            />
-          )
+          </div>
+        ) : item.type === 'video' || (item.type === 'cloudinary' && item.src?.endsWith('.mp4')) ? (
+          <video
+            src={item.src}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          />
         ) : (
-          /* Static Thumbnail */
           <div 
-            className="w-full h-full bg-cover bg-center"
-            style={{ 
-              backgroundImage: `url(${item.type === 'youtube' 
-                ? `https://img.youtube.com/vi/${item.videoId}/maxresdefault.jpg` 
-                : item.src})` 
-            }}
+            className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+            style={{ backgroundImage: `url(${item.src})` }}
           />
         )}
       </div>
@@ -101,7 +90,7 @@ const AllWork = () => {
       subcategories: [
         {
           name: "Advertisements",
-          gridCols: "grid-cols-2 md:grid-cols-4",
+          gridCols: "grid-cols-1 md:grid-cols-3",
           items: [
             { id: "ai-adv-1", title: "Realistic Product Advertisement", tag: "Product Ad", type: "youtube", videoId: "u2MwVays7fo", isVertical: true },
             { id: "ai-adv-2", title: "Abstract Motion Design", tag: "Motion Art", type: "youtube", videoId: "DU68DVJCTq4", isVertical: true }
@@ -109,7 +98,7 @@ const AllWork = () => {
         },
         {
           name: "AI Storytelling",
-          gridCols: "grid-cols-2 md:grid-cols-4",
+          gridCols: "grid-cols-1 md:grid-cols-3",
           items: [
              { id: "ai-story-1", title: "Cyberpunk Narrative Short", tag: "Narrative", type: "youtube", videoId: "WJS5_laqbno", isVertical: true }
           ]
@@ -166,7 +155,7 @@ const AllWork = () => {
         },
         {
           name: "Advertisement Videos",
-          gridCols: "grid-cols-2 md:grid-cols-4",
+          gridCols: "grid-cols-1 md:grid-cols-3",
           items: [
             { id: "adv-v-1", title: "High-Impact Social Ad", tag: "Advertising", type: "youtube", videoId: "-MhFhPmehbg", isVertical: true },
             { id: "adv-v-2", title: "FRND Ad Campaign Master", tag: "Performance", type: "youtube", videoId: "ICPDfLbCpSo" }
