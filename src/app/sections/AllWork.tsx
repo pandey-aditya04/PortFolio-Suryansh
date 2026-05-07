@@ -223,22 +223,24 @@ const AllWork = () => {
         {categories.map((category) => (
           <div key={category.index} id={`work-${category.name.toLowerCase().replace(/\s+/g, '-')}`} className="mb-32 relative pt-20 -mt-20">
             {/* Category Header */}
-            <div className="flex flex-col gap-4 mb-12">
-              <div className="flex items-center gap-4">
-                <span className="text-xs font-bold text-white/20 tracking-widest uppercase">0{category.index}</span>
-                <div className="h-[1px] flex-1 bg-gradient-to-r from-white/10 to-transparent" />
+            {category.name !== "Post Designs" && (
+              <div className="flex flex-col gap-4 mb-12">
+                <div className="flex items-center gap-4">
+                  <span className="text-xs font-bold text-white/20 tracking-widest uppercase">0{category.index}</span>
+                  <div className="h-[1px] flex-1 bg-gradient-to-r from-white/10 to-transparent" />
+                </div>
+                <div className="flex items-baseline gap-4">
+                  <h3 className="text-4xl md:text-6xl font-serif text-white tracking-tight">
+                    {category.name.split(' ')[0]} <span className="text-white/40 italic">{category.name.split(' ').slice(1).join(' ')}</span>
+                  </h3>
+                  {category.badge && (
+                    <span className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-white/10 text-white/40">
+                      {category.badge}
+                    </span>
+                  )}
+                </div>
               </div>
-              <div className="flex items-baseline gap-4">
-                <h3 className="text-4xl md:text-6xl font-serif text-white tracking-tight">
-                  {category.name.split(' ')[0]} <span className="text-white/40 italic">{category.name.split(' ').slice(1).join(' ')}</span>
-                </h3>
-                {category.badge && (
-                  <span className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-white/10 text-white/40">
-                    {category.badge}
-                  </span>
-                )}
-              </div>
-            </div>
+            )}
 
             {category.subcategories.map((sub, sIdx) => (
               <div key={sub.name} className={sIdx === 0 ? "mt-0" : "mt-16"}>
@@ -247,7 +249,7 @@ const AllWork = () => {
                    <div className="h-[1px] flex-1 border-t border-dashed border-white/5" />
                 </div>
 
-                {category.name === "Carousel" ? (
+                {category.name === "Carousel" || category.name === "Post Designs" ? (
                   <div className="flex flex-col gap-12 -mx-12 overflow-hidden py-4">
                     {/* Row 1 - Left */}
                     <div className="carousel-track scroll-left">
@@ -266,7 +268,7 @@ const AllWork = () => {
                       ))}
                     </div>
 
-                    {/* Row 2 - Right (using different items for variety if possible) */}
+                    {/* Row 2 - Right */}
                     <div className="carousel-track scroll-right">
                       {[...sub.items.reverse(), ...sub.items].map((item: any, idx) => (
                         <div 
