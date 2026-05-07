@@ -327,6 +327,8 @@ body {
   display: flex;
   width: max-content;
   gap: 2rem;
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 .scroll-left {
@@ -366,11 +368,11 @@ body {
 }
 
 @keyframes scrollLeft {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
 }
 
 @keyframes scrollRight {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
+  0% { transform: translate3d(-50%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }

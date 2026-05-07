@@ -106,6 +106,14 @@ const WorkCard = ({ item, category, onClick, index }: { item: any, category: any
   );
 };
 
+const optimizeCloudinaryUrl = (url: string) => {
+  if (!url || !url.includes('cloudinary.com')) return url;
+  if (url.includes('upload/')) {
+    return url.replace('upload/', 'upload/q_auto,f_auto,w_800/');
+  }
+  return url;
+};
+
 const AllWork = () => {
   const [selectedVideo, setSelectedVideo] = useState<WorkItem | null>(null);
 
@@ -247,7 +255,12 @@ const AllWork = () => {
                             className="w-[280px] h-[380px] md:w-[350px] md:h-[450px] rounded-[2rem] overflow-hidden border border-white/5 relative group cursor-pointer shrink-0"
                             onClick={() => setSelectedVideo(item as any)}
                           >
-                            <img src={item.src} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
+                            <img 
+                              src={optimizeCloudinaryUrl(item.src)} 
+                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                              alt={item.title}
+                              loading="lazy"
+                            />
                           </div>
                         ))}
                       </div>
@@ -258,7 +271,12 @@ const AllWork = () => {
                             className="w-[280px] h-[380px] md:w-[350px] md:h-[450px] rounded-[2rem] overflow-hidden border border-white/5 relative group cursor-pointer shrink-0"
                             onClick={() => setSelectedVideo(item as any)}
                           >
-                            <img src={item.src} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt={item.title} />
+                            <img 
+                              src={optimizeCloudinaryUrl(item.src)} 
+                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                              alt={item.title}
+                              loading="lazy"
+                            />
                           </div>
                         ))}
                       </div>
