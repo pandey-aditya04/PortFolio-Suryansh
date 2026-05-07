@@ -70,7 +70,7 @@ export const FeaturedProject = () => {
              </div>
              {/* Mockup Content */}
              <div className="flex-1 bg-[#1a1a1a] relative overflow-hidden">
-                <div className="absolute inset-0 w-full h-[120%] -top-[10%] left-0 scale-[1.1] transform-gpu pointer-events-none">
+                <div className="absolute inset-0 w-full h-[145%] -top-[22.5%] left-0 scale-[1.3] transform-gpu pointer-events-none">
                   <iframe
                     src="https://www.youtube.com/embed/ICPDfLbCpSo?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=ICPDfLbCpSo&enablejsapi=1&playsinline=1"
                     className="w-full h-full border-none pointer-events-none"
