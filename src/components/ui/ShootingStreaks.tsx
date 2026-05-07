@@ -28,6 +28,22 @@ export default function ShootingStreaks() {
     canvas.width = width;
     canvas.height = height;
 
+    interface Star {
+      x: number;
+      y: number;
+      size: number;
+      opacity: number;
+      twinkleSpeed: number;
+    }
+
+    const stars: Star[] = Array.from({ length: 200 }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      size: Math.random() * 1.2 + 0.1,
+      opacity: Math.random() * 0.4 + 0.1,
+      twinkleSpeed: Math.random() * 0.05 + 0.01,
+    }));
+
     let streaks: Streak[] = [];
     const MAX_STREAKS = 25;
 
@@ -52,6 +68,15 @@ export default function ShootingStreaks() {
 
     const animate = (time: number) => {
       ctx.clearRect(0, 0, width, height);
+
+      // Draw faint glowing stars
+      stars.forEach(star => {
+        const twinkle = Math.sin(time * star.twinkleSpeed) * 0.15;
+        ctx.fillStyle = `rgba(255, 255, 255, ${Math.max(0, star.opacity + twinkle)})`;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
 
       // Spawn logic
       if (streaks.length < MAX_STREAKS && time - lastSpawn > spawnInterval) {
