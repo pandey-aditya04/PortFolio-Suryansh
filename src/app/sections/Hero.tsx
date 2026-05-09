@@ -3,6 +3,9 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import dynamic from "next/dynamic";
+import { LiquidButton } from "@/components/ui/liquid-glass-button";
+import { TextEffect } from "@/components/ui/text-effect";
+import { Spotlight } from "@/components/ui/spotlight";
 
 const FloatingShapes = dynamic(
   () => import("@/components/ui/FloatingShapes").then(m => ({ default: m.FloatingShapes })),
@@ -12,6 +15,10 @@ const FloatingShapes = dynamic(
 export const Hero = () => {
   return (
     <section id="hero" className="relative flex items-center justify-center overflow-hidden pt-32 pb-24">
+      <Spotlight
+        className="-top-40 left-0 md:left-[15%] md:-top-32"
+        fill="white"
+      />
       <FloatingShapes />
       {/* Background Glow */}
       <div className="absolute top-1/2 right-0 -translate-y-1/2 w-[600px] h-[600px] bg-[#646464]/10 rounded-full blur-[120px] -z-10" />
@@ -61,14 +68,14 @@ export const Hero = () => {
               </h1>
             </div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
-              className="text-base md:text-xl text-white/50 max-w-xl leading-relaxed"
+            <TextEffect 
+              preset="blur"
+              per="word"
+              delay={0.8}
+              className="text-base md:text-xl text-white/60 max-w-xl leading-relaxed"
             >
               I&apos;m a versatile visual artist specializing in video editing, AI video synthesis, and graphic design to help brands tell compelling stories through premium aesthetics.
-            </motion.p>
+            </TextEffect>
           </div>
 
           <motion.div
@@ -77,18 +84,20 @@ export const Hero = () => {
             transition={{ duration: 0.8, delay: 0.9 }}
             className="flex flex-wrap gap-4 md:gap-6 mt-4"
           >
-            <button 
+            <LiquidButton 
               onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-6 md:px-8 py-3 md:py-4 border border-white/10 text-white rounded-full font-semibold hover:bg-white/5 transition-all text-sm md:text-base"
+              size="lg"
             >
               See All Projects
-            </button>
-            <button 
+            </LiquidButton>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-6 md:px-8 py-3 md:py-4 bg-white text-[#0c0c0c] rounded-full font-semibold hover:bg-white/90 transition-all text-sm md:text-base"
+              className="flex items-center justify-center bg-white text-[#0c0c0c] px-8 h-10 rounded-md text-sm font-semibold hover:bg-white/90 transition-colors"
             >
               Contact Now
-            </button>
+            </motion.button>
           </motion.div>
         </div>
 

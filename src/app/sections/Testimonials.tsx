@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import Image from "next/image";
+import { LiquidButton } from "@/components/ui/liquid-glass-button";
 
 const testimonials = [
   {
@@ -66,18 +67,18 @@ export const Testimonials = () => {
             </div>
 
             <div className="flex gap-4">
-              <button 
+              <LiquidButton 
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-10 py-4 border border-white/10 text-white rounded-full font-medium text-sm transition-all hover:bg-white/5"
+                size="lg"
               >
                 See All Projects
-              </button>
-              <button 
+              </LiquidButton>
+              <LiquidButton 
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-10 py-4 bg-white text-black rounded-full font-medium text-sm shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all hover:bg-neutral-200"
+                size="lg"
               >
                 Contact Now
-              </button>
+              </LiquidButton>
             </div>
           </div>
 

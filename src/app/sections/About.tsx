@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Twitter, Instagram, Globe, Mail } from "lucide-react";
 import Image from "next/image";
+import { GlowCard } from "@/components/ui/spotlight-card";
 
 export const About = () => {
   const experience = [
@@ -37,10 +38,11 @@ export const About = () => {
           
           {/* Left Column — Profile Card */}
           <div className="lg:col-span-5">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+            <GlowCard 
+              customSize
               className="p-8 rounded-[2rem] border border-white/10 bg-[#111] h-full flex flex-col"
+              glowColor="blue"
+              intensity={0.5}
             >
               <div className="relative aspect-[1/1] rounded-[1.5rem] overflow-hidden bg-[#1a1a1a] mb-10 group">
                 {/* Profile Image */}
@@ -76,16 +78,16 @@ export const About = () => {
                   </motion.a>
                 ))}
               </div>
-            </motion.div>
+            </GlowCard>
           </div>
 
           {/* Right Column — Bio & Experience */}
           <div className="lg:col-span-7 flex flex-col gap-6">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
+            <GlowCard 
+              customSize
               className="p-10 rounded-[2rem] border border-white/10 bg-[#111] flex flex-col gap-12"
+              glowColor="purple"
+              intensity={0.5}
             >
               {/* Bio */}
               <div className="flex flex-col gap-6">
@@ -115,15 +117,16 @@ export const About = () => {
                 {experience.map((exp, i) => (
                   <div 
                     key={i}
-                    className="flex flex-col md:grid md:grid-cols-12 gap-2 md:gap-0 items-start md:items-center text-white/80 group"
+                    className="flex items-center justify-between w-full text-white/80 group py-1"
                   >
-                    <span className="md:col-span-5 text-lg font-medium group-hover:text-white transition-colors">{exp.role}</span>
-                    <span className="md:col-span-5 text-base text-white/40 group-hover:text-white/60 transition-colors">{exp.company}</span>
-                    <span className="md:col-span-2 text-base font-mono text-white/20 md:text-right group-hover:text-white/40 transition-colors">{exp.year}</span>
+                    <span className="text-lg font-medium group-hover:text-white transition-colors">{exp.role}</span>
+                    <div className="flex-grow mx-4 border-b border-white/5 border-dotted" />
+                    <span className="text-base text-white/40 group-hover:text-white/60 transition-colors mr-4">{exp.company}</span>
+                    <span className="text-base font-mono text-white/20 group-hover:text-white/40 transition-colors">{exp.year}</span>
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </GlowCard>
           </div>
 
         </div>

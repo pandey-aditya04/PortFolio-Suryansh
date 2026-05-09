@@ -101,7 +101,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${dmSerifDisplay.variable} ${dmSans.variable}`}
+      className={`dark ${geistSans.variable} ${geistMono.variable} ${dmSerifDisplay.variable} ${dmSans.variable}`}
       suppressHydrationWarning
     >
       <body suppressHydrationWarning>

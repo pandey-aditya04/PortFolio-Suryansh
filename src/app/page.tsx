@@ -8,7 +8,6 @@ import { Hero } from "./sections/Hero";
 const About = dynamic(() => import("./sections/About").then(m => ({ default: m.About })), { ssr: true });
 const AllWork = dynamic(() => import("./sections/AllWork"), { ssr: true });
 const Process = dynamic(() => import("./sections/Process").then(m => ({ default: m.Process })), { ssr: true });
-const Comparison = dynamic(() => import("./sections/Comparison").then(m => ({ default: m.Comparison })), { ssr: true });
 const Testimonials = dynamic(() => import("./sections/Testimonials").then(m => ({ default: m.Testimonials })), { ssr: true });
 const FAQ = dynamic(() => import("./sections/FAQ").then(m => ({ default: m.FAQ })), { ssr: true });
 const Contact = dynamic(() => import("./sections/Contact").then(m => ({ default: m.Contact })), { ssr: true });
@@ -23,7 +22,6 @@ export default function Home() {
         <About />
         <AllWork />
         <Process />
-        <Comparison />
         <Testimonials />
         <FAQ />
         <Contact />

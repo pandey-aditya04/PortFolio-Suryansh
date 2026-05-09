@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus, Star } from "lucide-react";
 import Image from "next/image";
+import { LiquidButton } from "@/components/ui/liquid-glass-button";
 
 export const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
@@ -74,12 +75,18 @@ export const FAQ = () => {
             </div>
 
             <div className="flex gap-4">
-              <button className="px-8 py-4 border border-white/10 text-white rounded-full font-bold hover:bg-white/5 transition-all">
+              <LiquidButton 
+                onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+                size="lg"
+              >
                 See All Projects
-              </button>
-              <button className="px-8 py-4 bg-white text-black rounded-full font-bold hover:bg-white/90 transition-all">
+              </LiquidButton>
+              <LiquidButton 
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                size="lg"
+              >
                 Contact Now
-              </button>
+              </LiquidButton>
             </div>
           </div>
 

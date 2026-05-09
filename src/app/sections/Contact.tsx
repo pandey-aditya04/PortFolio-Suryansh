@@ -4,6 +4,7 @@ import { useState } from "react";
 import { SectionReveal } from "@/components/ui/SectionReveal";
 import { Send, CheckCircle2, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { LiquidButton } from "@/components/ui/liquid-glass-button";
 
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -177,12 +178,10 @@ export function Contact() {
                       />
                     </div>
 
-                    <motion.button 
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                    <LiquidButton 
                       disabled={isSubmitting}
                       type="submit" 
-                      className="w-full h-16 bg-white text-black font-bold rounded-2xl hover:bg-white/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-4 text-lg shadow-[0_20px_40px_rgba(255,255,255,0.1)]"
+                      className="w-full h-16 shadow-[0_20px_40px_rgba(255,255,255,0.1)]"
                     >
                       {isSubmitting ? (
                         <>
@@ -195,7 +194,7 @@ export function Contact() {
                           <Send className="h-5 w-5" />
                         </>
                       )}
-                    </motion.button>
+                    </LiquidButton>
                   </motion.form>
                 )}
               </AnimatePresence>

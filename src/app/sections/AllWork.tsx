@@ -4,7 +4,7 @@ import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowUpRight } from 'lucide-react';
 import { cn } from "@/lib/utils";
-
+import { GlowCard } from '@/components/ui/spotlight-card';
 interface WorkItem {
   id: string;
   title: string;
@@ -78,6 +78,8 @@ const optimizeCloudinaryUrl = (url: string) => {
   }
   return url;
 };
+
+const VideoFrameGrid = null; // Removed
 
 const AllWork = () => {
   const [selectedVideo, setSelectedVideo] = useState<WorkItem | null>(null);
@@ -213,65 +215,93 @@ const AllWork = () => {
                 <div key={sub.name} className={sIdx === 0 ? "mt-0" : "mt-24"}>
                   {category.name === "Carousel" || category.name === "Post Designs" ? (
                     <div className="flex flex-col gap-12 -mx-12 overflow-hidden py-4">
+                      {/* ... (Carousel code remains the same) */}
                       <div className="carousel-track scroll-left">
                         {[...sub.items, ...sub.items].map((item: any, idx) => (
                           <div 
                             key={`row1-${idx}`} 
-                            className="w-[280px] h-[380px] md:w-[350px] md:h-[450px] rounded-[2rem] overflow-hidden border border-white/5 relative group cursor-pointer shrink-0"
-                            onClick={() => setSelectedVideo(item as any)}
+                            className="w-[280px] h-[380px] md:w-[350px] md:h-[450px] rounded-[2rem] overflow-hidden relative group cursor-pointer shrink-0 p-0 border border-white/10 bg-[#111] shadow-2xl"
                           >
-                            <img 
-                              src={optimizeCloudinaryUrl(item.src)} 
-                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                              alt={item.title}
-                              loading="lazy"
-                            />
+                            <div 
+                              className="w-full h-full relative"
+                              onClick={() => setSelectedVideo(item as any)}
+                            >
+                              <img 
+                                src={optimizeCloudinaryUrl(item.src)} 
+                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                                alt={item.title}
+                                loading="lazy"
+                              />
+                            </div>
                           </div>
                         ))}
                       </div>
                       <div className="carousel-track scroll-right">
-                        {[...sub.items.reverse(), ...sub.items].map((item: any, idx) => (
+                        {[...[...sub.items].reverse(), ...sub.items].map((item: any, idx) => (
                           <div 
                             key={`row2-${idx}`} 
-                            className="w-[280px] h-[380px] md:w-[350px] md:h-[450px] rounded-[2rem] overflow-hidden border border-white/5 relative group cursor-pointer shrink-0"
-                            onClick={() => setSelectedVideo(item as any)}
+                            className="w-[280px] h-[380px] md:w-[350px] md:h-[450px] rounded-[2rem] overflow-hidden relative group cursor-pointer shrink-0 p-0 border border-white/10 bg-[#111] shadow-2xl"
                           >
-                            <img 
-                              src={optimizeCloudinaryUrl(item.src)} 
-                              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                              alt={item.title}
-                              loading="lazy"
-                            />
+                            <div 
+                              className="w-full h-full relative"
+                              onClick={() => setSelectedVideo(item as any)}
+                            >
+                              <img 
+                                src={optimizeCloudinaryUrl(item.src)} 
+                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                                alt={item.title}
+                                loading="lazy"
+                              />
+                            </div>
                           </div>
                         ))}
                       </div>
                     </div>
                   ) : (
-                    <div className="grid grid-cols-6 gap-4 md:gap-6 max-w-[1400px] mx-auto">
-                      {sub.items.map((item: any, idx) => (
-                        <div 
-                          key={item.id} 
-                          className={cn(
-                            "relative overflow-hidden rounded-3xl border border-white/10 bg-[#0a0a0a] group cursor-pointer transition-all duration-500",
-                            item.isVertical ? "col-span-6 md:col-span-2 aspect-[9/16]" : "col-span-6 md:col-span-3 aspect-video"
-                          )}
-                          onClick={() => setSelectedVideo(item as any)}
-                        >
-                          <div className="absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105">
-                            <MediaContent item={item} />
-                          </div>
-                          
-                          {/* Aesthetic Overlay */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
-                          
-                          {/* Interaction Icon */}
-                          <div className="absolute bottom-6 left-6 z-30 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
-                            <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center shadow-2xl">
-                              <ArrowUpRight className="w-4 h-4" />
+                    <div className="flex flex-col gap-6">
+                      {/* Landscape Row */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {landscapeItems.map((item: any, idx) => (
+                          <GlowCard 
+                            key={item.id} 
+                            customSize
+                            className="aspect-video rounded-[2.5rem] overflow-hidden relative group cursor-pointer p-0"
+                            glowColor={idx % 2 === 0 ? "blue" : "purple"}
+                          >
+                            <div className="w-full h-full" onClick={() => setSelectedVideo(item)}>
+                              <MediaContent item={item} />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                <div className="absolute bottom-8 left-8">
+                                  <span className="text-[10px] uppercase tracking-widest text-white/60 mb-2 block">{item.tag}</span>
+                                  <h4 className="text-xl font-serif text-white">{item.title}</h4>
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        </div>
-                      ))}
+                          </GlowCard>
+                        ))}
+                      </div>
+                      
+                      {/* Portrait Row */}
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                        {portraitItems.map((item: any, idx) => (
+                          <GlowCard 
+                            key={item.id} 
+                            customSize
+                            className="aspect-[9/16] rounded-[2.5rem] overflow-hidden relative group cursor-pointer p-0"
+                            glowColor={idx % 2 === 0 ? "purple" : "blue"}
+                          >
+                            <div className="w-full h-full" onClick={() => setSelectedVideo(item)}>
+                              <MediaContent item={item} />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                <div className="absolute bottom-6 left-6">
+                                  <span className="text-[10px] uppercase tracking-widest text-white/60 mb-1 block">{item.tag}</span>
+                                  <h4 className="text-lg font-serif text-white leading-tight">{item.title}</h4>
+                                </div>
+                              </div>
+                            </div>
+                          </GlowCard>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
@@ -301,7 +331,7 @@ const AllWork = () => {
               initial={{ scale: 0.9, y: 20 }}
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
-              className="relative w-full max-w-6xl aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-black"
+              className="relative w-full max-w-6xl aspect-video rounded-3xl overflow-hidden shadow-2xl bg-black"
             >
               {selectedVideo.type === 'youtube' ? (
                 <iframe
