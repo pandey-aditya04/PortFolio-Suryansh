@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useRef, ReactNode } from 'react';
 import { motion } from 'framer-motion';
 
@@ -57,14 +59,15 @@ const GlowCard: React.FC<GlowCardProps & any> = ({
     return () => document.removeEventListener('pointermove', syncPointer);
   }, []);
 
-  const { base, spread } = glowColorMap[glowColor];
+  const safeGlowColor = glowColor as keyof typeof glowColorMap;
+  const { base, spread } = glowColorMap[safeGlowColor] || glowColorMap.blue;
 
   // Determine sizing
   const getSizeClasses = () => {
     if (customSize) {
       return ''; // Let className or inline styles handle sizing
     }
-    return sizeMap[size];
+    return sizeMap[size as keyof typeof sizeMap] || sizeMap.md;
   };
 
   const getInlineStyles = () => {
