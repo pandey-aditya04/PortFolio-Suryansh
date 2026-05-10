@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MessageSquare, Zap, Play, CheckCircle } from "lucide-react";
+import { RandomLetterSwapPingPong } from "@/components/ui/random-letter-swap";
 
 export const Process = () => {
   const steps = [
@@ -40,8 +41,9 @@ export const Process = () => {
             <span className="text-[10px] text-white">⊙</span>
             <span className="text-xs font-medium uppercase tracking-widest text-white/80">How it works</span>
           </div>
-          <h2 className="text-5xl md:text-7xl font-serif text-white">
-            Process <span className="text-white/40 italic">Is Everything</span>
+          <h2 className="text-5xl md:text-7xl font-serif text-white flex items-center gap-x-4">
+            <RandomLetterSwapPingPong label="Process" />
+            <RandomLetterSwapPingPong label="Is Everything" className="text-white/40 italic" />
           </h2>
           <p className="text-white/40 text-lg max-w-md">
             Simple, streamlined process is what gets you premium results.

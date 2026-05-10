@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus, Star } from "lucide-react";
 import Image from "next/image";
 import { LiquidButton } from "@/components/ui/liquid-glass-button";
+import { RandomLetterSwapPingPong } from "@/components/ui/random-letter-swap";
 
 export const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
@@ -44,8 +45,9 @@ export const FAQ = () => {
                 <span className="text-[10px] text-white">⊙</span>
                 <span className="text-xs font-medium uppercase tracking-widest text-white/80">FAQ Section</span>
               </div>
-              <h2 className="text-6xl font-serif text-white">
-                Questions, <span className="text-white/40 italic">Answers</span>
+              <h2 className="text-6xl font-serif text-white flex flex-wrap gap-x-4">
+                <RandomLetterSwapPingPong label="Questions," />
+                <RandomLetterSwapPingPong label="Answers" className="text-white/40 italic" />
               </h2>
               <p className="text-white/40 text-lg">
                 Get quick answers to your most pressing questions.

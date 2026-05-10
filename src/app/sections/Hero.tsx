@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import { LiquidButton } from "@/components/ui/liquid-glass-button";
 import { TextEffect } from "@/components/ui/text-effect";
 import { Spotlight } from "@/components/ui/spotlight";
+import { RandomLetterSwapPingPong } from "@/components/ui/random-letter-swap";
 
 const FloatingShapes = dynamic(
   () => import("@/components/ui/FloatingShapes").then(m => ({ default: m.FloatingShapes })),
@@ -40,22 +41,16 @@ export const Hero = () => {
             <div className="flex flex-col gap-4">
               <h1 className="text-4xl md:text-7xl font-serif tracking-tight leading-tight flex items-center gap-x-2 md:gap-x-4 flex-wrap">
                 <div className="flex items-center gap-x-2 md:gap-x-4">
-                  <motion.span
-                    initial={{ y: 40, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
+                  <RandomLetterSwapPingPong
+                    label="Suryansh"
                     className="text-white"
-                  >
-                    Suryansh
-                  </motion.span>
-                  <motion.span
-                    initial={{ y: 40, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 0.8, delay: 0.5 }}
+                    staggerDuration={0.03}
+                  />
+                  <RandomLetterSwapPingPong
+                    label="Srivastava"
                     className="text-white/30"
-                  >
-                    Srivastava
-                  </motion.span>
+                    staggerDuration={0.03}
+                  />
                   <motion.div
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}

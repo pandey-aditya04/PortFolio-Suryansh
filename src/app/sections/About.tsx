@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Twitter, Instagram, Globe, Mail } from "lucide-react";
 import Image from "next/image";
 import { GlowCard } from "@/components/ui/spotlight-card";
+import { RandomLetterSwapForward } from "@/components/ui/random-letter-swap";
 
 export const About = () => {
   const experience = [
@@ -62,7 +63,17 @@ export const About = () => {
               </div>
 
               <div className="flex flex-col gap-3 mb-10">
-                <h3 className="text-4xl font-serif text-white">Hello I am <span className="text-white">Suryansh</span> <span className="text-white/40">Srivastava</span></h3>
+                <h3 className="text-4xl font-serif text-white flex flex-wrap gap-x-3">
+                  <span className="text-white">Hello I am</span>
+                  <RandomLetterSwapForward
+                    label="Suryansh"
+                    className="text-white"
+                  />
+                  <RandomLetterSwapForward
+                    label="Srivastava"
+                    className="text-white/40"
+                  />
+                </h3>
                 <p className="text-white/40 text-base">AI Visual Creator & Motion Artist Based in India.</p>
               </div>
 

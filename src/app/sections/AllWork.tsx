@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, ArrowUpRight } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { GlowCard } from '@/components/ui/spotlight-card';
+import { RandomLetterSwapPingPong } from '@/components/ui/random-letter-swap';
 interface WorkItem {
   id: string;
   title: string;
@@ -185,8 +186,9 @@ const AllWork = () => {
             <span className="w-2 h-2 rounded-full bg-white/40 animate-pulse" />
             <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-white/40">Portfolio Archive</span>
           </div>
-          <h2 className="text-6xl md:text-8xl font-serif text-white tracking-tight">
-            All <span className="text-white/40 italic">Work</span>
+          <h2 className="text-6xl md:text-8xl font-serif text-white tracking-tight flex items-center gap-x-4">
+            <RandomLetterSwapPingPong label="All" />
+            <RandomLetterSwapPingPong label="Work" className="text-white/40 italic" />
           </h2>
         </div>
 
@@ -200,8 +202,14 @@ const AllWork = () => {
                   <div className="h-[1px] flex-1 bg-gradient-to-r from-white/10 to-transparent" />
                 </div>
                 <div className="flex items-baseline gap-4">
-                  <h3 className="text-4xl md:text-6xl font-serif text-white tracking-tight">
-                    {category.name.split(' ')[0]} <span className="text-white/40 italic">{category.name.split(' ').slice(1).join(' ')}</span>
+                  <h3 className="text-4xl md:text-6xl font-serif text-white tracking-tight flex items-center gap-x-3">
+                    <RandomLetterSwapPingPong label={category.name.split(' ')[0]} />
+                    {category.name.split(' ').length > 1 && (
+                      <RandomLetterSwapPingPong 
+                        label={category.name.split(' ').slice(1).join(' ')} 
+                        className="text-white/40 italic" 
+                      />
+                    )}
                   </h3>
                 </div>
               </div>

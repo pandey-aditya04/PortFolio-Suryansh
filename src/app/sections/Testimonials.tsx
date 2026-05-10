@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import Image from "next/image";
 import { LiquidButton } from "@/components/ui/liquid-glass-button";
+import { RandomLetterSwapPingPong } from "@/components/ui/random-letter-swap";
 
 const testimonials = [
   {
@@ -44,8 +45,9 @@ export const Testimonials = () => {
               </div>
               
               <div className="flex flex-col gap-4">
-                <h2 className="text-5xl md:text-7xl font-serif text-white tracking-tight">
-                  Clients <span className="text-white/30">Love me</span>
+                <h2 className="text-5xl md:text-7xl font-serif text-white tracking-tight flex flex-wrap gap-x-4">
+                  <RandomLetterSwapPingPong label="Clients" />
+                  <RandomLetterSwapPingPong label="Love me" className="text-white/30" />
                 </h2>
                 <p className="text-white/40 text-lg">
                   Trusted by 100+ happy clients, adding $250M+ in revenue.

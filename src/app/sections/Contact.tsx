@@ -5,6 +5,7 @@ import { SectionReveal } from "@/components/ui/SectionReveal";
 import { Send, CheckCircle2, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { LiquidButton } from "@/components/ui/liquid-glass-button";
+import { RandomLetterSwapPingPong } from "@/components/ui/random-letter-swap";
 
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -56,8 +57,9 @@ export function Contact() {
                   Let&apos;s Connect
                 </span>
               </div>
-              <h2 className="text-5xl md:text-6xl font-serif text-white leading-tight">
-                Let&apos;s build something <span className="text-white/40 italic">exceptional</span>
+              <h2 className="text-5xl md:text-6xl font-serif text-white leading-tight flex flex-wrap gap-x-4">
+                <RandomLetterSwapPingPong label="Let's build something" />
+                <RandomLetterSwapPingPong label="exceptional" className="text-white/40 italic" />
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-md">
                 Have a project in mind or just want to say hi? I&apos;m currently available for new opportunities and collaborations.

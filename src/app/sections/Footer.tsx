@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowUp, Heart, Instagram, Linkedin, Twitter, Youtube, Mail, LucideIcon } from "lucide-react";
+import { RandomLetterSwapPingPong } from "@/components/ui/random-letter-swap";
 
 type SocialLinkItem = {
   name: string;
@@ -38,7 +39,9 @@ export function Footer() {
 
           {/* Quick links */}
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-widest mb-4 text-muted-foreground">Quick Links</h4>
+            <h4 className="text-sm font-semibold uppercase tracking-widest mb-4 text-muted-foreground">
+              <RandomLetterSwapPingPong label="Quick Links" />
+            </h4>
             <nav className="grid grid-cols-2 gap-2">
               <a href="#hero" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Home</a>
               <a href="#projects" className="text-sm text-muted-foreground transition-colors hover:text-foreground">Projects</a>
@@ -50,7 +53,9 @@ export function Footer() {
 
           {/* Social */}
           <div>
-            <h4 className="text-sm font-semibold uppercase tracking-widest mb-4 text-muted-foreground">Connect</h4>
+            <h4 className="text-sm font-semibold uppercase tracking-widest mb-4 text-muted-foreground">
+              <RandomLetterSwapPingPong label="Connect" />
+            </h4>
             <div className="flex gap-3">
               {socialLinksData.map((link) => {
                 const Icon = link.icon;
