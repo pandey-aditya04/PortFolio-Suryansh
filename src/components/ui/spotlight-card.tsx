@@ -56,13 +56,17 @@ const GlowCard: React.FC<GlowCardProps & any> = ({
       
       requestAnimationFrame(() => {
         if (!cardRef.current || !rect) return;
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
+        const xp = (e.clientX - rect.left) / rect.width;
+        const yp = (e.clientY - rect.top) / rect.height;
         
-        cardRef.current.style.setProperty('--x', x.toFixed(2));
-        cardRef.current.style.setProperty('--xp', (x / rect.width).toFixed(2));
-        cardRef.current.style.setProperty('--y', y.toFixed(2));
-        cardRef.current.style.setProperty('--yp', (y / rect.height).toFixed(2));
+        // Calculate hue directly in JS to ensure cross-platform compatibility
+        const currentHue = base + (xp * spread);
+        
+        cardRef.current.style.setProperty('--x', (e.clientX - rect.left).toFixed(2));
+        cardRef.current.style.setProperty('--y', (e.clientY - rect.top).toFixed(2));
+        cardRef.current.style.setProperty('--xp', xp.toFixed(2));
+        cardRef.current.style.setProperty('--yp', yp.toFixed(2));
+        cardRef.current.style.setProperty('--hue', currentHue.toFixed(2));
       });
     };
 
@@ -102,10 +106,11 @@ const GlowCard: React.FC<GlowCardProps & any> = ({
 
   const getInlineStyles = () => {
     const baseStyles: any = {
-      '--base': base,
-      '--spread': spread,
-      '--saturation': 100,
-      '--lightness': 60,
+      '--base': base.toString(),
+      '--spread': spread.toString(),
+      '--hue': base.toString(), // Initial hue
+      '--saturation': '100',
+      '--lightness': '60',
       '--radius': '2',
       '--border': '2',
       '--backdrop': 'hsl(0 0% 60% / 0.12)',
@@ -114,7 +119,6 @@ const GlowCard: React.FC<GlowCardProps & any> = ({
       '--outer': '1',
       '--border-size': 'calc(var(--border, 2) * 1px)',
       '--spotlight-size': 'calc(var(--size, 400) * 1px)',
-      '--hue': 'calc(var(--base) + (var(--xp, 0) * var(--spread, 0)))',
       '--glow-brightness': 25 * intensity,
       '--border-spot-opacity': 1,
       '--border-light-opacity': 0.8,
