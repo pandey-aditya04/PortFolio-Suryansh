@@ -357,7 +357,7 @@ body {
     calc(var(--spotlight-size) * 0.95) calc(var(--spotlight-size) * 0.95) at
     calc(var(--x, 0) * 1px)
     calc(var(--y, 0) * 1px),
-    hsl(var(--hue, 210) calc(var(--saturation, 100) * 1%) calc(var(--lightness, 50) * 1%) / var(--border-spot-opacity, 1)), transparent 100%
+    hsl(var(--hue, 210), 100%, 60%, var(--border-spot-opacity, 1)), transparent 100%
   );
   filter: brightness(var(--glow-brightness, 4));
 }

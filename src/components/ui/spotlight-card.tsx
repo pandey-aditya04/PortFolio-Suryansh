@@ -108,9 +108,7 @@ const GlowCard: React.FC<GlowCardProps & any> = ({
     const baseStyles: any = {
       '--base': base.toString(),
       '--spread': spread.toString(),
-      '--hue': base.toString(), // Initial hue
-      '--saturation': '100',
-      '--lightness': '60',
+      '--hue': base.toString(),
       '--radius': '2',
       '--border': '2',
       '--backdrop': 'hsl(0 0% 60% / 0.12)',
