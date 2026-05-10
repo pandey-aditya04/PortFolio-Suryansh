@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ArrowUpRight } from 'lucide-react';
+import { X, ArrowUpRight, Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { cn } from "@/lib/utils";
 import { GlowCard } from '@/components/ui/spotlight-card';
 import { RandomLetterSwapPingPong } from '@/components/ui/random-letter-swap';
@@ -16,34 +16,94 @@ interface WorkItem {
   isVertical?: boolean;
 }
 
-const MediaContent = ({ item }: { item: any }) => {
+const MediaContent = React.memo(({ item, isUnmuted, setUnmutedId }: { item: any, isUnmuted: boolean, setUnmutedId: (id: string | null) => void }) => {
   const [isInView, setIsInView] = React.useState(false);
+  const [isPlaying, setIsPlaying] = React.useState(true);
   const containerRef = React.useRef<HTMLDivElement>(null);
+  const iframeRef = React.useRef<HTMLIFrameElement>(null);
+  const videoRef = React.useRef<HTMLVideoElement>(null);
 
   React.useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => setIsInView(entry.isIntersecting),
-      { threshold: 0.1 }
+      { threshold: 0.15, rootMargin: '200px' }
     );
     if (containerRef.current) observer.observe(containerRef.current);
     return () => observer.disconnect();
   }, []);
 
+  // Handle Play/Pause logic
+  const togglePlay = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const newPlaying = !isPlaying;
+    setIsPlaying(newPlaying);
+    
+    if (item.type === 'youtube') {
+      const command = newPlaying ? 'playVideo' : 'pauseVideo';
+      iframeRef.current?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: command }), '*');
+    } else if (videoRef.current) {
+      newPlaying ? videoRef.current.play() : videoRef.current.pause();
+    }
+  };
+
+  // Restart video helper
+  const restartVideo = () => {
+    if (item.type === 'youtube') {
+      iframeRef.current?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'seekTo', args: [0, true] }), '*');
+      iframeRef.current?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), '*');
+    } else if (videoRef.current) {
+      videoRef.current.currentTime = 0;
+      videoRef.current.play();
+    }
+    setIsPlaying(true);
+  };
+
+  // Handle Mute/Unmute logic
+  const toggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (isUnmuted) {
+      setUnmutedId(null);
+    } else {
+      setUnmutedId(item.id);
+      restartVideo(); // Restart when manually unmuted
+    }
+  };
+
+  // Sync mute state with global unmutedId
+  React.useEffect(() => {
+    if (item.type === 'youtube') {
+      const command = isUnmuted ? 'unMute' : 'mute';
+      iframeRef.current?.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: command }), '*');
+    } else if (videoRef.current) {
+      videoRef.current.muted = !isUnmuted;
+    }
+  }, [isUnmuted, item.type]);
+
   return (
-    <div ref={containerRef} className="absolute inset-0 w-full h-full overflow-hidden bg-[#0a0a0a]">
+    <div 
+      ref={containerRef} 
+      className="absolute inset-0 w-full h-full overflow-hidden bg-[#0a0a0a] group/media cursor-pointer"
+      onClick={() => {
+        setUnmutedId(item.id);
+        restartVideo();
+      }}
+    >
       {isInView ? (
         <div className="absolute inset-0 w-full h-full">
           {item.type === 'youtube' ? (
             <div className={`absolute w-[100%] h-[155%] -top-[27.5%] left-0 transform-gpu ${item.isVertical ? 'scale-[1.35]' : 'scale-[1.3]'}`}>
               <iframe
+                ref={iframeRef}
                 src={`https://www.youtube.com/embed/${item.videoId}?autoplay=1&mute=1&loop=1&controls=0&modestbranding=1&rel=0&disablekb=1&iv_load_policy=3&playlist=${item.videoId}&enablejsapi=1&playsinline=1`}
                 className="w-full h-full border-none pointer-events-none"
                 allow="autoplay; encrypted-media"
                 title={item.title}
+                loading="lazy"
               />
             </div>
           ) : (item.type === 'video' || (item.type === 'cloudinary' && item.src?.endsWith('.mp4'))) ? (
             <video
+              ref={videoRef}
               src={item.src}
               autoPlay
               loop
@@ -56,6 +116,41 @@ const MediaContent = ({ item }: { item: any }) => {
               className="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
               style={{ backgroundImage: `url(${item.src})` }}
             />
+          )}
+
+          {/* Overlay Controls */}
+          {(item.type === 'youtube' || item.type === 'video' || (item.type === 'cloudinary' && item.src?.endsWith('.mp4'))) && (
+            <>
+              {/* Play/Pause Center Button */}
+              <div 
+                className={cn(
+                  "absolute inset-0 flex items-center justify-center transition-all duration-300 z-10",
+                  isPlaying ? "opacity-0 group-hover/media:opacity-100 group-hover/media:bg-black/20" : "opacity-100 bg-black/40"
+                )}
+              >
+                <button 
+                  onClick={togglePlay}
+                  className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all hover:scale-110 active:scale-95"
+                >
+                  {isPlaying ? <Pause size={32} fill="currentColor" /> : <Play size={32} className="ml-1" fill="currentColor" />}
+                </button>
+              </div>
+
+              {/* Mute Toggle Bottom Corner */}
+              <div className="absolute bottom-4 right-4 z-20">
+                <button 
+                  onClick={toggleMute}
+                  className={cn(
+                    "w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-300",
+                    isUnmuted 
+                      ? "bg-white text-black border-white shadow-[0_0_15px_rgba(255,255,255,0.5)]" 
+                      : "bg-black/40 text-white border-white/20 backdrop-blur-md hover:bg-white/10"
+                  )}
+                >
+                  {isUnmuted ? <Volume2 size={18} /> : <VolumeX size={18} />}
+                </button>
+              </div>
+            </>
           )}
         </div>
       ) : (
@@ -70,7 +165,7 @@ const MediaContent = ({ item }: { item: any }) => {
       )}
     </div>
   );
-};
+});
 
 const optimizeCloudinaryUrl = (url: string) => {
   if (!url || !url.includes('cloudinary.com')) return url;
@@ -84,25 +179,46 @@ const VideoFrameGrid = null; // Removed
 
 const AllWork = () => {
   const [selectedVideo, setSelectedVideo] = useState<WorkItem | null>(null);
+  const [unmutedId, setUnmutedId] = useState<string | null>(null);
 
   const categories = useMemo(() => [
     {
       index: "01",
       name: "AI Videos",
-      badge: "3 Series",
+      badge: "Series",
       accent: "#f5a623",
       cardType: "card-amber",
       subcategories: [
         {
           name: "Advertisements",
           items: [
-            // Row 1: 2 Landscape
+            { id: "ai-adv-1", title: "Product Advertisement 01", tag: "Ad", type: "youtube", videoId: "sJhBE6H2PMY", isVertical: true },
+            { id: "ai-adv-2", title: "Product Advertisement 02", tag: "Ad", type: "youtube", videoId: "u2MwVays7fo", isVertical: true },
+            { id: "ai-adv-3", title: "Motion Design Concept", tag: "Motion", type: "youtube", videoId: "DU68DVJCTq4", isVertical: true },
+            { id: "ai-adv-4", title: "Visual Storytelling", tag: "Visual", type: "youtube", videoId: "_-egdW6Ca5Y", isVertical: true },
+            { id: "ai-adv-5", title: "Dynamic Ad Piece", tag: "Dynamic", type: "youtube", videoId: "tLD5PONeyzo", isVertical: true }
+          ]
+        },
+        {
+          name: "Cartoon",
+          items: [
+            { id: "ai-cart-1", title: "Animated Cartoon Feature", tag: "Animation", type: "youtube", videoId: "B3Yjbh1rXqg" }
+          ]
+        },
+        {
+          name: "AI Storytelling",
+          items: [
+            { id: "ai-story-1", title: "Cyberpunk Narrative", tag: "Story", type: "youtube", videoId: "WJS5_laqbno", isVertical: true },
+            { id: "ai-story-2", title: "AI Visual Journey", tag: "Story", type: "youtube", videoId: "DuD_8TXKV_E", isVertical: true }
+          ]
+        },
+        {
+          name: "Landscape",
+          items: [
             { id: "ai-land-1", title: "Mountain Vista Cinematic", tag: "Cinematic", type: "youtube", videoId: "VHdLncCBl9M" },
-            { id: "ai-land-2", title: "Nature Synthesis Exploration", tag: "Visual Art", type: "youtube", videoId: "d3HpHGpXFuE" },
-            // Row 2: 3 Portrait
-            { id: "ai-adv-1", title: "Realistic Product Advertisement", tag: "Product Ad", type: "youtube", videoId: "u2MwVays7fo", isVertical: true },
-            { id: "ai-adv-2", title: "Abstract Motion Design", tag: "Motion Art", type: "youtube", videoId: "DU68DVJCTq4", isVertical: true },
-            { id: "ai-story-1", title: "Cyberpunk Narrative Short", tag: "Narrative", type: "youtube", videoId: "WJS5_laqbno", isVertical: true }
+            { id: "ai-land-2", title: "Nature Synthesis", tag: "Visual Art", type: "youtube", videoId: "d3HpHGpXFuE" },
+            { id: "ai-land-3", title: "Atmospheric Environment", tag: "Landscape", type: "youtube", videoId: "xC_v-LddSJI" },
+            { id: "ai-land-4", title: "Ethereal Worlds", tag: "Landscape", type: "youtube", videoId: "QGRvL-vvtBI" }
           ]
         }
       ]
@@ -116,13 +232,16 @@ const AllWork = () => {
         {
           name: "Professional Works",
           items: [
-            // Row 1: 2 Landscape
             { id: "edit-1", title: "Electra CS Master Edit", tag: "Production", type: "youtube", videoId: "OHEWAcivxCA" },
-            { id: "edit-2", title: "Cinematic Commercial Story", tag: "Commercial", type: "youtube", videoId: "zQArTonc-FQ" },
-            // Row 2: 3 Portrait
+            { id: "edit-2", title: "Cinematic Commercial Story", tag: "Commercial", type: "youtube", videoId: "zQArTonc-FQ" }
+          ]
+        },
+        {
+          name: "Advertisement Videos",
+          items: [
             { id: "adv-v-1", title: "High-Impact Social Ad", tag: "Advertising", type: "youtube", videoId: "-MhFhPmehbg", isVertical: true },
-            { id: "adv-v-2", title: "Performance Marketing Ad", tag: "Performance", type: "youtube", videoId: "ICPDfLbCpSo", isVertical: true },
-            { id: "adv-v-3", title: "Vertical Brand Story", tag: "Social", type: "youtube", videoId: "WJS5_laqbno", isVertical: true }
+            { id: "adv-v-2", title: "Performance Marketing", tag: "Performance", type: "youtube", videoId: "ICPDfLbCpSo" },
+            { id: "adv-v-3", title: "Vertical Brand Story", tag: "Social", type: "youtube", videoId: "JKvFWeeu7xw", isVertical: true }
           ]
         }
       ]
@@ -167,6 +286,31 @@ const AllWork = () => {
             { id: "post-9", title: "Style Exploration 09", tag: "Art", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778092749/skills/Post%20designs/9.jpg" },
             { id: "post-10", title: "Merchandise Concept A", tag: "Merch", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777791103/skills/Post%20designs/merch-1.png" },
             { id: "post-11", title: "Merchandise Concept B", tag: "Merch", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1777791118/skills/Post%20designs/merch-2.png" }
+          ]
+        }
+      ]
+    },
+    {
+      index: "05",
+      name: "Menu",
+      accent: "#10b981",
+      cardType: "card-emerald",
+      subcategories: [
+        {
+          name: "Brand Menus",
+          items: [
+            { id: "menu-1", title: "Menu Page 1", tag: "Design", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778437639/skills/Menus/PAGE_1.jpg" },
+            { id: "menu-2", title: "Menu Page 2", tag: "Design", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778437647/skills/Menus/PAGE_2.jpg" },
+            { id: "menu-3", title: "Menu Page 3", tag: "Design", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778437649/skills/Menus/PAGE_3.jpg" },
+            { id: "menu-4", title: "Menu Page 4", tag: "Design", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778437650/skills/Menus/PAGE_4.jpg" },
+            { id: "menu-5", title: "Menu Page 5", tag: "Design", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778437652/skills/Menus/PAGE_5.jpg" },
+            { id: "menu-6", title: "Menu Page 6", tag: "Design", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778437653/skills/Menus/PAGE_6.jpg" },
+            { id: "menu-7", title: "Menu Page 7", tag: "Design", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778437654/skills/Menus/PAGE_7.jpg" },
+            { id: "menu-8", title: "Menu Page 8", tag: "Design", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778437657/skills/Menus/PAGE_8.jpg" },
+            { id: "menu-9", title: "Menu Page 9", tag: "Design", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778437659/skills/Menus/PAGE_9.jpg" },
+            { id: "menu-10", title: "Menu Page 10", tag: "Design", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778437641/skills/Menus/PAGE_10.jpg" },
+            { id: "menu-11", title: "Menu Page 11", tag: "Design", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778437643/skills/Menus/PAGE_11.jpg" },
+            { id: "menu-12", title: "Menu Page 12", tag: "Design", type: "image", src: "https://res.cloudinary.com/daeio5gbf/image/upload/v1778437645/skills/Menus/PAGE_12.jpg" }
           ]
         }
       ]
@@ -221,7 +365,14 @@ const AllWork = () => {
 
               return (
                 <div key={sub.name} className={sIdx === 0 ? "mt-0" : "mt-24"}>
-                  {category.name === "Carousel" || category.name === "Post Designs" ? (
+                  <div className="flex items-center gap-4 mb-8">
+                    <h4 className="text-xl md:text-2xl font-serif text-white/60 tracking-tight italic">
+                      <RandomLetterSwapPingPong label={sub.name} />
+                    </h4>
+                    <div className="h-[1px] w-12 bg-white/10" />
+                  </div>
+
+                  {category.name === "Carousel" || category.name === "Post Designs" || category.name === "Menu" ? (
                     <div className="flex flex-col gap-12 -mx-12 overflow-hidden py-4">
                       {/* ... (Carousel code remains the same) */}
                       <div className="carousel-track scroll-left">
@@ -239,6 +390,7 @@ const AllWork = () => {
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                                 alt={item.title}
                                 loading="lazy"
+                                decoding="async"
                               />
                             </div>
                           </div>
@@ -259,6 +411,7 @@ const AllWork = () => {
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                                 alt={item.title}
                                 loading="lazy"
+                                decoding="async"
                               />
                             </div>
                           </div>
@@ -266,50 +419,62 @@ const AllWork = () => {
                       </div>
                     </div>
                   ) : (
-                    <div className="flex flex-col gap-6">
+                    <div className="flex flex-col gap-8">
                       {/* Landscape Row */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {landscapeItems.map((item: any, idx) => (
-                          <GlowCard 
-                            key={item.id} 
-                            customSize
-                            className="aspect-video rounded-[2.5rem] overflow-hidden relative group cursor-pointer p-0"
-                            glowColor={idx % 2 === 0 ? "blue" : "purple"}
-                          >
-                            <div className="w-full h-full" onClick={() => setSelectedVideo(item)}>
-                              <MediaContent item={item} />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                <div className="absolute bottom-8 left-8">
-                                  <span className="text-[10px] uppercase tracking-widest text-white/60 mb-2 block">{item.tag}</span>
-                                  <h4 className="text-xl font-serif text-white">{item.title}</h4>
+                      {landscapeItems.length > 0 && (
+                        <div className="flex flex-wrap justify-center gap-6">
+                          {landscapeItems.map((item: any, idx) => (
+                            <div key={item.id} className="w-full md:w-[calc(50%-12px)] max-w-[640px] transform-gpu will-change-transform">
+                              <GlowCard 
+                                customSize
+                                className="aspect-video rounded-[2.5rem] overflow-hidden relative group cursor-pointer p-0"
+                                glowColor={idx % 2 === 0 ? "blue" : "purple"}
+                              >
+                                <div className="w-full h-full" onClick={() => {
+                                  setSelectedVideo(item);
+                                  setUnmutedId(null); // Mute gallery when modal opens
+                                }}>
+                                  <MediaContent item={item} isUnmuted={unmutedId === item.id} setUnmutedId={setUnmutedId} />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                    <div className="absolute bottom-8 left-8">
+                                      <span className="text-[10px] uppercase tracking-widest text-white/60 mb-2 block">{item.tag}</span>
+                                      <h4 className="text-xl font-serif text-white">{item.title}</h4>
+                                    </div>
+                                  </div>
                                 </div>
-                              </div>
+                              </GlowCard>
                             </div>
-                          </GlowCard>
-                        ))}
-                      </div>
+                          ))}
+                        </div>
+                      )}
                       
                       {/* Portrait Row */}
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-                        {portraitItems.map((item: any, idx) => (
-                          <GlowCard 
-                            key={item.id} 
-                            customSize
-                            className="aspect-[9/16] rounded-[2.5rem] overflow-hidden relative group cursor-pointer p-0"
-                            glowColor={idx % 2 === 0 ? "purple" : "blue"}
-                          >
-                            <div className="w-full h-full" onClick={() => setSelectedVideo(item)}>
-                              <MediaContent item={item} />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                <div className="absolute bottom-6 left-6">
-                                  <span className="text-[10px] uppercase tracking-widest text-white/60 mb-1 block">{item.tag}</span>
-                                  <h4 className="text-lg font-serif text-white leading-tight">{item.title}</h4>
+                      {portraitItems.length > 0 && (
+                        <div className="flex flex-wrap justify-center gap-6">
+                          {portraitItems.map((item: any, idx) => (
+                            <div key={item.id} className="w-[calc(50%-12px)] md:w-[calc(33.33%-16px)] max-w-[420px] transform-gpu will-change-transform">
+                              <GlowCard 
+                                customSize
+                                className="aspect-[9/16] rounded-[2.5rem] overflow-hidden relative group cursor-pointer p-0"
+                                glowColor={idx % 2 === 0 ? "purple" : "blue"}
+                              >
+                                <div className="w-full h-full" onClick={() => {
+                                  setSelectedVideo(item);
+                                  setUnmutedId(null); // Mute gallery when modal opens
+                                }}>
+                                  <MediaContent item={item} isUnmuted={unmutedId === item.id} setUnmutedId={setUnmutedId} />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                    <div className="absolute bottom-6 left-6">
+                                      <span className="text-[10px] uppercase tracking-widest text-white/60 mb-1 block">{item.tag}</span>
+                                      <h4 className="text-lg font-serif text-white leading-tight">{item.title}</h4>
+                                    </div>
+                                  </div>
                                 </div>
-                              </div>
+                              </GlowCard>
                             </div>
-                          </GlowCard>
-                        ))}
-                      </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
@@ -329,7 +494,9 @@ const AllWork = () => {
             className="fixed inset-0 z-[110] flex items-center justify-center bg-black/95 backdrop-blur-2xl p-4 md:p-10"
           >
             <button
-              onClick={() => setSelectedVideo(null)}
+              onClick={() => {
+                setSelectedVideo(null);
+              }}
               className="absolute top-6 right-6 md:top-10 md:right-10 w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-white/20 transition-colors z-[120]"
             >
               <X size={24} />

@@ -43,20 +43,50 @@ const GlowCard: React.FC<GlowCardProps & any> = ({
   const innerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const syncPointer = (e: PointerEvent) => {
-      if (!cardRef.current) return;
-      const rect = cardRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      
-      cardRef.current.style.setProperty('--x', x.toFixed(2));
-      cardRef.current.style.setProperty('--xp', (x / rect.width).toFixed(2));
-      cardRef.current.style.setProperty('--y', y.toFixed(2));
-      cardRef.current.style.setProperty('--yp', (y / rect.height).toFixed(2));
+    let rect: DOMRect | null = null;
+    
+    const updateRect = () => {
+      if (cardRef.current) {
+        rect = cardRef.current.getBoundingClientRect();
+      }
     };
 
-    document.addEventListener('pointermove', syncPointer);
-    return () => document.removeEventListener('pointermove', syncPointer);
+    const syncPointer = (e: PointerEvent) => {
+      if (!cardRef.current || !rect) return;
+      
+      requestAnimationFrame(() => {
+        if (!cardRef.current || !rect) return;
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        cardRef.current.style.setProperty('--x', x.toFixed(2));
+        cardRef.current.style.setProperty('--xp', (x / rect.width).toFixed(2));
+        cardRef.current.style.setProperty('--y', y.toFixed(2));
+        cardRef.current.style.setProperty('--yp', (y / rect.height).toFixed(2));
+      });
+    };
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        updateRect();
+        document.addEventListener('pointermove', syncPointer);
+        window.addEventListener('resize', updateRect);
+        window.addEventListener('scroll', updateRect, { passive: true });
+      } else {
+        document.removeEventListener('pointermove', syncPointer);
+        window.removeEventListener('resize', updateRect);
+        window.removeEventListener('scroll', updateRect);
+      }
+    }, { threshold: 0 });
+
+    if (cardRef.current) observer.observe(cardRef.current);
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('pointermove', syncPointer);
+      window.removeEventListener('resize', updateRect);
+      window.removeEventListener('scroll', updateRect);
+    };
   }, []);
 
   const safeGlowColor = glowColor as keyof typeof glowColorMap;
@@ -74,16 +104,20 @@ const GlowCard: React.FC<GlowCardProps & any> = ({
     const baseStyles: any = {
       '--base': base,
       '--spread': spread,
+      '--saturation': 100,
+      '--lightness': 60,
       '--radius': '2',
-      '--border': '1',
+      '--border': '2',
       '--backdrop': 'hsl(0 0% 60% / 0.12)',
-      '--backup-border': 'rgba(255,255,255,0.1)',
-      '--size': '350',
+      '--backup-border': 'rgba(255,255,255,0.2)',
+      '--size': '600',
       '--outer': '1',
-      '--border-size': 'calc(var(--border, 1) * 1px)',
-      '--spotlight-size': 'calc(var(--size, 200) * 1px)',
+      '--border-size': 'calc(var(--border, 2) * 1px)',
+      '--spotlight-size': 'calc(var(--size, 400) * 1px)',
       '--hue': 'calc(var(--base) + (var(--xp, 0) * var(--spread, 0)))',
-      '--glow-brightness': 4 * intensity,
+      '--glow-brightness': 25 * intensity,
+      '--border-spot-opacity': 1,
+      '--border-light-opacity': 0.8,
       backgroundImage: 'none',
       backgroundColor: 'var(--backdrop, transparent)',
       backgroundSize: 'calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)))',
@@ -119,7 +153,6 @@ const GlowCard: React.FC<GlowCardProps & any> = ({
           shadow-[0_1rem_2rem_-1rem_black] 
           p-4 
           gap-4 
-          backdrop-blur-[5px]
           ${className}
         `}
         {...props}

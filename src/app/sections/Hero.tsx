@@ -51,14 +51,17 @@ export const Hero = () => {
                     className="text-white/30"
                     staggerDuration={0.03}
                   />
-                  <motion.div
+                  <motion.button
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
                     transition={{ delay: 0.6, type: "spring", stiffness: 200 }}
-                    className="flex items-center justify-center w-8 h-8 md:w-14 md:h-14 rounded-full border border-white/10 bg-white/5 align-middle hover:bg-white hover:text-black transition-colors duration-500"
+                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="flex items-center justify-center w-8 h-8 md:w-14 md:h-14 rounded-full border border-white/10 bg-white/5 align-middle hover:bg-white hover:text-black transition-colors duration-500 cursor-pointer"
                   >
                     <ArrowUpRight className="w-3 h-3 md:w-5 md:h-5" />
-                  </motion.div>
+                  </motion.button>
                 </div>
               </h1>
             </div>
