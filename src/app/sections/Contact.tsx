@@ -22,19 +22,35 @@ export function Contact() {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        headers: { 
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          access_key: "YOUR_ACCESS_KEY_HERE", // Get your free key from https://web3forms.com/
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          from_name: "Portfolio Contact Form"
+        }),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (result.success) {
         setIsSuccess(true);
         setFormData({ name: "", email: "", subject: "New Project Inquiry", message: "" });
         setTimeout(() => setIsSuccess(false), 5000);
+      } else {
+        console.error("Submission error:", result);
+        alert(result.message || "Something went wrong. Please try again.");
       }
     } catch (error) {
       console.error("Submission error:", error);
+      alert("Failed to send message. Please check your connection.");
     } finally {
       setIsSubmitting(false);
     }
