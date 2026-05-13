@@ -5,28 +5,22 @@ import { Star } from "lucide-react";
 import Image from "next/image";
 import { LiquidButton } from "@/components/ui/liquid-glass-button";
 import { RandomLetterSwapPingPong } from "@/components/ui/random-letter-swap";
+import { GlowCard } from "@/components/ui/spotlight-card";
 
 const testimonials = [
   {
-    name: "Will smith",
-    role: "Harper education",
-    content: "The designs exceeded our expectations! Every element felt purposeful, creating a seamless and visually stunning brand identity",
+    name: "Robert Laurent",
+    role: "Client",
+    content: "The videos exceeded our expectations! Every element felt purposeful, creating a seamless and visually stunning brand identity.",
     rating: 5.0,
     image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&h=200&auto=format&fit=crop"
   },
   {
-    name: "Ikta Sollork",
-    role: "PARAL CEO",
-    content: "Working with this process was effortless. The vision was understood perfectly, and the designs truly represent my brand",
-    rating: 4.7,
+    name: "Sophia Reinhardt",
+    role: "Client",
+    content: "Working with this process was effortless. The vision was understood perfectly, and the videos truly represents my brand.",
+    rating: 4.3,
     image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=200&h=200&auto=format&fit=crop"
-  },
-  {
-    name: "Liloch",
-    role: "AIO Founder",
-    content: "Exceptional creativity and attention to detail! The final product exceeded all my expectations. Highly recommended for any premium design work.",
-    rating: 5.0,
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&h=200&auto=format&fit=crop"
   }
 ];
 
@@ -50,7 +44,7 @@ export const Testimonials = () => {
                   <RandomLetterSwapPingPong label="Love me" className="text-white/30" />
                 </h2>
                 <p className="text-white/40 text-lg">
-                  Trusted by 100+ happy clients, adding $250M+ in revenue.
+                  Trusted by 100+ happy clients, adding $110K+ in revenue.
                 </p>
               </div>
             </div>
@@ -58,13 +52,19 @@ export const Testimonials = () => {
             <div className="grid grid-cols-3 gap-3">
               {[
                 { value: "100+", label: "Happy clients" },
-                { value: "$250m", label: "revenue added" },
-                { value: "4.8", label: "Average Rating" },
+                { value: "$110k+", label: "Revenue Added" },
+                { value: "4.3", label: "Average Rating" },
               ].map((stat, i) => (
-                <div key={i} className="p-6 rounded-[2rem] border border-white/5 bg-[#111] flex flex-col gap-3">
+                <GlowCard 
+                  key={i}
+                  customSize
+                  className="p-6 rounded-[2rem] border border-white/5 bg-[#111] flex flex-col gap-3"
+                  glowColor="blue"
+                  intensity={0.2}
+                >
                   <span className="text-3xl font-bold text-white tracking-tight">{stat.value}</span>
                   <span className="text-[10px] leading-tight uppercase tracking-wider text-white/30">{stat.label}</span>
-                </div>
+                </GlowCard>
               ))}
             </div>
 
@@ -87,9 +87,12 @@ export const Testimonials = () => {
           {/* Right Column — Testimonial Feed */}
           <div className="lg:col-span-7 flex flex-col gap-6">
             {testimonials.map((t, i) => (
-              <div 
+              <GlowCard 
                 key={i} 
+                customSize
                 className="bg-[#0f0f0f]/80 backdrop-blur-sm p-10 rounded-[2.5rem] border border-white/5 shadow-2xl flex flex-col gap-6"
+                glowColor="purple"
+                intensity={0.3}
               >
                 <div className="flex items-center gap-4">
                   <div className="flex flex-col">
@@ -112,7 +115,7 @@ export const Testimonials = () => {
                     {t.content}
                   </p>
                 </div>
-              </div>
+              </GlowCard>
             ))}
           </div>
 

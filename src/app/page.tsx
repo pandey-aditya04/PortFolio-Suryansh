@@ -11,6 +11,8 @@ const Process = dynamic(() => import("./sections/Process").then(m => ({ default:
 const Testimonials = dynamic(() => import("./sections/Testimonials").then(m => ({ default: m.Testimonials })), { ssr: true });
 const FAQ = dynamic(() => import("./sections/FAQ").then(m => ({ default: m.FAQ })), { ssr: true });
 const Contact = dynamic(() => import("./sections/Contact").then(m => ({ default: m.Contact })), { ssr: true });
+const ResumeSection = dynamic(() => import("./sections/ResumeSection").then(m => ({ default: m.ResumeSection })), { ssr: true });
+const Experience = dynamic(() => import("./sections/Experience").then(m => ({ default: m.Experience })), { ssr: true });
 const Footer = dynamic(() => import("./sections/Footer").then(m => ({ default: m.Footer })), { ssr: true });
 
 export default function Home() {
@@ -20,8 +22,10 @@ export default function Home() {
       <main className="overflow-hidden">
         <Hero />
         <About />
-        <AllWork />
+        <Experience />
         <Process />
+        <ResumeSection />
+        <AllWork />
         <Testimonials />
         <FAQ />
         <Contact />

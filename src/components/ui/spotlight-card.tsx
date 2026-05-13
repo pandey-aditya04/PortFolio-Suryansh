@@ -54,6 +54,9 @@ const GlowCard: React.FC<GlowCardProps & any> = ({
     const syncPointer = (e: PointerEvent) => {
       if (!cardRef.current || !rect) return;
       
+      const safeGlowColor = glowColor as keyof typeof glowColorMap;
+      const { base, spread } = glowColorMap[safeGlowColor] || glowColorMap.blue;
+
       requestAnimationFrame(() => {
         if (!cardRef.current || !rect) return;
         const xp = (e.clientX - rect.left) / rect.width;
@@ -109,17 +112,17 @@ const GlowCard: React.FC<GlowCardProps & any> = ({
       '--base': base.toString(),
       '--spread': spread.toString(),
       '--hue': base.toString(),
-      '--radius': '2',
-      '--border': '2',
+      '--radius': '32', // Increased default radius to match 2rem
+      '--border': '1',
       '--backdrop': 'hsl(0 0% 60% / 0.12)',
       '--backup-border': 'rgba(255,255,255,0.2)',
       '--size': '600',
       '--outer': '1',
-      '--border-size': 'calc(var(--border, 2) * 1px)',
-      '--spotlight-size': 'calc(var(--size, 400) * 1px)',
-      '--glow-brightness': 25 * intensity,
-      '--border-spot-opacity': 1,
-      '--border-light-opacity': 0.8,
+      '--border-size': 'calc(var(--border, 1) * 1px)',
+      '--spotlight-size': 'calc(var(--size, 600) * 1px)',
+      '--glow-brightness': 40 * intensity, // Boosted brightness for more vibrant colored glows
+      '--border-spot-opacity': 0.8,
+      '--border-light-opacity': 0.5,
       backgroundImage: 'none',
       backgroundColor: 'var(--backdrop, transparent)',
       backgroundSize: 'calc(100% + (2 * var(--border-size))) calc(100% + (2 * var(--border-size)))',
@@ -148,7 +151,6 @@ const GlowCard: React.FC<GlowCardProps & any> = ({
         className={`
           ${getSizeClasses()}
           ${!customSize && !width && !height ? 'aspect-[3/4]' : ''}
-          rounded-sm 
           relative 
           grid 
           grid-rows-[1fr_auto] 
@@ -160,7 +162,9 @@ const GlowCard: React.FC<GlowCardProps & any> = ({
         {...props}
       >
       <div ref={innerRef} data-glow></div>
-      {children}
+      <div className="relative z-10 flex flex-col h-full">
+        {children}
+      </div>
     </motion.div>
   );
 };

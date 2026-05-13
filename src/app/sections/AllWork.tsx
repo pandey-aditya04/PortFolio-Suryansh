@@ -425,10 +425,8 @@ const AllWork = () => {
                         <div className="flex flex-wrap justify-center gap-6">
                           {landscapeItems.map((item: any, idx) => (
                             <div key={item.id} className="w-full md:w-[calc(50%-12px)] max-w-[640px] transform-gpu will-change-transform">
-                              <GlowCard 
-                                customSize
-                                className="aspect-video rounded-[2.5rem] overflow-hidden relative group cursor-pointer p-0"
-                                glowColor={idx % 2 === 0 ? "blue" : "purple"}
+                              <motion.div 
+                                className="aspect-video rounded-[2.5rem] overflow-hidden relative group cursor-pointer p-0 border border-white/5 bg-[#111]"
                               >
                                 <div className="w-full h-full" onClick={() => {
                                   setSelectedVideo(item);
@@ -442,7 +440,7 @@ const AllWork = () => {
                                     </div>
                                   </div>
                                 </div>
-                              </GlowCard>
+                              </motion.div>
                             </div>
                           ))}
                         </div>
@@ -453,10 +451,8 @@ const AllWork = () => {
                         <div className="flex flex-wrap justify-center gap-6">
                           {portraitItems.map((item: any, idx) => (
                             <div key={item.id} className="w-[calc(50%-12px)] md:w-[calc(33.33%-16px)] max-w-[420px] transform-gpu will-change-transform">
-                              <GlowCard 
-                                customSize
-                                className="aspect-[9/16] rounded-[2.5rem] overflow-hidden relative group cursor-pointer p-0"
-                                glowColor={idx % 2 === 0 ? "purple" : "blue"}
+                              <motion.div 
+                                className="aspect-[9/16] rounded-[2.5rem] overflow-hidden relative group cursor-pointer p-0 border border-white/5 bg-[#111]"
                               >
                                 <div className="w-full h-full" onClick={() => {
                                   setSelectedVideo(item);
@@ -470,7 +466,7 @@ const AllWork = () => {
                                     </div>
                                   </div>
                                 </div>
-                              </GlowCard>
+                              </motion.div>
                             </div>
                           ))}
                         </div>

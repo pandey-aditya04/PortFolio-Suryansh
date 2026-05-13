@@ -8,6 +8,8 @@ import { TextEffect } from "@/components/ui/text-effect";
 import { Spotlight } from "@/components/ui/spotlight";
 import { RandomLetterSwapPingPong } from "@/components/ui/random-letter-swap";
 
+import { TextScramble } from "@/components/ui/text-scramble";
+
 const FloatingShapes = dynamic(
   () => import("@/components/ui/FloatingShapes").then(m => ({ default: m.FloatingShapes })),
   { ssr: false }
@@ -34,7 +36,13 @@ export const Hero = () => {
             className="flex items-center gap-2 px-3 md:px-4 py-1.5 rounded-full border border-white/10 bg-white/5 w-fit max-w-full"
           >
             <span className="text-[10px] text-white shrink-0">⊙</span>
-            <span className="text-[9px] md:text-xs font-medium uppercase tracking-widest text-white/80 whitespace-nowrap overflow-hidden text-ellipsis">Video Editor | Graphic Designer | AI Visual Creator</span>
+            <TextScramble 
+              className="text-[9px] md:text-xs font-medium uppercase tracking-widest text-white/80 whitespace-nowrap overflow-hidden text-ellipsis"
+              duration={1.5}
+              characterSet="01"
+            >
+              AI Visual Creator | Motion Artist | Video Editor | Graphic Designer
+            </TextScramble>
           </motion.div>
 
           <div className="flex flex-col gap-6">
@@ -72,7 +80,7 @@ export const Hero = () => {
               delay={0.8}
               className="text-base md:text-xl text-white/60 max-w-xl leading-relaxed"
             >
-              I&apos;m a versatile visual artist specializing in video editing, AI video synthesis, and graphic design to help brands tell compelling stories through premium aesthetics.
+              I am a versatile AI Visual Creator and Motion Artist specializing in high-end AI video synthesis, cinematic motion graphics, and premium brand storytelling.
             </TextEffect>
           </div>
 
@@ -138,9 +146,9 @@ export const Hero = () => {
             }}
             className="absolute bottom-4 right-[-40px] w-72 p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md z-10"
           >
-            <p className="text-white/80 text-sm leading-relaxed mb-4">
+            <TextEffect preset="blur" className="text-white/80 text-sm leading-relaxed mb-4">
               "A master of his craft. The way he integrates AI tools into professional editing is seamless and impactful."
-            </p>
+            </TextEffect>
             <div className="flex items-center gap-3">
               <div>
                 <p className="text-xs font-bold text-white">Michael Chen</p>
