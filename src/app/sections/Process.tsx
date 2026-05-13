@@ -80,11 +80,8 @@ export const Process = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
             >
-              <GlowCard
-                customSize
+              <motion.div
                 className="p-8 rounded-[2rem] border border-white/10 bg-[#111] relative group overflow-hidden h-full flex flex-col"
-                glowColor={i % 2 === 0 ? "blue" : "purple"}
-                intensity={0.3}
               >
                 {/* Step Number Badge */}
                 <div className="absolute top-6 right-6 w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[10px] font-bold text-white/40 group-hover:text-white group-hover:border-white/30 transition-all">
@@ -112,7 +109,7 @@ export const Process = () => {
                     Step {step.id}
                   </span>
                 </div>
-              </GlowCard>
+              </motion.div>
             </motion.div>
           ))}
         </div>

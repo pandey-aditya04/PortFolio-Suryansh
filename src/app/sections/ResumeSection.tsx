@@ -28,11 +28,8 @@ export const ResumeSection = () => {
   return (
     <section id="resume" className="py-24 bg-[#0c0c0c]">
       <div className="max-w-[1300px] mx-auto px-6">
-        <GlowCard 
-          customSize
+        <div 
           className="p-8 md:p-12 rounded-[3rem] border border-white/10 bg-[#111] overflow-hidden relative"
-          glowColor="blue"
-          intensity={0.4}
         >
           <div className="flex flex-col lg:flex-row items-center justify-between gap-16 relative z-10">
             {/* Left: Content */}
@@ -97,7 +94,7 @@ export const ResumeSection = () => {
 
           {/* Background Decorative Element */}
           <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-blue-500/10 to-transparent pointer-events-none" />
-        </GlowCard>
+        </div>
       </div>
     </section>
   );

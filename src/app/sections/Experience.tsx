@@ -80,11 +80,8 @@ export const Experience = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: i * 0.1 }}
               >
-                <GlowCard 
-                  customSize
+                <motion.div 
                   className="p-8 md:p-10 rounded-[2.5rem] border border-white/10 bg-[#111] group hover:bg-[#151515] transition-all"
-                  glowColor="blue"
-                  intensity={0.3}
                 >
                   <div className="flex flex-col md:flex-row gap-6 md:items-start justify-between">
                     <div className="flex gap-6">
@@ -111,18 +108,15 @@ export const Experience = () => {
                       </span>
                     </div>
                   </div>
-                </GlowCard>
+                </motion.div>
               </motion.div>
             ))}
           </div>
 
           {/* Sidebar: Responsibilities & Education */}
           <div className="lg:col-span-4 flex flex-col gap-8">
-            <GlowCard 
-              customSize
+            <div 
               className="p-8 rounded-[2.5rem] border border-white/10 bg-[#111]"
-              glowColor="purple"
-              intensity={0.4}
             >
               <h4 className="text-xs uppercase tracking-[0.2em] text-white/30 font-bold mb-8 border-b border-white/5 pb-4">
                 Positions of Responsibility
@@ -139,13 +133,10 @@ export const Experience = () => {
                   </div>
                 ))}
               </div>
-            </GlowCard>
+            </div>
 
-            <GlowCard 
-              customSize
+            <div 
               className="p-8 rounded-[2.5rem] border border-white/10 bg-[#111]"
-              glowColor="blue"
-              intensity={0.4}
             >
               <h4 className="text-xs uppercase tracking-[0.2em] text-white/30 font-bold mb-8 border-b border-white/5 pb-4">
                 Education
@@ -155,7 +146,7 @@ export const Experience = () => {
                 <span className="text-sm text-white/40">Madan Mohan Malaviya University of Technology (MMMUT), Gorakhpur</span>
                 <span className="text-[10px] font-mono text-white/20 mt-1 uppercase">Expected 2027</span>
               </div>
-            </GlowCard>
+            </div>
           </div>
 
         </div>

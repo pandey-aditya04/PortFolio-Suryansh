@@ -55,16 +55,13 @@ export const Testimonials = () => {
                 { value: "$110k+", label: "Revenue Added" },
                 { value: "4.3", label: "Average Rating" },
               ].map((stat, i) => (
-                <GlowCard 
+                <div 
                   key={i}
-                  customSize
                   className="p-6 rounded-[2rem] border border-white/5 bg-[#111] flex flex-col gap-3"
-                  glowColor="blue"
-                  intensity={0.2}
                 >
                   <span className="text-3xl font-bold text-white tracking-tight">{stat.value}</span>
                   <span className="text-[10px] leading-tight uppercase tracking-wider text-white/30">{stat.label}</span>
-                </GlowCard>
+                </div>
               ))}
             </div>
 
@@ -87,12 +84,9 @@ export const Testimonials = () => {
           {/* Right Column — Testimonial Feed */}
           <div className="lg:col-span-7 flex flex-col gap-6">
             {testimonials.map((t, i) => (
-              <GlowCard 
+              <div 
                 key={i} 
-                customSize
                 className="bg-[#0f0f0f]/80 backdrop-blur-sm p-10 rounded-[2.5rem] border border-white/5 shadow-2xl flex flex-col gap-6"
-                glowColor="purple"
-                intensity={0.3}
               >
                 <div className="flex items-center gap-4">
                   <div className="flex flex-col">
@@ -115,7 +109,7 @@ export const Testimonials = () => {
                     {t.content}
                   </p>
                 </div>
-              </GlowCard>
+              </div>
             ))}
           </div>
 

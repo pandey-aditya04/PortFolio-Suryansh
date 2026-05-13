@@ -101,11 +101,8 @@ export const About = () => {
           
           {/* Left Column — Profile Card */}
           <div className="lg:col-span-5">
-            <GlowCard 
-              customSize
+            <div 
               className="p-8 rounded-[2rem] border border-white/10 bg-[#111] h-full flex flex-col"
-              glowColor="blue"
-              intensity={0.5}
             >
               <div className="relative aspect-[1/1] rounded-[1.5rem] overflow-hidden bg-[#1a1a1a] mb-10 group">
                 {/* Profile Image */}
@@ -181,16 +178,13 @@ export const About = () => {
                   </motion.a>
                 ))}
               </div>
-            </GlowCard>
+            </div>
           </div>
 
           {/* Right Column — Detailed Bio */}
           <div className="lg:col-span-7 flex flex-col gap-6">
-            <GlowCard 
-              customSize
+            <div 
               className="p-10 rounded-[2rem] border border-white/10 bg-[#111] flex flex-col gap-10 h-full justify-center"
-              glowColor="purple"
-              intensity={0.5}
             >
               {/* Bio */}
               <div className="flex flex-col gap-8">
@@ -224,7 +218,7 @@ export const About = () => {
                   ))}
                 </div>
               </div>
-            </GlowCard>
+            </div>
           </div>
 
         </div>

@@ -120,7 +120,7 @@ const GlowCard: React.FC<GlowCardProps & any> = ({
       '--outer': '1',
       '--border-size': 'calc(var(--border, 1) * 1px)',
       '--spotlight-size': 'calc(var(--size, 600) * 1px)',
-      '--glow-brightness': 40 * intensity, // Boosted brightness for more vibrant colored glows
+      '--glow-brightness': 4 * intensity, // Reverted to subtle original brightness
       '--border-spot-opacity': 0.8,
       '--border-light-opacity': 0.5,
       backgroundImage: 'none',
