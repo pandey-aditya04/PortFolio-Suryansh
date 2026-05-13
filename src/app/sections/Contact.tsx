@@ -29,7 +29,7 @@ export function Contact() {
           "Accept": "application/json"
         },
         body: JSON.stringify({
-          access_key: "YOUR_ACCESS_KEY_HERE", // Get your free key from https://web3forms.com/
+          access_key: "952ea822-5a15-402c-a2df-7cb65fb38c49", // Updated with user's live key
           name: formData.name,
           email: formData.email,
           subject: formData.subject,
