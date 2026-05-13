@@ -122,9 +122,9 @@ export const Hero = () => {
             }}
             className="absolute top-0 right-4 w-72 p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md z-20"
           >
-            <p className="text-white/80 text-sm leading-relaxed mb-4">
+            <TextEffect preset="blur" className="text-white/80 text-sm leading-relaxed mb-4">
               "Suryansh's AI video synthesis is revolutionary. The level of detail and realism is far beyond anything we've seen."
-            </p>
+            </TextEffect>
             <div className="flex items-center gap-3">
               <div>
                 <p className="text-xs font-bold text-white">Sarah Jenkins</p>
